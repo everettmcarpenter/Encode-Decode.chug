@@ -68,7 +68,7 @@ CK_DLL_INFO( ABFormat )
     // text description of this chugin; what is it? what does it do? who is it for?
     QUERY->setinfo( QUERY, CHUGIN_INFO_DESCRIPTION, "A first order A-BFormat converter" );
     // (optional) URL of the homepage for this chugin
-    QUERY->setinfo( QUERY, CHUGIN_INFO_URL, "https://github.com/SaintEverett/Encode-Decode.chug/tree/32486a2a3fcbb03b66f6b0c5dfaeed064a58e200/B-A-BFormat.chug/ABFormat.chug" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_URL, "https://github.com/everettmcarpenter/Encode-Decode.chug/tree/32486a2a3fcbb03b66f6b0c5dfaeed064a58e200/B-A-BFormat.chug/ABFormat.chug" );
     // (optional) contact email
     QUERY->setinfo( QUERY, CHUGIN_INFO_EMAIL, "carpee2[at]rpi[dot]edu" );
 }

@@ -15,7 +15,7 @@ calc.all(45.0, 15.0, 2) @=> float coord[];
 
 sin.gain(0.5);
 
-enc.coeff(coord);
+enc.sh(coord);
 
 sin => enc => dac;
 for(int i; i < coord.size(); i++)

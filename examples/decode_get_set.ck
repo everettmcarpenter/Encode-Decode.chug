@@ -1,15 +1,15 @@
 Decode1 dec;
 
-float coeff[4][4];
+float sh[4][4];
 
-for(int i; i < coeff.size(); i++)
+for(int i; i < sh.size(); i++)
 {
-    for(int j; j < coeff[0].size(); j++)
+    for(int j; j < sh[0].size(); j++)
     {
-        Math.random2f(-1.0,1.0) => coeff[i][j];
-        cherr <= coeff[i][j] <= " ";
+        Math.random2f(-1.0,1.0) => sh[i][j];
+        cherr <= sh[i][j] <= " ";
     }
     cherr <= IO.newline();
 }
 
-dec.placement(coeff);
+dec.placement(sh);

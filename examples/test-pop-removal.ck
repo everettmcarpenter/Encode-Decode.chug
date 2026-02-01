@@ -7,8 +7,8 @@ while(true)
     {
         Math.random2f(-1.0,1.0) => float temp;
         //cherr <= temp <= IO.newline();
-        enc.seti(temp,i);
-        cherr <= enc.geti(i) <= IO.newline();
+        enc.sh(temp,i);
+        cherr <= enc.sh(i) <= IO.newline();
     }
     100::ms => now;
 }

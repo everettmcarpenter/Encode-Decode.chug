@@ -9,7 +9,7 @@ fun void shuffle(float storage[]) { // randomize position
     Math.random2f(-1.0,1.0) => storage[i];
     }
     for(int i; i < storage.size(); i++) {
-    // cherr <= "Real: " <= storage[i] <= " | Chugin: " <= encode.geti(i) <= IO.newline();
+    // cherr <= "Real: " <= storage[i] <= " | Chugin: " <= encode.sh(i) <= IO.newline();
     }
 }
 
@@ -25,7 +25,7 @@ fun void interpolator(int id) // interpolate through the coordinates
         {
             cherr <= "waiting on: " <= id <= IO.newline();
         }
-        encode.seti(coordinates[id],id); // set assigned encoder coefficient (id) to current array entry
+        encode.sh(coordinates[id],id); // set assigned encoder coefficient (id) to current array entry
         5::ms => now;
     }
 }

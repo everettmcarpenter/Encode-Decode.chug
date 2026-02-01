@@ -24,7 +24,7 @@ vec3 r_v;
 
 float sound_sh[4];
 calc.all(sound.x,sound.y,sound.z,sound_sh,1);
-encode.coeff(sound_sh);
+encode.sh(sound_sh);
 sine => encode => blackhole;
 
 fun vec3 velocity(Speaker quad[], float pressure[])

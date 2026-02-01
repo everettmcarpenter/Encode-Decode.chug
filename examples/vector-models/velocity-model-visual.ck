@@ -27,8 +27,8 @@ vec3 r_v;
 float sound_sh[2][4];
 calc.all(SOURCE_DIRECTION,SOURCE_ELEVATION,sound_sh[0],1);
 calc.all(SOURCE_DIRECTION+45.0, SOURCE_ELEVATION, sound_sh[1], 1);
-encode[0].coeff(sound_sh[0]);
-encode[1].coeff(sound_sh[1]);
+encode[0].sh(sound_sh[0]);
+encode[1].sh(sound_sh[1]);
 
 sine[0] => scale[0] => encode[0] => blackhole;
 // sine[1] => scale[1] => encode[1] => blackhole;
@@ -81,7 +81,7 @@ fun void rotateSound(Encode1 enc, Source sound)
     {
         calc.all(45.0+h, 0.0, temp_c, 1);
         sound.update(45.0+h, 10.0);
-        enc.coeff(temp_c);
+        enc.sh(temp_c);
         0.005 +=> h;
         GG.nextFrame() => now;
     }
