@@ -122,14 +122,14 @@ CK_DLL_INFO(Decode)
 CK_DLL_QUERY(Decode)
 {
     // generally, don't change this...
-    QUERY->setname(QUERY, "DECODE");
-    QUERY->begin_class(QUERY, "DECODE1", "UGen");
+    QUERY->setname(QUERY, "Decode");
+    QUERY->begin_class(QUERY, "Decode1", "UGen");
     QUERY->add_ctor(QUERY, decode1_ctor);
     QUERY->add_dtor(QUERY, decode1_dtor);
     QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
-    QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "placement");
+    QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "sh");
     QUERY->add_arg(QUERY, "float[][]", "");
-    QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "placement");
+    QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "sh");
     QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     // this reserves a variable in the ChucK internal class to store
@@ -137,14 +137,14 @@ CK_DLL_QUERY(Decode)
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "DECODE");
-    QUERY->begin_class(QUERY, "DECODE2", "UGen");
+    QUERY->setname(QUERY, "Decode");
+    QUERY->begin_class(QUERY, "Decode2", "UGen");
     QUERY->add_ctor(QUERY, decode2_ctor);
     QUERY->add_dtor(QUERY, decode2_dtor);
     QUERY->add_ugen_funcf(QUERY, decode2_tickf, NULL, 9, 9);
-    QUERY->add_mfun(QUERY, decode2_setSpeakers, "void", "placement");
+    QUERY->add_mfun(QUERY, decode2_setSpeakers, "void", "sh");
     QUERY->add_arg(QUERY, "float[][]", "");
-    QUERY->add_mfun(QUERY, decode2_getSpeakers, "float[][]", "placement");
+    QUERY->add_mfun(QUERY, decode2_getSpeakers, "float[][]", "sh");
     QUERY->add_mfun(QUERY, decode2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     // this reserves a variable in the ChucK internal class to store
@@ -152,14 +152,14 @@ CK_DLL_QUERY(Decode)
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "DECODE");
-    QUERY->begin_class(QUERY, "DECODE3", "UGen");
+    QUERY->setname(QUERY, "Decode");
+    QUERY->begin_class(QUERY, "Decode3", "UGen");
     QUERY->add_ctor(QUERY, decode3_ctor);
     QUERY->add_dtor(QUERY, decode3_dtor);
     QUERY->add_ugen_funcf(QUERY, decode3_tickf, NULL, 16, 16);
-    QUERY->add_mfun(QUERY, decode3_setSpeakers, "void", "placement");
+    QUERY->add_mfun(QUERY, decode3_setSpeakers, "void", "sh");
     QUERY->add_arg(QUERY, "float[][]", "");
-    QUERY->add_mfun(QUERY, decode3_getSpeakers, "float[][]", "placement");
+    QUERY->add_mfun(QUERY, decode3_getSpeakers, "float[][]", "sh");
     QUERY->add_mfun(QUERY, decode3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     // this reserves a variable in the ChucK internal class to store
@@ -167,14 +167,14 @@ CK_DLL_QUERY(Decode)
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "DECODE");
-    QUERY->begin_class(QUERY, "DECODE4", "UGen");
+    QUERY->setname(QUERY, "Decode");
+    QUERY->begin_class(QUERY, "Decode4", "UGen");
     QUERY->add_ctor(QUERY, decode4_ctor);
     QUERY->add_dtor(QUERY, decode4_dtor);
     QUERY->add_ugen_funcf(QUERY, decode4_tickf, NULL, 25, 25);
-    QUERY->add_mfun(QUERY, decode4_setSpeakers, "void", "placement");
+    QUERY->add_mfun(QUERY, decode4_setSpeakers, "void", "sh");
     QUERY->add_arg(QUERY, "float[][]", "");
-    QUERY->add_mfun(QUERY, decode4_getSpeakers, "float[][]", "placement");
+    QUERY->add_mfun(QUERY, decode4_getSpeakers, "float[][]", "sh");
     QUERY->add_mfun(QUERY, decode4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     // this reserves a variable in the ChucK internal class to store
@@ -182,14 +182,14 @@ CK_DLL_QUERY(Decode)
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "DECODE");
-    QUERY->begin_class(QUERY, "DECODE5", "UGen");
+    QUERY->setname(QUERY, "Decode");
+    QUERY->begin_class(QUERY, "Decode5", "UGen");
     QUERY->add_ctor(QUERY, decode5_ctor);
     QUERY->add_dtor(QUERY, decode5_dtor);
     QUERY->add_ugen_funcf(QUERY, decode5_tickf, NULL, 36, 36);
-    QUERY->add_mfun(QUERY, decode5_setSpeakers, "void", "placement");
+    QUERY->add_mfun(QUERY, decode5_setSpeakers, "void", "sh");
     QUERY->add_arg(QUERY, "float[][]", "");
-    QUERY->add_mfun(QUERY, decode5_getSpeakers, "float[][]", "placement");
+    QUERY->add_mfun(QUERY, decode5_getSpeakers, "float[][]", "sh");
     QUERY->add_mfun(QUERY, decode5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     // this reserves a variable in the ChucK internal class to store

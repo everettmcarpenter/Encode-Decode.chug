@@ -1,8 +1,8 @@
 Encode1 encode; // try switching around Encode1, Encode2, Encode3 etc.. you can see the difference in channel count
-Gain sum((1.0/(encode.chans()*5)))[encode.chans()]; // sum for headphone purposes
-SinOsc osc(Math.random2f(134,562))[encode.chans()]; // one oscillator for each coordinate (simply just to show increase in channels through higher orders)
-float coordinates[encode.chans()]; // array of current coordinates
-float target_coordinates[encode.chans()]; // array of target coordinates
+Gain sum((1.0/(encode.channels()*5)))[encode.channels()]; // sum for headphone purposes
+SinOsc osc(Math.random2f(134,562))[encode.channels()]; // one oscillator for each coordinate (simply just to show increase in channels through higher orders)
+float coordinates[encode.channels()]; // array of current coordinates
+float target_coordinates[encode.channels()]; // array of target coordinates
 
 fun void shuffle(float storage[]) { // randomize position
     for(int i; i < storage.size(); i++) {
@@ -30,11 +30,11 @@ fun void interpolator(int id) // interpolate through the coordinates
     }
 }
 
-for(int i; i < encode.chans(); i++) { // spork however you need
+for(int i; i < encode.channels(); i++) { // spork however you need
     spork ~ interpolator(i);
 }
 
-for(int i; i < encode.chans(); i++) { // patch to encode
+for(int i; i < encode.channels(); i++) { // patch to encode
    
     osc[i] => encode;
     encode.chan(i) => sum[i] => dac.chan(i%2); // patch to dac
