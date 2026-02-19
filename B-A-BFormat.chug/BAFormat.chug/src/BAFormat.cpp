@@ -62,15 +62,15 @@ t_CKINT baformat_data_offset = 0;
 CK_DLL_INFO( BAFormat )
 {
     // the version string of this chugin, e.g., "v1.2.1"
-    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.0.0" );
     // the author(s) of this chugin, e.g., "Alice Baker & Carl Donut"
-    QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "Everett M. Carpenter" );
     // text description of this chugin; what is it? what does it do? who is it for?
-    QUERY->setinfo( QUERY, CHUGIN_INFO_DESCRIPTION, "" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_DESCRIPTION, "A chugin for converting first order B-Format ambisonic signals to A-Format signals." );
     // (optional) URL of the homepage for this chugin
     QUERY->setinfo( QUERY, CHUGIN_INFO_URL, "" );
     // (optional) contact email
-    QUERY->setinfo( QUERY, CHUGIN_INFO_EMAIL, "" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_EMAIL, "carpee2[at]rpi[dot]edu" );
 }
 
 
@@ -90,7 +90,7 @@ CK_DLL_QUERY( BAFormat )
     // NOTE to create a non-UGen class, change the second argument
     // to extend a different ChucK class (e.g., "Object")
     QUERY->begin_class( QUERY, "BAFormat", "UGen" );
-
+    QUERY->doc_class( QUERY, "A class for converting B-Format ambisonics signals to A-Format ambisonic signals.");
     // register default constructor
     QUERY->add_ctor( QUERY, baformat_ctor );
     // NOTE constructors can be overloaded like any other functions,
