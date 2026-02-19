@@ -37,6 +37,7 @@
 
 // include chugin header
 #include "chugin.h"
+#include "BAFormat.h"
 
 // general includes
 #include <iostream>
@@ -47,52 +48,11 @@ CK_DLL_CTOR( baformat_ctor );
 // declaration of chugin desctructor
 CK_DLL_DTOR( baformat_dtor );
 
-// example of getter/setter
-CK_DLL_MFUN( baformat_setParam );
-CK_DLL_MFUN( baformat_getParam );
-
 // for chugins extending UGen, this is mono synthesis function for 1 sample
-CK_DLL_TICK( baformat_tick );
+CK_DLL_TICKF( baformat_tickf );
 
 // this is a special offset reserved for chugin internal data
 t_CKINT baformat_data_offset = 0;
-
-
-//-----------------------------------------------------------------------------
-// class definition for internal chugin data
-// (NOTE this isn't strictly necessary, but is one example of a recommended approach)
-//-----------------------------------------------------------------------------
-class BAFormat
-{
-public:
-    // constructor
-    BAFormat( t_CKFLOAT fs )
-    {
-        m_param = 0;
-    }
-
-    // for chugins extending UGen
-    SAMPLE tick( SAMPLE in )
-    {
-        // default: this passes whatever input is patched into chugin
-        return in;
-    }
-
-    // set parameter example
-    t_CKFLOAT setParam( t_CKFLOAT p )
-    {
-        m_param = p;
-        return p;
-    }
-
-    // get parameter example
-    t_CKFLOAT getParam() { return m_param; }
-    
-private:
-    // instance data
-    t_CKFLOAT m_param;
-};
-
 
 //-----------------------------------------------------------------------------
 // info function: ChucK calls this when loading/probing the chugin
@@ -142,18 +102,10 @@ CK_DLL_QUERY( BAFormat )
 
     // for UGens only: add tick function
     // NOTE a non-UGen class should remove or comment out this next line
-    QUERY->add_ugen_func( QUERY, baformat_tick, NULL, 1, 1 );
+    QUERY->add_ugen_funcf( QUERY, baformat_tickf, NULL, 4, 4 );
     // NOTE: if this is to be a UGen with more than 1 channel,
     // e.g., a multichannel UGen -- will need to use add_ugen_funcf()
     // and declare a tickf function using CK_DLL_TICKF
-
-    // example of adding setter method
-    QUERY->add_mfun( QUERY, baformat_setParam, "float", "param" );
-    // example of adding argument to the above method
-    QUERY->add_arg( QUERY, "float", "arg" );
-
-    // example of adding getter method
-    QUERY->add_mfun( QUERY, baformat_getParam, "float", "param" );
     
     // this reserves a variable in the ChucK internal class to store 
     // referene to the c++ class we defined above
@@ -197,41 +149,14 @@ CK_DLL_DTOR( baformat_dtor )
 
 
 // implementation for tick function (relevant only for UGens)
-CK_DLL_TICK( baformat_tick )
+CK_DLL_TICKF( baformat_tickf )
 {
     // get our c++ class pointer
     BAFormat * baf_obj = (BAFormat *)OBJ_MEMBER_INT(SELF, baformat_data_offset);
  
     // invoke our tick function; store in the magical out variable
-    if( baf_obj ) *out = baf_obj->tick( in );
+    if( baf_obj ) baf_obj->tick( in, out, nframes );
 
     // yes
     return TRUE;
-}
-
-
-// example implementation for setter
-CK_DLL_MFUN( baformat_setParam )
-{
-    // get our c++ class pointer
-    BAFormat * baf_obj = (BAFormat *)OBJ_MEMBER_INT( SELF, baformat_data_offset );
-
-    // get next argument
-    // NOTE argument type must match what is specified above in CK_DLL_QUERY
-    // NOTE this advances the ARGS pointer, so save in variable for re-use
-    t_CKFLOAT arg1 = GET_NEXT_FLOAT( ARGS );
-    
-    // call setParam() and set the return value
-    RETURN->v_float = baf_obj->setParam( arg1 );
-}
-
-
-// example implementation for getter
-CK_DLL_MFUN(baformat_getParam)
-{
-    // get our c++ class pointer
-    BAFormat * baf_obj = (BAFormat *)OBJ_MEMBER_INT( SELF, baformat_data_offset );
-
-    // call getParam() and set the return value
-    RETURN->v_float = baf_obj->getParam();
 }

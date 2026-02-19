@@ -15,7 +15,7 @@
     <ClInclude Include="include\chugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BAFormat.h">
+    <ClInclude Include="include\BAFormat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
