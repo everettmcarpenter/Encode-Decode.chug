@@ -1,3 +1,6 @@
+# documentation generation (nice)
+chuck doc/make-doc.ck
+
 # linux (easiest)
 chuck -s build-pkg-linux.ck
 
