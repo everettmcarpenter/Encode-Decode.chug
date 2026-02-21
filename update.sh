@@ -12,13 +12,13 @@ ROOT_DIR="$(pwd)"
 DEST_DIR="$ROOT_DIR/$BUILD_DIR"
 # collection of source paths and output files
 CHUGS=(
-    "B-A-BFormat.chug/ABFormat.chug:ABFormat.chug"
-    "B-A-BFormat.chug/BAFormat.chug:BAFormat.chug"
+	"B-A-BFormat.chug/ABFormat.chug/:ABFormat.chug"
+    "B-A-BFormat.chug/BAFormat.chug/:BAFormat.chug"
     "Encode.chug/:Encode.chug"
-    "Decode.chug/DecodeN:Decode.chug"
-    "Decode.chug/SADN:SADN.chug"
+    "Decode.chug/DecodeN/:Decode.chug"
+    "Decode.chug/SADN/:SADN.chug"
     "OrderGain.chug/:OrderGain.chug"
-    "Mirror.chug:Mirror.chug"
+    "Mirror.chug/:Mirror.chug"
 )
 # build function
 build_and_move() {
@@ -28,12 +28,14 @@ build_and_move() {
     echo "Building $chug"
     
     cd "$path" || { echo "Failed to enter $path"; exit 1; }
+	pwd
     make clean
-    make "$OS"
-    
+	make "$OS"
+	make "$OS" 
     if [[ "$OS" == "win32" ]]; then
         cp "x64/Release/$chug" "$DEST_DIR/win/"
     else
+		pwd
         cp "$chug" "$DEST_DIR/$OS/"
     fi
     
@@ -50,6 +52,7 @@ fi
 # build away
 for entry in "${CHUGS[@]}"; do
     IFS=':' read -r path chug <<< "$entry"
+    echo "$path" "$chug"
     build_and_move "$path" "$chug"
 done
 
@@ -59,6 +62,6 @@ if [[ "$OS" == "win32" ]]; then
     zip $BUILD_DIR/win/ chumbi-win
     zip -r -b $BUILD_DIR/win/ chumbi-win-v$VERS.zip $BUILD_DIR/win/
 else 
-    ls --time=creation -l $BUILD_DIR/$OS
+    ls --time=creation -l $BUILD_DIR/$OS/
     zip -r -b $BUILD_DIR/ chumbi-$OS-v$VERS.zip $BUILD_DIR/$OS/
 fi

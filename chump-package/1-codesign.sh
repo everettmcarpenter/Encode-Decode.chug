@@ -6,7 +6,7 @@
 
 # taken from Nick Shaheed (thanks dude)
 
-# collection of source paths and output files
+# collection of source paths
 CHUGS=(
     "../current-builds/mac/ABFormat.chug"
     "../current-builds/mac/BAFormat.chug"
@@ -22,7 +22,7 @@ for entry in "${CHUGS[@]}"; do
     CHUG=$entry
     echo "codesigning" $entry
     # remove code signature from chugin and dylibs
-    codesign --remove-signature ${CHUG}
+    codesign --remove-signature $CHUG
 
     # codesign Chumpinate.chug
     codesign --deep --force --verify --verbose --timestamp --options runtime --entitlements Chumpinate.entitlements --sign "Developer ID Application" ${CHUG}
