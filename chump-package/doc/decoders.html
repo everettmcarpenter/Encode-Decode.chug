@@ -1,0 +1,90 @@
+<html>
+<link rel="stylesheet" type="text/css" href="ckdoc.css" />
+<link rel="stylesheet" type="text/css" href="class.css" />
+<title>Decoders</title>
+<body>
+<a name="top"/>
+<div id="title">
+<div class="titleL">
+<div style="display: flex; align-items: center;"><div class="inline titlelogo"><a href="https://chuck.stanford.edu/" target="_blank"><img src="https://chuck.stanford.edu/doc/images/chuck-logo2023w.png" /> </div><div class="inline"><h1><a href="./">ChucK Class Library Reference</a></h1></div>
+<div class="inline gray"><h1>&nbsp;&nbsp;<span style="color:black">/</span>&nbsp;&nbsp;Decoders</h1></div>
+</div>
+</div>
+</div>
+<div id="body">
+<div class="toc"><a id="toc"/>
+<p class="toc_class"><a href="#Decode1" class="ckdoc_typename ckdoc_type_ugen">Decode1</a></p>
+<p class="toc_class"><a href="#SAD1" class="ckdoc_typename ckdoc_type_ugen">SAD1</a></p>
+</div>
+<div class="classes">
+<p class="group_desc">Ambisonic decoders, all work from 1st to 5th order.</p>
+<a name="Decode1" /><div class="class">
+<h2 class="class_title" name="Decode1">Decode1</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="empty_class_description">No description available</p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">Decode1</span>()</p>
+<p class="member_description">Default constructor for Decode1.</p>
+</div>
+</div>
+<h3 class="class_section_header">member functions</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> )</p>
+<p class="empty_member_description">No description available</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">sh</span>()</p>
+<p class="empty_member_description">No description available</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
+<p class="empty_member_description">No description available</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+<a name="SAD1" /><div class="class">
+<h2 class="class_title" name="SAD1">SAD1</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="class_description">A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).<p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">SAD1</span>()</p>
+<p class="member_description">Default constructor for SAD1.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="membername">SAD1</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> SAD1)</p>
+<p class="member_description">Constructor for instantiating with an array of speaker angles.</p>
+</div>
+</div>
+<h3 class="class_section_header">member functions</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">dim</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> dimension)</p>
+<p class="member_description">Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">placement</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> speakerAngles)</p>
+<p class="member_description">Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">placement</span>()</p>
+<p class="member_description">Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
+<p class="member_description">Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+</div>
+</div>
+</body>
+</html>

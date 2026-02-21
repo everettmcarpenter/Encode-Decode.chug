@@ -1,0 +1,23 @@
+{
+    "api_version": {
+        "major": 10,
+        "minor": 2
+    },
+    "arch": "x86_64",
+    "files": [
+        {
+            "checksum": "cd0ec8eddd5338479adec3f5591e3f9818e9eface6cae87fbc7cd5c65d0cab70",
+            "file_type": "zip",
+            "local_dir": "./",
+            "url": "https://everettmiles.com/Chumbi/1.0.0/windows/Chumbi.zip"
+        }
+    ],
+    "language_version_min": {
+        "major": 5,
+        "mega": 1,
+        "minor": 4,
+        "patch": 0
+    },
+    "os": "windows",
+    "version": "1.0.0"
+}
