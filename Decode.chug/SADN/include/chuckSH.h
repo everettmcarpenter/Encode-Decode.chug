@@ -4,8 +4,8 @@
 
 #define MAX_ORDER 12
 
-static const float degree2rad = E_PI / 180.0f;
-static const float rad2deg = 180.0f / E_PI;
+static float degree2rad = E_PI / 180.0f;
+static float rad2deg = 180.0f / E_PI;
 
 NLOUP<MAX_ORDER> norms; // create LOUP
 
