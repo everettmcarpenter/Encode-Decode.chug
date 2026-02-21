@@ -60,5 +60,5 @@ if [[ "$OS" == "win32" ]]; then
     zip -r -b $BUILD_DIR/win/ chumbi-win-v$VERS.zip $BUILD_DIR/win/
 else 
     ls --time=creation -l $BUILD_DIR/$OS
-    zip -r -b $BUILD_DIR/ chumbi-$OS-v$VERS.zip $BUILD_DIR/
+    zip -r -b $BUILD_DIR/ chumbi-$OS-v$VERS.zip $BUILD_DIR/$OS/
 fi
