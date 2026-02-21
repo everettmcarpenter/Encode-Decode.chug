@@ -9,6 +9,7 @@
 #define DECODE_BASE_H
 
 #include "chugin.h"
+#include "chuckSH.h"
 #include <array>
 
 template<const unsigned order_>
