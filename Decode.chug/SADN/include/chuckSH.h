@@ -1,3 +1,6 @@
+#ifndef CHUCKSH_H
+#define CHUCKSH_H
+
 #include <cmath>
 #include <vector>
 #include "SHCT.h"
@@ -52,3 +55,5 @@ void SH(unsigned order_, const float azimuth_, const float zenith_, std::vector<
         }
     }
 }
+
+#endif

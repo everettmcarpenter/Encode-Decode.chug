@@ -1,11 +1,14 @@
+#ifndef CHUCKSH_H
+#define CHUCKSH_H
+
 #include <cmath>
 #include <vector>
 #include "SHCT.h"
 
 #define MAX_ORDER 12
 
-static const float degree2rad = E_PI / 180.0f;
-static const float rad2deg = 180.0f / E_PI;
+static float degree2rad = E_PI / 180.0f;
+static float rad2deg = 180.0f / E_PI;
 
 NLOUP<MAX_ORDER> norms; // create LOUP
 
@@ -52,3 +55,5 @@ void SH(unsigned order_, const float azimuth_, const float zenith_, std::vector<
         }
     }
 }
+
+#endif
