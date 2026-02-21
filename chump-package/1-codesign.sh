@@ -8,13 +8,13 @@
 
 # collection of source paths and output files
 CHUGS=(
-    "current-builds/mac/ABFormat.chug"
-    "current-builds/mac/BAFormat.chug"
-    "current-builds/mac/Encode.chug"
-    "current-builds/mac/Decode.chug"
-    "current-builds/mac/SADN.chug"
-    "current-builds/mac/OrderGain.chug"
-    "current-builds/mac/Mirror.chug"
+    "../current-builds/mac/ABFormat.chug"
+    "../current-builds/mac/BAFormat.chug"
+    "../current-builds/mac/Encode.chug"
+    "../current-builds/mac/Decode.chug"
+    "../current-builds/mac/SADN.chug"
+    "../current-builds/mac/OrderGain.chug"
+    "../current-builds/mac/Mirror.chug"
 )
 
 # where the Chumpinate build can be foundy
