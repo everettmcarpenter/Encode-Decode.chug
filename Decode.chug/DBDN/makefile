@@ -11,7 +11,7 @@ DECODER_INC_DIR=../decode-include/
 CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
-CK_SRC_PATH?=include/
+CK_SRC_PATH?=../decode-include/
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck
