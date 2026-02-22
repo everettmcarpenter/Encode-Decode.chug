@@ -6,11 +6,11 @@ C_MODULES=
 CXX_MODULES=src/DBDN.cpp
 
 INC_DIR = include/
-DECODE_INC_DIR=../DBDN-include/
-CXXFLAGS=-c -Wall -I$(INC_DIR) -I$(DECODE_INC_DIR)
+DECODER_INC_DIR=../decode-include/
+CXXFLAGS=-c -Wall -I$(INC_DIR) -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
-CK_SRC_PATH?=$(DECODE_INC_DIR)
+CK_SRC_PATH?=$(DECODER_INC_DIR)
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck

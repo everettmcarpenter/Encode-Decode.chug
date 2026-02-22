@@ -65,7 +65,7 @@ t_CKINT dbdn_data_offset = 0;
 CK_DLL_INFO( DBDN )
 {
     // the version string of this chugin, e.g., "v1.2.1"
-    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.0.0" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.2.0" );
     // the author(s) of this chugin, e.g., "Alice Baker & Carl Donut"
     QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "Everett M. Carpenter" );
     // text description of this chugin; what is it? what does it do? who is it for?
@@ -138,7 +138,7 @@ CK_DLL_CTOR( dbdn_ctor )
     OBJ_MEMBER_INT( SELF, dbdn_data_offset ) = 0;
     
     // instantiate our internal c++ class representation
-    DBDN<1>* dbdn_obj = new DBDN<1>( API->vm->srate(VM) );
+    DBD1* dbdn_obj = new DBD1( API->vm->srate(VM) );
     
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT( SELF, dbdn_data_offset ) = (t_CKINT)dbdn_obj;
@@ -149,7 +149,7 @@ CK_DLL_CTOR( dbdn_ctor )
 CK_DLL_DTOR( dbdn_dtor )
 {
     // get our c++ class pointer
-    DBDN<1>* dbdn_obj = (DBDN<1> *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
     // clean up (this macro tests for NULL, deletes, and zeros out the variable)
     CK_SAFE_DELETE( dbdn_obj );
     // set the data field to 0
@@ -161,7 +161,7 @@ CK_DLL_DTOR( dbdn_dtor )
 CK_DLL_TICKF( dbdn_tickf )
 {
     // get our c++ class pointer
-    DBDN<1> * dbdn_obj = (DBDN<1> *)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
+    DBD1 * dbdn_obj = (DBD1 *)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
  
     // invoke our tick function; store in the magical out variable
     if( dbdn_obj ) dbdn_obj->tick( in, out, nframes );
@@ -174,7 +174,7 @@ CK_DLL_MFUN(dbdn_setSpeakers)
 {
     Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
     // get our c++ class pointer
-    DBDN<1>* dbdn_obj = (DBDN<1>*)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
+    DBD1* dbdn_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
     if (dbdn_obj)
     {
         dbdn_obj->CKsetSpeakAngles(multi_array, API);
@@ -186,7 +186,7 @@ CK_DLL_MFUN(dbdn_setSpeakers)
 CK_DLL_MFUN( dbdn_setParam )
 {
     // get our c++ class pointer
-    DBDN<1>* dbdn_obj = (DBDN<1> *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
 
     // get next argument
     // NOTE argument type must match what is specified above in CK_DLL_QUERY
@@ -202,7 +202,7 @@ CK_DLL_MFUN( dbdn_setParam )
 CK_DLL_MFUN(dbdn_getParam)
 {
     // get our c++ class pointer
-    DBDN<1>* dbdn_obj = (DBDN<1> *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
 
     // call getParam() and set the return value
     RETURN->v_float = 0;

@@ -1,14 +1,22 @@
+#ifndef DBDN_H
+#define DBDN_H
+
 #include "DecoderBase.h"
 #include "CrossoverCoefficients.h"
 
-template <unsigned order_>
+template <const unsigned order_>
 class DBDN : public Decoder<order_>
 {
 public:
-	DBDN(float fs)
+	DBDN(unsigned fs)
 	{
-		high = new FilterCoefficients((unsigned)fs, 750.0, FilterCoefficients::hipass);
-		low = new FilterCoefficients((unsigned)fs, 750.0, FilterCoefficients::lowpass);
+		high = new FilterCoefficients(fs, 750.0, FilterCoefficients::hipass);
+		low = new FilterCoefficients(fs, 750.0, FilterCoefficients::lowpass);
+	}
+	~DBDN()
+	{
+		delete high;
+		delete low;
 	}
 
 	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes)
@@ -43,18 +51,50 @@ public:
 			{
 				for (int s = 0; s < this->n_channels; s++)
 				{
-					out[f * this->n_channels + c] = lout[s][0]; // add lowpassed s'th ACN
-					out[f * this->n_channels + c] += hout[s][0]; // add highpassed s'th ACN 
-					out[f * this->n_channels + c] *= SpeakSH[c][s]; // scale by speaker's s'th spherical harmonic
+					out[f * this->n_channels + c] = this->lout[s][0]; // add lowpassed s'th ACN
+					out[f * this->n_channels + c] += this->hout[s][0]; // add highpassed s'th ACN 
+					out[f * this->n_channels + c] *= this->SpeakSH[c][s]; // scale by speaker's s'th spherical harmonic
 				}
 			}
 		}
 	}
-private:
+public:
 	FilterCoefficients* high;
 	FilterCoefficients* low;
-	SAMPLE lin[n_channels][2] = { 0.0 };
-	SAMPLE lout[n_channels][2] = { 0.0 };
-	SAMPLE hin[n_channels][2] = { 0.0 };
-	SAMPLE hout[n_channels][2] = { 0.0 };
+	SAMPLE lin[(order_+1)*(order_+1)][2] = { 0.0 };
+	SAMPLE lout[(order_+1)*(order_+1)][2] = { 0.0 };
+	SAMPLE hin[(order_+1)*(order_+1)][2] = { 0.0 };
+	SAMPLE hout[(order_+1)*(order_+1)][2] = { 0.0 };
 };
+
+class DBD1 : public DBDN<1> // wrapper for DBDN to chuck
+{
+public:
+	DBD1(t_CKFLOAT fs) : DBDN<1>(static_cast<unsigned>(fs)) {};
+};
+
+class DBD2 : public DBDN<2>
+{
+public:
+	DBD2(t_CKFLOAT fs) : DBDN<2>(static_cast<unsigned>(fs)) {};
+};
+
+class DBD3 : public DBDN<3>
+{
+public:
+	DBD3(t_CKFLOAT fs) : DBDN<3>(static_cast<unsigned>(fs)) {};
+};
+
+class DBD4 : public DBDN<4>
+{
+public:
+	DBD4(t_CKFLOAT fs) : DBDN<4>(static_cast<unsigned>(fs)) {};
+};
+
+class DBD5 : public DBDN<5> 
+{
+public:
+	DBD5(t_CKFLOAT fs) : DBDN<5>(static_cast<unsigned>(fs)) {};
+};
+
+#endif

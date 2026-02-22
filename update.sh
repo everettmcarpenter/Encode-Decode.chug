@@ -6,7 +6,7 @@ if [ $# -eq 0 ]; then
 fi
 
 OS="$1"
-VERS="1.1.0"
+VERS="1.2.0"
 BUILD_DIR="current-builds"
 ROOT_DIR="$(pwd)"
 DEST_DIR="$ROOT_DIR/$BUILD_DIR"
@@ -17,6 +17,7 @@ CHUGS=(
     "Encode.chug/:Encode.chug"
     "Decode.chug/DecodeN/:Decode.chug"
     "Decode.chug/SADN/:SADN.chug"
+    "Decode.chug/DBDN/:DBDN.chug"
     "OrderGain.chug/:OrderGain.chug"
     "Mirror.chug/:Mirror.chug"
 )
