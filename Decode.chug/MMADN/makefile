@@ -7,7 +7,7 @@ CXX_MODULES=src/MMADN.cpp
 
 INC_DIR = include/
 DECODER_INC_DIR=../decode-include/
-CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)/..
+CXXFLAGS=-c -Wall -I$(INC_DIR) -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
 CK_SRC_PATH?=$(DECODER_INC_DIR)
@@ -107,7 +107,7 @@ $(C_OBJECTS): %.o: %.c
 	$(CC) $(FLAGS) -c -o $@ $<
 
 $(CXX_OBJECTS): %.o: %.cpp $(CK_SRC_PATH)/chugin.h
-	$(CXX) $(FLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(FLAGS) -c -o $@ $<
 
 # build as webchugin
 web:
