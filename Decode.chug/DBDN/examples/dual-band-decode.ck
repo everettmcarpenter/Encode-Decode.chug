@@ -18,7 +18,7 @@ float place[][];
 float encplace[];
 
 // sad.placement() @=> place;
-enc.pos() @=> encplace;
+enc.sh() @=> encplace;
 
 fun void varImpulse(Impulse a, dur speed)
 {

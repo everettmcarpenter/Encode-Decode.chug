@@ -1,4 +1,3 @@
-
 # chugin name
 CHUGIN_NAME=DBDN
 
@@ -7,10 +6,11 @@ C_MODULES=
 CXX_MODULES=src/DBDN.cpp
 
 INC_DIR = include/
-CXXFLAGS=-c -Wall -I$(INC_DIR)/..
+DECODER_INC_DIR=../decode-include/
+CXXFLAGS=-c -Wall -I$(INC_DIR) -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
-CK_SRC_PATH?=include/
+CK_SRC_PATH?=$(DECODER_INC_DIR)
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck
@@ -106,12 +106,17 @@ endif
 $(C_OBJECTS): %.o: %.c
 	$(CC) $(FLAGS) -c -o $@ $<
 
-# FIXED dependency rule
-$(CXX_OBJECTS): %.o: %.cpp | $(DEPDIR)
-	$(CXX) $(FLAGS) $(DEPFLAGS) -c -o $@ $<
-	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d && touch $@
+$(CXX_OBJECTS): %.o: %.cpp $(CK_SRC_PATH)/chugin.h
+	$(CXX) $(CXXFLAGS) $(FLAGS) -c -o $@ $<
 
--include $(DEPS)
+# build as webchugin
+web:
+	emcc -O3 -s SIDE_MODULE=1 -s DISABLE_EXCEPTION_CATCHING=0 -fPIC -Wformat=0 	-I $(CK_SRC_PATH) $(CXX_MODULES) $(C_MODULES) -o $(WEBCHUG)
+
+install: $(CHUG)
+	mkdir -p $(CHUGIN_PATH)
+	cp $^ $(CHUGIN_PATH)
+	chmod 755 $(CHUGIN_PATH)/$(CHUG)
 
 clean: 
-	rm -rf $(C_OBJECTS) $(CXX_OBJECTS) $(CHUG) $(WEBCHUG) Release Debug $(DEPDIR)
+	rm -rf $(C_OBJECTS) $(CXX_OBJECTS) $(CHUG) $(WEBCHUG) Release Debug

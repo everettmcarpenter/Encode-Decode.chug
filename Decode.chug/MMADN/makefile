@@ -1,17 +1,19 @@
-
 # chugin name
 CHUGIN_NAME=MMADN
 
 # all of the c/cpp files that compose this chugin
 C_MODULES=
-CXX_MODULES=MMADN.cpp
+CXX_MODULES=src/MMADN.cpp
+
+INC_DIR = include/
+DECODER_INC_DIR=../decode-include/
+CXXFLAGS=-c -Wall -I$(INC_DIR) -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
-CK_SRC_PATH?=chuck/include
+CK_SRC_PATH?=$(DECODER_INC_DIR)
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck
-
 
 # ---------------------------------------------------------------------------- #
 # you won't generally need to change anything below this line for a new chugin #
@@ -105,7 +107,7 @@ $(C_OBJECTS): %.o: %.c
 	$(CC) $(FLAGS) -c -o $@ $<
 
 $(CXX_OBJECTS): %.o: %.cpp $(CK_SRC_PATH)/chugin.h
-	$(CXX) $(FLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(FLAGS) -c -o $@ $<
 
 # build as webchugin
 web:

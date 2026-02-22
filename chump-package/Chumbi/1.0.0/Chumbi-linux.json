@@ -1,0 +1,23 @@
+{
+    "api_version": {
+        "major": 10,
+        "minor": 2
+    },
+    "arch": "x86_64",
+    "files": [
+        {
+            "checksum": "0b4cbb5554d5e25aff7a534d664a64f9dbe56e1a4ff247efd3f087d5d8d8ad77",
+            "file_type": "zip",
+            "local_dir": "./",
+            "url": "https://everettmiles.com/Chumbi/1.0.0/linux/Chumbi.zip"
+        }
+    ],
+    "language_version_min": {
+        "major": 5,
+        "mega": 1,
+        "minor": 4,
+        "patch": 0
+    },
+    "os": "linux",
+    "version": "1.0.0"
+}

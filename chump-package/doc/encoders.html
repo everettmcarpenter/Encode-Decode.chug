@@ -1,0 +1,114 @@
+<html>
+<link rel="stylesheet" type="text/css" href="ckdoc.css" />
+<link rel="stylesheet" type="text/css" href="class.css" />
+<title>Encoders and Converters</title>
+<body>
+<a name="top"/>
+<div id="title">
+<div class="titleL">
+<div style="display: flex; align-items: center;"><div class="inline titlelogo"><a href="https://chuck.stanford.edu/" target="_blank"><img src="https://chuck.stanford.edu/doc/images/chuck-logo2023w.png" /> </div><div class="inline"><h1><a href="./">ChucK Class Library Reference</a></h1></div>
+<div class="inline gray"><h1>&nbsp;&nbsp;<span style="color:black">/</span>&nbsp;&nbsp;Encoders and Converters</h1></div>
+</div>
+</div>
+</div>
+<div id="body">
+<div class="toc"><a id="toc"/>
+<p class="toc_class"><a href="#Encode1" class="ckdoc_typename ckdoc_type_ugen">Encode1</a></p>
+<p class="toc_class"><a href="#ABFormat" class="ckdoc_typename ckdoc_type_ugen">ABFormat</a></p>
+<p class="toc_class"><a href="#BAFormat" class="ckdoc_typename ckdoc_type_ugen">BAFormat</a></p>
+</div>
+<div class="classes">
+<p class="group_desc">Ambisonic virtual encoders and microphone utilities. Encoder works from 1st to 5th order.</p>
+<a name="Encode1" /><div class="class">
+<h2 class="class_title" name="Encode1">Encode1</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="class_description">A first order ambisonic virtual source encoder.<p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">Encode1</span>()</p>
+<p class="member_description">Default constructor for Encode1.</p>
+</div>
+</div>
+<h3 class="class_section_header">member functions</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">azi</span>()</p>
+<p class="member_description">Get last given azimuth.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">azi</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> azimuth)</p>
+<p class="member_description">Set azimuth.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">pos</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> azimuth, <span class="ckdoc_typename ckdoc_type_primitive">float</span> zenith)</p>
+<p class="member_description">Set azimuth and zenith of encoder virtual source.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> n)</p>
+<p class="member_description">Get nth spherical harmonic currently being used.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> coordinates)</p>
+<p class="member_description">Set 1D array of all spherical harmonics currently being used.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> value, <span class="ckdoc_typename ckdoc_type_primitive">int</span> n)</p>
+<p class="member_description">Set nth spherical harmonic to be used.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">sh</span>()</p>
+<p class="member_description">Get 1D array of all spherical harmonics currently being used.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
+<p class="member_description">Set 1D array of weighting for all spherical harmonics.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
+<p class="member_description">Get 1D array of weighting for all spherical harmonics.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">zeni</span>()</p>
+<p class="member_description">Get last given zenith.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">zeni</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> zenith)</p>
+<p class="member_description">Set zenith.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+<a name="ABFormat" /><div class="class">
+<h2 class="class_title" name="ABFormat">ABFormat</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="empty_class_description">No description available</p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">ABFormat</span>()</p>
+<p class="member_description">Default constructor for ABFormat.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+<a name="BAFormat" /><div class="class">
+<h2 class="class_title" name="BAFormat">BAFormat</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="class_description">A class for converting B-Format ambisonics signals to A-Format ambisonic signals.<p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">BAFormat</span>()</p>
+<p class="member_description">Default constructor for BAFormat.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+</div>
+</div>
+</body>
+</html>

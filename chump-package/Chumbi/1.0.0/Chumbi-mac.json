@@ -1,0 +1,23 @@
+{
+    "api_version": {
+        "major": 1,
+        "minor": 0
+    },
+    "arch": "universal",
+    "files": [
+        {
+            "checksum": "bec3eb6679152cd52eebf105817007f966a785e037df391ca97fef4cf0e27e93",
+            "file_type": "zip",
+            "local_dir": "./",
+            "url": "https://everettmiles.com/Chumbi/1.0.0/mac/Chumbi.zip"
+        }
+    ],
+    "language_version_min": {
+        "major": 5,
+        "mega": 1,
+        "minor": 4,
+        "patch": 1
+    },
+    "os": "mac",
+    "version": "1.0.0"
+}
