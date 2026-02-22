@@ -7,14 +7,13 @@ CXX_MODULES=src/MMADN.cpp
 
 INC_DIR = include/
 DECODER_INC_DIR=../decode-include/
-CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)
+CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)/..
 
 # where to find chugin.h
-CK_SRC_PATH?=../decode-include/
+CK_SRC_PATH?=$(DECODER_INC_DIR)
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck
-
 
 # ---------------------------------------------------------------------------- #
 # you won't generally need to change anything below this line for a new chugin #
