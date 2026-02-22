@@ -1,19 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="include\chuckSH.h">
+    <ClInclude Include="include\CrossoverCoefficients.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\chugin.h">
+    <ClInclude Include="..\decode-include\chuckSH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DecoderBase.h">
+    <ClInclude Include="..\decode-include\chugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SHCT.h">
+    <ClInclude Include="..\decode-include\DecoderBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LinkwitzRiley.h">
+    <ClInclude Include="..\decode-include\SHCT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DBDN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
