@@ -7,7 +7,8 @@ C_MODULES=
 CXX_MODULES=src/SADN.cpp
 
 INC_DIR = include/
-CXXFLAGS=-c -Wall -I$(INC_DIR)/..
+DECODER_INC_DIR=../decode-include/
+CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
 CK_SRC_PATH?=include/

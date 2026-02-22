@@ -1,13 +1,16 @@
-
 # chugin name
 CHUGIN_NAME=MMADN
 
 # all of the c/cpp files that compose this chugin
 C_MODULES=
-CXX_MODULES=MMADN.cpp
+CXX_MODULES=src/MMADN.cpp
+
+INC_DIR = include/
+DECODER_INC_DIR=../decode-include/
+CXXFLAGS=-c -Wall -I$(INC_DIR)/.. -I$(DECODER_INC_DIR)
 
 # where to find chugin.h
-CK_SRC_PATH?=chuck/include
+CK_SRC_PATH?=include/
 
 # where to install chugin
 CHUGIN_PATH?=/usr/local/lib/chuck
