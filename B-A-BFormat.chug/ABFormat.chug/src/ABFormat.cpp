@@ -82,8 +82,8 @@ CK_DLL_QUERY( ABFormat )
 {
     // generally, don't change this...
     QUERY->setname( QUERY, "ABFormat" );
-    QUERY->doc_class(QUERY, "A class for converting A-Format ambisonics signals to B-Format ambisonic signals.");
     QUERY->begin_class( QUERY, "ABFormat", "UGen" );
+    QUERY->doc_class(QUERY, "A class for converting A-Format ambisonics signals to B-Format ambisonic signals.");
     QUERY->add_ctor( QUERY, abformat_ctor );
     QUERY->add_dtor( QUERY, abformat_dtor );
     QUERY->add_ugen_funcf( QUERY, abformat_tickf, NULL, 4, 4 );;

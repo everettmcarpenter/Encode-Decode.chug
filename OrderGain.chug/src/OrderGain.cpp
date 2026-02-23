@@ -111,62 +111,102 @@ CK_DLL_QUERY(OrderGain)
     // generally, don't change this...
     QUERY->setname(QUERY, "OrderGain");
     QUERY->begin_class(QUERY, "OrderGain1", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
     QUERY->add_ctor(QUERY, ordergain1_ctor);
     QUERY->add_ctor(QUERY, ordergain1_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain1_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain1_tickf, NULL, 4, 4);
     QUERY->add_mfun(QUERY, ordergain1_setGain, "float", "gain");
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
     QUERY->add_mfun(QUERY, ordergain1_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
     ordergain1_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
     QUERY->begin_class(QUERY, "OrderGain2", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
     QUERY->add_ctor(QUERY, ordergain2_ctor);
     QUERY->add_ctor(QUERY, ordergain2_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain2_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain2_tickf, NULL, 9, 9);
     QUERY->add_mfun(QUERY, ordergain2_setGain, "float", "gain");
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
     QUERY->add_mfun(QUERY, ordergain2_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
     ordergain2_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
     QUERY->begin_class(QUERY, "OrderGain3", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
     QUERY->add_ctor(QUERY, ordergain3_ctor);
     QUERY->add_ctor(QUERY, ordergain3_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain3_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain3_tickf, NULL, 16, 16);
     QUERY->add_mfun(QUERY, ordergain3_setGain, "float", "gain");
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
     QUERY->add_mfun(QUERY, ordergain3_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
     ordergain3_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
     QUERY->begin_class(QUERY, "OrderGain4", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
     QUERY->add_ctor(QUERY, ordergain4_ctor);
     QUERY->add_ctor(QUERY, ordergain4_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain4_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain4_tickf, NULL, 25, 25);
     QUERY->add_mfun(QUERY, ordergain4_setGain, "float", "gain");
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
     QUERY->add_mfun(QUERY, ordergain4_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
     ordergain4_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
     QUERY->begin_class(QUERY, "OrderGain5", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
     QUERY->add_ctor(QUERY, ordergain5_ctor);
     QUERY->add_ctor(QUERY, ordergain5_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain5_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain5_tickf, NULL, 36, 36);
     QUERY->add_mfun(QUERY, ordergain5_setGain, "float", "gain");
     QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
     QUERY->add_mfun(QUERY, ordergain5_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
+    ordergain5_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
+    QUERY->end_class(QUERY);
+
+    //========================================
+    // OrderGainN (purely for documentation purposes)
+    //
+    //========================================
+    QUERY->begin_class(QUERY, "OrderGainN", "UGen");
+    QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
+    QUERY->add_ctor(QUERY, ordergain5_ctor);
+    QUERY->add_ctor(QUERY, ordergain5_ctor2);
+    QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain via constructor.");
+    QUERY->add_dtor(QUERY, ordergain5_dtor);
+    QUERY->add_ugen_funcf(QUERY, ordergain5_tickf, NULL, 36, 36);
+    QUERY->add_mfun(QUERY, ordergain5_setGain, "float", "gain");
+    QUERY->add_arg(QUERY, "float", "gain");
+    QUERY->doc_func(QUERY, "Set gain.");
+    QUERY->add_mfun(QUERY, ordergain5_getGain, "float", "gain");
+    QUERY->doc_func(QUERY, "Get gain.");
     ordergain5_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 

@@ -13,52 +13,53 @@
 </div>
 <div id="body">
 <div class="toc"><a id="toc"/>
-<p class="toc_class"><a href="#Decode1" class="ckdoc_typename ckdoc_type_ugen">Decode1</a></p>
-<p class="toc_class"><a href="#SAD1" class="ckdoc_typename ckdoc_type_ugen">SAD1</a></p>
+<p class="toc_class"><a href="#DecodeN" class="ckdoc_typename ckdoc_type_ugen">DecodeN</a></p>
+<p class="toc_class"><a href="#SADN" class="ckdoc_typename ckdoc_type_ugen">SADN</a></p>
+<p class="toc_class"><a href="#DBDN" class="ckdoc_typename ckdoc_type_ugen">DBDN</a></p>
 </div>
 <div class="classes">
 <p class="group_desc">Ambisonic decoders, all work from 1st to 5th order.</p>
-<a name="Decode1" /><div class="class">
-<h2 class="class_title" name="Decode1">Decode1</h2>
+<a name="DecodeN" /><div class="class">
+<h2 class="class_title" name="DecodeN">DecodeN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="empty_class_description">No description available</p>
+<p class="class_description">Decoder based on a given matrix of spherical harmonic values.<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="membername">Decode1</span>()</p>
-<p class="member_description">Default constructor for Decode1.</p>
+<p class="member_declaration"><span class="membername">DecodeN</span>()</p>
+<p class="member_description">Default constructor for DecodeN.</p>
 </div>
 </div>
 <h3 class="class_section_header">member functions</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> )</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> sh)</p>
+<p class="member_description">Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">sh</span>()</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Get current matrix of spherical harmonics.</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Set vector of weights to be used, the same vector is used for all speakers.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>
 </div>
 <hr />
-<a name="SAD1" /><div class="class">
-<h2 class="class_title" name="SAD1">SAD1</h2>
+<a name="SADN" /><div class="class">
+<h2 class="class_title" name="SADN">SADN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
 <p class="class_description">A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="membername">SAD1</span>()</p>
-<p class="member_description">Default constructor for SAD1.</p>
+<p class="member_declaration"><span class="membername">SADN</span>()</p>
+<p class="member_description">Default constructor for SADN.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="membername">SAD1</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> SAD1)</p>
+<p class="member_declaration"><span class="membername">SADN</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> SAD1)</p>
 <p class="member_description">Constructor for instantiating with an array of speaker angles.</p>
 </div>
 </div>
@@ -79,6 +80,35 @@
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
 <p class="member_description">Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+<a name="DBDN" /><div class="class">
+<h2 class="class_title" name="DBDN">DBDN</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="empty_class_description">No description available</p>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">DBDN</span>()</p>
+<p class="member_description">Default constructor for DBDN.</p>
+</div>
+</div>
+<h3 class="class_section_header">member functions</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">param</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> arg)</p>
+<p class="empty_member_description">No description available</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">param</span>()</p>
+<p class="empty_member_description">No description available</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">placement</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> )</p>
+<p class="empty_member_description">No description available</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>

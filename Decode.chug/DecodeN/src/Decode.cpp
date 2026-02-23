@@ -124,76 +124,110 @@ CK_DLL_QUERY(Decode)
     // generally, don't change this...
     QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode1", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
     QUERY->add_ctor(QUERY, decode1_ctor);
     QUERY->add_dtor(QUERY, decode1_dtor);
     QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
     QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
     // this reserves a variable in the ChucK internal class to store
     decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode2", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
     QUERY->add_ctor(QUERY, decode2_ctor);
     QUERY->add_dtor(QUERY, decode2_dtor);
     QUERY->add_ugen_funcf(QUERY, decode2_tickf, NULL, 9, 9);
     QUERY->add_mfun(QUERY, decode2_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode2_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
     // this reserves a variable in the ChucK internal class to store
     decode2_data_offset = QUERY->add_mvar(QUERY, "int", "@decode2_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode3", "UGen");
     QUERY->add_ctor(QUERY, decode3_ctor);
     QUERY->add_dtor(QUERY, decode3_dtor);
     QUERY->add_ugen_funcf(QUERY, decode3_tickf, NULL, 16, 16);
     QUERY->add_mfun(QUERY, decode3_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode3_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
     // this reserves a variable in the ChucK internal class to store
     decode3_data_offset = QUERY->add_mvar(QUERY, "int", "@decode3_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode4", "UGen");
     QUERY->add_ctor(QUERY, decode4_ctor);
     QUERY->add_dtor(QUERY, decode4_dtor);
     QUERY->add_ugen_funcf(QUERY, decode4_tickf, NULL, 25, 25);
     QUERY->add_mfun(QUERY, decode4_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode4_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
     // this reserves a variable in the ChucK internal class to store
     decode4_data_offset = QUERY->add_mvar(QUERY, "int", "@decode4_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode5", "UGen");
     QUERY->add_ctor(QUERY, decode5_ctor);
     QUERY->add_dtor(QUERY, decode5_dtor);
     QUERY->add_ugen_funcf(QUERY, decode5_tickf, NULL, 36, 36);
     QUERY->add_mfun(QUERY, decode5_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode5_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
     // this reserves a variable in the ChucK internal class to store
     decode5_data_offset = QUERY->add_mvar(QUERY, "int", "@decode5_data", false);
+    QUERY->end_class(QUERY);
+
+    //=======================================================================
+    // DecodeN (purely for documentation purposes)
+    //
+    //=======================================================================
+    QUERY->begin_class(QUERY, "DecodeN", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
+    QUERY->add_ctor(QUERY, decode1_ctor);
+    QUERY->add_dtor(QUERY, decode1_dtor);
+    QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
+    QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "sh");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
+    QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
+    QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    // this reserves a variable in the ChucK internal class to store
+    decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
 
     // wasn't that a breeze?

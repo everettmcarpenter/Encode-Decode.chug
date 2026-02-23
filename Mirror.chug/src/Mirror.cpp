@@ -124,10 +124,12 @@ CK_DLL_QUERY( Mirror )
     // NOTE to create a non-UGen class, change the second argument
     // to extend a different ChucK class (e.g., "Object")
     QUERY->begin_class( QUERY, "Mirror1", "UGen" );
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
 
     // register default constructor
     QUERY->add_ctor( QUERY, mirror1_ctor );
     QUERY->add_ctor(QUERY, mirror1_octor);
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
     QUERY->add_arg(QUERY, "int", "mode");
     // NOTE constructors can be overloaded like any other functions,
     // each overloaded constructor begins with `QUERY->add_ctor()`
@@ -137,8 +139,10 @@ CK_DLL_QUERY( Mirror )
     QUERY->add_dtor( QUERY, mirror1_dtor );
 
     QUERY->add_mfun(QUERY, mirror1_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
     QUERY->add_mfun(QUERY, mirror1_setMode, "void", "mode");
     QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
 
     // for UGens only: add tick function
     // NOTE a non-UGen class should remove or comment out this next line
@@ -159,12 +163,16 @@ CK_DLL_QUERY( Mirror )
 
     // 2nd order
     QUERY->begin_class(QUERY, "Mirror2", "UGen");
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
     QUERY->add_ctor(QUERY, mirror2_ctor);
     QUERY->add_ctor(QUERY, mirror2_octor);
     QUERY->add_arg(QUERY, "int", "mode");
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
     QUERY->add_mfun(QUERY, mirror2_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
     QUERY->add_mfun(QUERY, mirror2_setMode, "void", "mode");
     QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
     QUERY->add_dtor(QUERY, mirror2_dtor);
     QUERY->add_ugen_funcf(QUERY, mirror2_tickf, NULL, 9, 9);
     mirror2_data_offset = QUERY->add_mvar(QUERY, "int", "@m_data", false);
@@ -172,12 +180,16 @@ CK_DLL_QUERY( Mirror )
 
     // 3rd order
     QUERY->begin_class(QUERY, "Mirror3", "UGen");
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
     QUERY->add_ctor(QUERY, mirror3_ctor);
     QUERY->add_ctor(QUERY, mirror3_octor);
     QUERY->add_arg(QUERY, "int", "mode");
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
     QUERY->add_mfun(QUERY, mirror3_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
     QUERY->add_mfun(QUERY, mirror3_setMode, "void", "mode");
     QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
     QUERY->add_dtor(QUERY, mirror3_dtor);
     QUERY->add_ugen_funcf(QUERY, mirror3_tickf, NULL, 16, 16);
     mirror3_data_offset = QUERY->add_mvar(QUERY, "int", "@m_data", false);
@@ -185,12 +197,16 @@ CK_DLL_QUERY( Mirror )
 
     // 4th order
     QUERY->begin_class(QUERY, "Mirror4", "UGen");
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
     QUERY->add_ctor(QUERY, mirror4_ctor);
     QUERY->add_ctor(QUERY, mirror4_octor);
     QUERY->add_arg(QUERY, "int", "mode");
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
     QUERY->add_mfun(QUERY, mirror4_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
     QUERY->add_mfun(QUERY, mirror4_setMode, "void", "mode");
     QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
     QUERY->add_dtor(QUERY, mirror4_dtor);
     QUERY->add_ugen_funcf(QUERY, mirror4_tickf, NULL, 25, 25);
     mirror4_data_offset = QUERY->add_mvar(QUERY, "int", "@m_data", false);
@@ -198,16 +214,40 @@ CK_DLL_QUERY( Mirror )
 
     // 5th order
     QUERY->begin_class(QUERY, "Mirror5", "UGen");
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
     QUERY->add_ctor(QUERY, mirror5_ctor);
     QUERY->add_ctor(QUERY, mirror5_octor);
     QUERY->add_arg(QUERY, "int", "mode");
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
     QUERY->add_mfun(QUERY, mirror5_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
     QUERY->add_mfun(QUERY, mirror5_setMode, "void", "mode");
     QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
     QUERY->add_dtor(QUERY, mirror5_dtor);
     QUERY->add_ugen_funcf(QUERY, mirror5_tickf, NULL, 36, 36);
     mirror5_data_offset = QUERY->add_mvar(QUERY, "int", "@m_data", false);
     QUERY->end_class(QUERY);
+
+    //============================================================
+    //      MirrorN (purely for documentation purposes)
+    //
+    //============================================================
+    QUERY->begin_class( QUERY, "MirrorN", "UGen" );
+    QUERY->doc_class( QUERY, "A utility UGen for mirroring ambisonic fields across the cartesian axes.");
+    QUERY->add_ctor( QUERY, mirror1_ctor );
+    QUERY->add_ctor(QUERY, mirror1_octor);
+    QUERY->add_arg(QUERY, "int", "mode");
+    QUERY->doc_func( QUERY, "Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.");
+    QUERY->add_dtor( QUERY, mirror1_dtor );
+    QUERY->add_mfun(QUERY, mirror1_getMode, "int", "mode");
+    QUERY->doc_func(QUERY, "Get current mode.");
+    QUERY->add_mfun(QUERY, mirror1_setMode, "void", "mode");
+    QUERY->add_arg(QUERY, "int", "newmode");
+    QUERY->doc_func(QUERY, "Set mode.");
+    QUERY->add_ugen_funcf(QUERY, mirror1_tickf, NULL, 4, 4);
+    mirror1_data_offset = QUERY->add_mvar( QUERY, "int", "@m_data", false );
+    QUERY->end_class( QUERY );
 
     // wasn't that a breeze?
     return TRUE;

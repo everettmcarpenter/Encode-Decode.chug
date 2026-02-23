@@ -248,6 +248,31 @@ CK_DLL_QUERY( SAD )
     sad5_data_offset = QUERY->add_mvar(QUERY, "int", "@sad_data", false);
     QUERY->end_class(QUERY);
 
+    //=======================================================================
+    // SADN (purely for documentation purposes)
+    //
+    //=======================================================================
+    QUERY->begin_class( QUERY, "SADN", "UGen" );
+    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).");
+    QUERY->add_ctor( QUERY, sad1_ctor );
+    QUERY->add_ctor( QUERY, sad1_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "SAD1");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, sad1_dtor );
+    QUERY->add_ugen_funcf( QUERY, sad1_tickf, NULL, 4, 4 );
+    QUERY->add_mfun(QUERY, sad1_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
+    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "placement");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad1_setDimension, "void", "dim");
+    QUERY->add_arg(QUERY, "int", "dimension");
+    QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
+    QUERY->end_class(QUERY);
+
     // wasn't that a breeze?
     return TRUE;
 }

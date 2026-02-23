@@ -13,64 +13,64 @@
 </div>
 <div id="body">
 <div class="toc"><a id="toc"/>
-<p class="toc_class"><a href="#OrderGain1" class="ckdoc_typename ckdoc_type_ugen">OrderGain1</a></p>
-<p class="toc_class"><a href="#Mirror1" class="ckdoc_typename ckdoc_type_ugen">Mirror1</a></p>
+<p class="toc_class"><a href="#OrderGainN" class="ckdoc_typename ckdoc_type_ugen">OrderGainN</a></p>
+<p class="toc_class"><a href="#MirrorN" class="ckdoc_typename ckdoc_type_ugen">MirrorN</a></p>
 </div>
 <div class="classes">
 <p class="group_desc">Basic soundfield alterers, shapers and modifiers, all work from 1st to 5th order.</p>
-<a name="OrderGain1" /><div class="class">
-<h2 class="class_title" name="OrderGain1">OrderGain1</h2>
+<a name="OrderGainN" /><div class="class">
+<h2 class="class_title" name="OrderGainN">OrderGainN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="empty_class_description">No description available</p>
+<p class="class_description">BFormat gain adjustment, allows easy management and mixing of BFormat streams.<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="membername">OrderGain1</span>()</p>
-<p class="member_description">Default constructor for OrderGain1.</p>
+<p class="member_declaration"><span class="membername">OrderGainN</span>()</p>
+<p class="member_description">Default constructor for OrderGainN.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="membername">OrderGain1</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> gain)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="membername">OrderGainN</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> gain)</p>
+<p class="member_description">Set gain via constructor.</p>
 </div>
 </div>
 <h3 class="class_section_header">member functions</h3>
 <div class="members">
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">gain</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> gain)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Set gain.</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">gain</span>()</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Get gain.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>
 </div>
 <hr />
-<a name="Mirror1" /><div class="class">
-<h2 class="class_title" name="Mirror1">Mirror1</h2>
+<a name="MirrorN" /><div class="class">
+<h2 class="class_title" name="MirrorN">MirrorN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="empty_class_description">No description available</p>
+<p class="class_description">A utility UGen for mirroring ambisonic fields across the cartesian axes.<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="membername">Mirror1</span>()</p>
-<p class="member_description">Default constructor for Mirror1.</p>
+<p class="member_declaration"><span class="membername">MirrorN</span>()</p>
+<p class="member_description">Default constructor for MirrorN.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="membername">Mirror1</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> mode)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="membername">MirrorN</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> mode)</p>
+<p class="member_description">Set mode with constructor, 0 reflects bottom to top, 1 reflects left to right, 2 reflects front to back.</p>
 </div>
 </div>
 <h3 class="class_section_header">member functions</h3>
 <div class="members">
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">int</span> <span class="membername">mode</span>()</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Get current mode.</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">mode</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> newmode)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_description">Set mode.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>

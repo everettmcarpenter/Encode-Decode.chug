@@ -371,6 +371,51 @@ CK_DLL_QUERY(Encode)
     encode5_data_offset = QUERY->add_mvar(QUERY, "int", "@e_data", false);
     QUERY->end_class(QUERY);
 
+    // =============================================
+    //  EncodeN (purely for documentation purposes)
+    //
+    // =============================================
+    QUERY->begin_class(QUERY, "EncodeN", "UGen");
+    QUERY->doc_class(QUERY, "An nth order ambisonic virtual source encoder.");
+    // register the destructor (probably no need to change)
+    QUERY->add_ctor(QUERY, encode1_ctor);
+    QUERY->add_dtor(QUERY, encode1_dtor);
+    QUERY->add_ugen_funcf(QUERY, encode1_tickf, NULL, 1, 9);
+    QUERY->add_mfun(QUERY, encode1_geti, "float", "sh");
+    QUERY->add_arg(QUERY, "int", "n");
+    QUERY->doc_func(QUERY, "Get nth spherical harmonic currently being used.");
+    QUERY->add_mfun(QUERY, encode1_coefficients, "void", "sh");
+    QUERY->add_arg(QUERY, "float[]", "coordinates");
+    QUERY->doc_func(QUERY, "Set 1D array of all spherical harmonics currently being used.");
+    QUERY->add_mfun(QUERY, encode1_seti, "void", "sh");
+    QUERY->add_arg(QUERY, "float", "value");
+    QUERY->add_arg(QUERY, "int", "n");
+    QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
+    QUERY->add_mfun(QUERY, encode1_position, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_mfun(QUERY, encode1_getSH, "float[]", "sh");
+    QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
+    QUERY->add_mfun(QUERY, encode1_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Get last given azimuth.");
+    QUERY->add_mfun(QUERY, encode1_getZeni, "float", "zeni");
+    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode1_setAzi, "float", "azi");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->doc_func(QUERY, "Set azimuth.");
+    QUERY->add_mfun(QUERY, encode1_setZeni, "float", "zeni");
+    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
+    QUERY->add_mfun(QUERY, encode1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY,"Get 1D array of weighting for all spherical harmonics.");
+    // this reserves a variable in the ChucK internal class to store
+    // referene to the c++ class we defined above
+    encode1_data_offset = QUERY->add_mvar(QUERY, "int", "@e_data", false);
+    QUERY->end_class(QUERY);
+
     // ------------------------------------------------------------------------
     // end the class(es) definition
     // IMPORTANT: this MUST be called to each class definition!
