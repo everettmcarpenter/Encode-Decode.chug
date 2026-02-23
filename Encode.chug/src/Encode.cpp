@@ -377,6 +377,8 @@ CK_DLL_QUERY(Encode)
     // =============================================
     QUERY->begin_class(QUERY, "EncodeN", "UGen");
     QUERY->doc_class(QUERY, "An nth order ambisonic virtual source encoder.");
+    QUERY->add_ex(QUERY, "examples/basic/encode.ck");
+    QUERY->add_ex(QUERY, "examples/deep/advanced-decode.ck");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode1_ctor);
     QUERY->add_dtor(QUERY, encode1_dtor);

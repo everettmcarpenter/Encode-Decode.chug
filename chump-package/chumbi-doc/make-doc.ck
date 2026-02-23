@@ -32,4 +32,4 @@ doc.addGroup(
 doc.genGroups(["Encoders and Converters", "Decoders", "Soundfield Utilities"]);
 
 // generate
-doc.outputToDir( "doc/", "Chumbi Doc" );
+doc.outputToDir( "chumbi-doc/", "Chumbi Doc" );

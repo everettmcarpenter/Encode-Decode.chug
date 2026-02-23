@@ -6,7 +6,7 @@
     "arch": "x86_64",
     "files": [
         {
-            "checksum": "d099e8d00a043d1e6658d787e2780f14a52b9ac02ee43868c59abd105e584c2b",
+            "checksum": "fad5718bb5bc19636043b354a1f40ef383ee35889b8d5f14a039f59386539631",
             "file_type": "zip",
             "local_dir": "./",
             "url": "https://everettmiles.com/Chumbi/1.0.0/linux/Chumbi.zip"

@@ -5,6 +5,9 @@
 // homer simpson enters the ambisonic universe, and exits using Decode
 SndBuf doh("special:doh") => Encode1 encoder => Decode1 decoder => dac; 
 
+// set homer's position 45 degree azimuth, 27 degree zenith
+encoder.pos(45.0, 27.0);
+
 float speakerSH[4][4]; // save the spherical harmonics here
 for(int n; n < 4; n++)
 {

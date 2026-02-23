@@ -254,6 +254,7 @@ CK_DLL_QUERY( SAD )
     //=======================================================================
     QUERY->begin_class( QUERY, "SADN", "UGen" );
     QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).");
+    QUERY->add_ex(QUERY,"examples/basic/simple-decode.ck");
     QUERY->add_ctor( QUERY, sad1_ctor );
     QUERY->add_ctor( QUERY, sad1_2ctor );
     QUERY->add_arg(QUERY, "float[][]", "SAD1");

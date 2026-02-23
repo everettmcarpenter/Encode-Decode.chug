@@ -215,6 +215,7 @@ CK_DLL_QUERY(Decode)
     //=======================================================================
     QUERY->begin_class(QUERY, "DecodeN", "UGen");
     QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
+    QUERY->add_ex(QUERY, "examples/deep/advanced-decode.ck");
     QUERY->add_ctor(QUERY, decode1_ctor);
     QUERY->add_dtor(QUERY, decode1_dtor);
     QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
