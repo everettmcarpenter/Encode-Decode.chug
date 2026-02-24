@@ -51,6 +51,7 @@ CK_DLL_MFUN(sad1_setSpeakers);
 CK_DLL_MFUN(sad1_getSpeakers);
 CK_DLL_TICKF( sad1_tickf );
 CK_DLL_MFUN(sad1_setWeights);
+CK_DLL_MFUN(sad1_getWeights);
 CK_DLL_MFUN(sad1_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -64,6 +65,7 @@ CK_DLL_MFUN(sad2_setSpeakers);
 CK_DLL_MFUN(sad2_getSpeakers);
 CK_DLL_TICKF(sad2_tickf);
 CK_DLL_MFUN(sad2_setWeights);
+CK_DLL_MFUN(sad2_getWeights);
 CK_DLL_MFUN(sad2_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -77,6 +79,7 @@ CK_DLL_MFUN(sad3_setSpeakers);
 CK_DLL_MFUN(sad3_getSpeakers);
 CK_DLL_TICKF(sad3_tickf);
 CK_DLL_MFUN(sad3_setWeights);
+CK_DLL_MFUN(sad3_getWeights);
 CK_DLL_MFUN(sad3_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -90,6 +93,7 @@ CK_DLL_MFUN(sad4_setSpeakers);
 CK_DLL_MFUN(sad4_getSpeakers);
 CK_DLL_TICKF(sad4_tickf);
 CK_DLL_MFUN(sad4_setWeights);
+CK_DLL_MFUN(sad4_getWeights);
 CK_DLL_MFUN(sad4_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -103,6 +107,7 @@ CK_DLL_MFUN(sad5_setSpeakers);
 CK_DLL_MFUN(sad5_getSpeakers);
 CK_DLL_TICKF(sad5_tickf);
 CK_DLL_MFUN(sad5_setWeights);
+CK_DLL_MFUN(sad5_getWeights);
 CK_DLL_MFUN(sad5_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -153,6 +158,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad1_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -175,6 +182,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad2_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -197,6 +206,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad3_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -219,6 +230,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad4_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -241,6 +254,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad5_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -269,6 +284,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad1_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -381,6 +398,24 @@ CK_DLL_MFUN(sad1_setWeights)
     if (sad1_obj) sad1_obj->CKsetWeights(weights, API);
 }
 
+CK_DLL_MFUN(sad1_getWeights)
+{
+    // get our c++ class pointer
+    SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
+
+    std::vector<float> weights = sad1_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
 CK_DLL_MFUN(sad1_setDimension)
 {
     SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
@@ -484,6 +519,24 @@ CK_DLL_MFUN(sad2_setWeights)
     // get our c++ class pointer
     SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
     if (sad2_obj) sad2_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad2_getWeights)
+{
+    // get our c++ class pointer
+    SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
+
+    std::vector<float> weights = sad2_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad2_setDimension)
@@ -591,6 +644,24 @@ CK_DLL_MFUN(sad3_setWeights)
     if (sad3_obj) sad3_obj->CKsetWeights(weights, API);
 }
 
+CK_DLL_MFUN(sad3_getWeights)
+{
+    // get our c++ class pointer
+    SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
+
+    std::vector<float> weights = sad3_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
 CK_DLL_MFUN(sad3_setDimension)
 {
     SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
@@ -694,6 +765,24 @@ CK_DLL_MFUN(sad4_setWeights)
     // get our c++ class pointer
     SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
     if (sad4_obj) sad4_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad4_getWeights)
+{
+    // get our c++ class pointer
+    SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
+
+    std::vector<float> weights = sad4_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad4_setDimension)
@@ -802,6 +891,24 @@ CK_DLL_MFUN(sad5_setWeights)
     // get our c++ class pointer
     SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
     if (sad5_obj) sad5_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad5_getWeights)
+{
+    // get our c++ class pointer
+    SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
+
+    std::vector<float> weights = sad5_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad5_setDimension)

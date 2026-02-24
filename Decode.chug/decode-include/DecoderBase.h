@@ -106,6 +106,17 @@ public:
 		}
 	}
 
+	std::vector<float> getWeights()
+	{
+		std::vector<float> store;
+		store.resize(n_channels);
+		for (int i = 0; i < weights.size(); i++)
+		{
+			store[i] = weights[i];
+		}
+		return store;
+	}
+
 protected:
 	static const unsigned order = order_; // order
 	static const unsigned n_channels = (order + 1) * (order + 1); // how many channels
