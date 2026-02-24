@@ -28,9 +28,9 @@ CK_DLL_MFUN(encode1_getSH);
 CK_DLL_MFUN(encode1_setWeights);
 CK_DLL_MFUN(encode1_getWeights);
 CK_DLL_MFUN(encode1_getAzi);
-CK_DLL_MFUN(encode1_getZeni);
+CK_DLL_MFUN(encode1_getElev);
 CK_DLL_MFUN(encode1_setAzi);
-CK_DLL_MFUN(encode1_setZeni);
+CK_DLL_MFUN(encode1_setElev);
 t_CKINT encode1_data_offset = 0;
 // Encode2
 CK_DLL_CTOR(encode2_ctor);
@@ -44,9 +44,9 @@ CK_DLL_MFUN(encode2_getSH);
 CK_DLL_MFUN(encode2_setWeights);
 CK_DLL_MFUN(encode2_getWeights);
 CK_DLL_MFUN(encode2_getAzi);
-CK_DLL_MFUN(encode2_getZeni);
+CK_DLL_MFUN(encode2_getElev);
 CK_DLL_MFUN(encode2_setAzi);
-CK_DLL_MFUN(encode2_setZeni);
+CK_DLL_MFUN(encode2_setElev);
 t_CKINT encode2_data_offset = 0;
 // Encode3
 CK_DLL_CTOR(encode3_ctor);
@@ -60,9 +60,9 @@ CK_DLL_MFUN(encode3_getSH);
 CK_DLL_MFUN(encode3_setWeights);
 CK_DLL_MFUN(encode3_getWeights);
 CK_DLL_MFUN(encode3_getAzi);
-CK_DLL_MFUN(encode3_getZeni);
+CK_DLL_MFUN(encode3_getElev);
 CK_DLL_MFUN(encode3_setAzi);
-CK_DLL_MFUN(encode3_setZeni);
+CK_DLL_MFUN(encode3_setElev);
 t_CKINT encode3_data_offset = 0;
 // Encode4
 CK_DLL_CTOR(encode4_ctor);
@@ -76,9 +76,9 @@ CK_DLL_MFUN(encode4_getSH);
 CK_DLL_MFUN(encode4_setWeights);
 CK_DLL_MFUN(encode4_getWeights);
 CK_DLL_MFUN(encode4_getAzi);
-CK_DLL_MFUN(encode4_getZeni);
+CK_DLL_MFUN(encode4_getElev);
 CK_DLL_MFUN(encode4_setAzi);
-CK_DLL_MFUN(encode4_setZeni);
+CK_DLL_MFUN(encode4_setElev);
 t_CKINT encode4_data_offset = 0;
 // Encode5
 CK_DLL_CTOR(encode5_ctor);
@@ -92,9 +92,9 @@ CK_DLL_MFUN(encode5_getSH);
 CK_DLL_MFUN(encode5_setWeights);
 CK_DLL_MFUN(encode5_getWeights);
 CK_DLL_MFUN(encode5_getAzi);
-CK_DLL_MFUN(encode5_getZeni);
+CK_DLL_MFUN(encode5_getElev);
 CK_DLL_MFUN(encode5_setAzi);
-CK_DLL_MFUN(encode5_setZeni);
+CK_DLL_MFUN(encode5_setElev);
 t_CKINT encode5_data_offset = 0;
 
 //-----------------------------------------------------------------------------
@@ -153,25 +153,25 @@ CK_DLL_QUERY(Encode)
     // position source within this chugin (easier)
     QUERY->add_mfun(QUERY, encode1_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set azimuth and zenith of encoder virtual source.");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set azimuth and elevation of encoder virtual source.");
     // retrieve SH
     QUERY->add_mfun(QUERY, encode1_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     // retrieve last azimuth 
     QUERY->add_mfun(QUERY, encode1_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    // retrieve last given zenith
-    QUERY->add_mfun(QUERY, encode1_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    // retrieve last given elevation
+    QUERY->add_mfun(QUERY, encode1_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     // set azimuth 
     QUERY->add_mfun(QUERY, encode1_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    // set  zenith
-    QUERY->add_mfun(QUERY, encode1_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    // set  elevation
+    QUERY->add_mfun(QUERY, encode1_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     // set weights
     QUERY->add_mfun(QUERY, encode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -207,19 +207,19 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
     QUERY->add_mfun(QUERY, encode2_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_arg(QUERY, "float", "elevation");
     QUERY->add_mfun(QUERY, encode2_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     QUERY->add_mfun(QUERY, encode2_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    QUERY->add_mfun(QUERY, encode2_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode2_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     QUERY->add_mfun(QUERY, encode2_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    QUERY->add_mfun(QUERY, encode2_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode2_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     QUERY->add_mfun(QUERY, encode2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
@@ -254,19 +254,19 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
     QUERY->add_mfun(QUERY, encode3_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_arg(QUERY, "float", "elevation");
     QUERY->add_mfun(QUERY, encode3_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     QUERY->add_mfun(QUERY, encode3_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    QUERY->add_mfun(QUERY, encode3_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode3_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     QUERY->add_mfun(QUERY, encode3_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    QUERY->add_mfun(QUERY, encode3_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode3_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     QUERY->add_mfun(QUERY, encode3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
@@ -301,19 +301,19 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
     QUERY->add_mfun(QUERY, encode4_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_arg(QUERY, "float", "elevation");
     QUERY->add_mfun(QUERY, encode4_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     QUERY->add_mfun(QUERY, encode4_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    QUERY->add_mfun(QUERY, encode4_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode4_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     QUERY->add_mfun(QUERY, encode4_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    QUERY->add_mfun(QUERY, encode4_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode4_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     QUERY->add_mfun(QUERY, encode4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
@@ -348,19 +348,19 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
     QUERY->add_mfun(QUERY, encode5_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_arg(QUERY, "float", "elevation");
     QUERY->add_mfun(QUERY, encode5_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     QUERY->add_mfun(QUERY, encode5_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    QUERY->add_mfun(QUERY, encode5_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode5_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     QUERY->add_mfun(QUERY, encode5_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    QUERY->add_mfun(QUERY, encode5_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode5_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     QUERY->add_mfun(QUERY, encode5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
@@ -395,19 +395,19 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_func(QUERY, "Set nth spherical harmonic to be used.");
     QUERY->add_mfun(QUERY, encode1_position, "void", "pos");
     QUERY->add_arg(QUERY, "float", "azimuth");
-    QUERY->add_arg(QUERY, "float", "zenith");
+    QUERY->add_arg(QUERY, "float", "elevation");
     QUERY->add_mfun(QUERY, encode1_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get 1D array of all spherical harmonics currently being used.");
     QUERY->add_mfun(QUERY, encode1_getAzi, "float", "azi");
     QUERY->doc_func(QUERY, "Get last given azimuth.");
-    QUERY->add_mfun(QUERY, encode1_getZeni, "float", "zeni");
-    QUERY->doc_func(QUERY, "Get last given zenith.");
+    QUERY->add_mfun(QUERY, encode1_getElev, "float", "elev");
+    QUERY->doc_func(QUERY, "Get last given elevation.");
     QUERY->add_mfun(QUERY, encode1_setAzi, "float", "azi");
     QUERY->add_arg(QUERY, "float", "azimuth");
     QUERY->doc_func(QUERY, "Set azimuth.");
-    QUERY->add_mfun(QUERY, encode1_setZeni, "float", "zeni");
-    QUERY->add_arg(QUERY, "float", "zenith");
-    QUERY->doc_func(QUERY, "Set zenith.");
+    QUERY->add_mfun(QUERY, encode1_setElev, "float", "elev");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set elevation.");
     QUERY->add_mfun(QUERY, encode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY,"Set 1D array of weighting for all spherical harmonics.");
@@ -507,12 +507,12 @@ CK_DLL_MFUN(encode1_seti)
 CK_DLL_MFUN(encode1_position)
 {
     float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    float elev = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     if (encode_obj)
     {
-        encode_obj->position(azi, zeni);
+        encode_obj->position(azi, elev);
     }
 }
 
@@ -567,24 +567,24 @@ CK_DLL_MFUN(encode1_getAzi)
     if (encode_obj) RETURN->v_float = encode_obj->last_azimuth;
 }
 
-CK_DLL_MFUN(encode1_getZeni)
+CK_DLL_MFUN(encode1_getElev)
 {
     Encode1* encode_obj = (Encode1*)OBJ_MEMBER_INT(SELF, encode1_data_offset);
-    if (encode_obj) RETURN->v_float = encode_obj->last_zenith;
+    if (encode_obj) RETURN->v_float = encode_obj->last_elevation;
 }
 
 CK_DLL_MFUN(encode1_setAzi)
 {
     Encode1* encode_obj = (Encode1*)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     float azi = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
+    if (encode_obj) encode_obj->position(azi, encode_obj->last_elevation);
 }
 
-CK_DLL_MFUN(encode1_setZeni)
+CK_DLL_MFUN(encode1_setElev)
 {
     Encode1* encode_obj = (Encode1*)OBJ_MEMBER_INT(SELF, encode1_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
+    float elev = GET_NEXT_FLOAT(ARGS);
+    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, elev);
 }
 
 //=================================================//
@@ -667,12 +667,12 @@ CK_DLL_MFUN(encode2_seti)
 CK_DLL_MFUN(encode2_position)
 {
     float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    float elev = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     if (encode_obj)
     {
-        encode_obj->position(azi, zeni);
+        encode_obj->position(azi, elev);
     }
 }
 
@@ -727,24 +727,24 @@ CK_DLL_MFUN(encode2_getAzi)
     if (encode_obj) RETURN->v_float = encode_obj->last_azimuth;
 }
 
-CK_DLL_MFUN(encode2_getZeni)
+CK_DLL_MFUN(encode2_getElev)
 {
     Encode2* encode_obj = (Encode2*)OBJ_MEMBER_INT(SELF, encode2_data_offset);
-    if (encode_obj) RETURN->v_float = encode_obj->last_zenith;
+    if (encode_obj) RETURN->v_float = encode_obj->last_elevation;
 }
 
 CK_DLL_MFUN(encode2_setAzi)
 {
     Encode2* encode_obj = (Encode2*)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     float azi = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
+    if (encode_obj) encode_obj->position(azi, encode_obj->last_elevation);
 }
 
-CK_DLL_MFUN(encode2_setZeni)
+CK_DLL_MFUN(encode2_setElev)
 {
     Encode2* encode_obj = (Encode2*)OBJ_MEMBER_INT(SELF, encode2_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
+    float elev = GET_NEXT_FLOAT(ARGS);
+    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, elev);
 }
 
 //=================================================//
@@ -827,12 +827,12 @@ CK_DLL_MFUN(encode3_seti)
 CK_DLL_MFUN(encode3_position)
 {
     float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    float elev = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     if (encode_obj)
     {
-        encode_obj->position(azi, zeni);
+        encode_obj->position(azi, elev);
     }
 }
 
@@ -887,24 +887,24 @@ CK_DLL_MFUN(encode3_getAzi)
     if (encode_obj) RETURN->v_float = encode_obj->last_azimuth;
 }
 
-CK_DLL_MFUN(encode3_getZeni)
+CK_DLL_MFUN(encode3_getElev)
 {
     Encode3* encode_obj = (Encode3*)OBJ_MEMBER_INT(SELF, encode3_data_offset);
-    if (encode_obj) RETURN->v_float = encode_obj->last_zenith;
+    if (encode_obj) RETURN->v_float = encode_obj->last_elevation;
 }
 
 CK_DLL_MFUN(encode3_setAzi)
 {
     Encode3* encode_obj = (Encode3*)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     float azi = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
+    if (encode_obj) encode_obj->position(azi, encode_obj->last_elevation);
 }
 
-CK_DLL_MFUN(encode3_setZeni)
+CK_DLL_MFUN(encode3_setElev)
 {
     Encode3* encode_obj = (Encode3*)OBJ_MEMBER_INT(SELF, encode3_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
+    float elev = GET_NEXT_FLOAT(ARGS);
+    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, elev);
 }
 
 //=================================================//
@@ -987,12 +987,12 @@ CK_DLL_MFUN(encode4_seti)
 CK_DLL_MFUN(encode4_position)
 {
     float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    float elev = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     if (encode_obj)
     {
-        encode_obj->position(azi, zeni);
+        encode_obj->position(azi, elev);
     }
 }
 
@@ -1047,24 +1047,24 @@ CK_DLL_MFUN(encode4_getAzi)
     if (encode_obj) RETURN->v_float = encode_obj->last_azimuth;
 }
 
-CK_DLL_MFUN(encode4_getZeni)
+CK_DLL_MFUN(encode4_getElev)
 {
     Encode4* encode_obj = (Encode4*)OBJ_MEMBER_INT(SELF, encode4_data_offset);
-    if (encode_obj) RETURN->v_float = encode_obj->last_zenith;
+    if (encode_obj) RETURN->v_float = encode_obj->last_elevation;
 }
 
 CK_DLL_MFUN(encode4_setAzi)
 {
     Encode4* encode_obj = (Encode4*)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     float azi = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
+    if (encode_obj) encode_obj->position(azi, encode_obj->last_elevation);
 }
 
-CK_DLL_MFUN(encode4_setZeni)
+CK_DLL_MFUN(encode4_setElev)
 {
     Encode4* encode_obj = (Encode4*)OBJ_MEMBER_INT(SELF, encode4_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
+    float elev = GET_NEXT_FLOAT(ARGS);
+    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, elev);
 }
 
 //=================================================//
@@ -1147,12 +1147,12 @@ CK_DLL_MFUN(encode5_seti)
 CK_DLL_MFUN(encode5_position)
 {
     float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    float elev = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     if (encode_obj)
     {
-        encode_obj->position(azi, zeni);
+        encode_obj->position(azi, elev);
     }
 }
 
@@ -1207,24 +1207,24 @@ CK_DLL_MFUN(encode5_getAzi)
     if (encode_obj) RETURN->v_float = encode_obj->last_azimuth;
 }
 
-CK_DLL_MFUN(encode5_getZeni)
+CK_DLL_MFUN(encode5_getElev)
 {
     Encode5* encode_obj = (Encode5*)OBJ_MEMBER_INT(SELF, encode5_data_offset);
-    if (encode_obj) RETURN->v_float = encode_obj->last_zenith;
+    if (encode_obj) RETURN->v_float = encode_obj->last_elevation;
 }
 
 CK_DLL_MFUN(encode5_setAzi)
 {
     Encode5* encode_obj = (Encode5*)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     float azi = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
+    if (encode_obj) encode_obj->position(azi, encode_obj->last_elevation);
 }
 
-CK_DLL_MFUN(encode5_setZeni)
+CK_DLL_MFUN(encode5_setElev)
 {
     Encode5* encode_obj = (Encode5*)OBJ_MEMBER_INT(SELF, encode5_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
-    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
+    float elev = GET_NEXT_FLOAT(ARGS);
+    if (encode_obj) encode_obj->position(encode_obj->last_azimuth, elev);
 }
 
 //=================================================//

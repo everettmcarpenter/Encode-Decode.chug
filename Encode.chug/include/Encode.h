@@ -133,8 +133,8 @@ public:
     void position(t_CKFLOAT azimuth_, t_CKFLOAT zenith_)
     {
         last_azimuth = azimuth_;
-        last_zenith = zenith_;
-        temp_matrix = SH(order, last_azimuth, last_zenith, 0); // simply just calls the spherical harmonic calculator
+        last_elevation = zenith_;
+        temp_matrix = SH(order, last_azimuth, last_elevation, 0); // simply just calls the spherical harmonic calculator
     }
 
     std::vector<float> getSH()
@@ -156,7 +156,7 @@ public:
     std::vector<float> temp_matrix;    // temp coeffs to be shifted to current
     std::vector<float> weights = { 1.0 };
     float last_azimuth = 0.f;
-    float last_zenith = 0.f;
+    float last_elevation = 0.f;
     bool zeroCrossing = FALSE; // is there a zero crossing?
 };
 
