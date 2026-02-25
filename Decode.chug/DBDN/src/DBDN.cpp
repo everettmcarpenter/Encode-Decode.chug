@@ -6,15 +6,15 @@
 //      but it is possible, of course, to create non-UGen classes in a chugin!
 // To modify this generated file for a non-UGen class...
 //      1. in QUERY->begin_class(), change "UGen" to a different ChucK class
-//         (e.g., `QUERY->begin_class(QUERY, "DBDN", "Object");`)
+//         (e.g., `QUERY->begin_class(QUERY, "DBD1", "Object");`)
 //      2. remove or commment out the line containing QUERY->add_ugen_func()
 //      3. that's it; the rest is no different for UGens/non-UGens
 //-----------------------------------------------------------------------------
-// NOTE once you have built this into a chugin (DBDN.chug), here are a few
+// NOTE once you have built this into a chugin (DBD1.chug), here are a few
 //      helpful tools for testing / probing / verifying your new chugin!
 //
-// chuginate also generated a DBDN-test.ck boilerplate ChucK program
-//      to help test your chugin (see DBDN-test.ck for more instructions)
+// chuginate also generated a DBD1-test.ck boilerplate ChucK program
+//      to help test your chugin (see DBD1-test.ck for more instructions)
 //
 // run `chuck --chugin-probe` to probe what chugins would be loaded, and
 //      from where in the chugin search paths
@@ -41,28 +41,73 @@
 
 
 // declaration of chugin constructor
-CK_DLL_CTOR(dbdn_ctor);
-// declaration of chugin desctructor
-CK_DLL_DTOR(dbdn_dtor);
-CK_DLL_MFUN(dbdn_setSpeakers);
+CK_DLL_CTOR(dbd1_ctor);
+CK_DLL_CTOR(dbd1_2ctor);
+CK_DLL_DTOR(dbd1_dtor);
+CK_DLL_MFUN(dbd1_setSpeakers);
+CK_DLL_MFUN(dbd1_setParam);
+CK_DLL_MFUN(dbd1_getParam);
+CK_DLL_TICKF(dbd1_tickf);
+CK_DLL_MFUN(dbd1_getSpeakers);
+CK_DLL_MFUN(dbd1_setWeights);
+CK_DLL_MFUN(dbd1_getWeights);
 
-// example of getter/setter
-CK_DLL_MFUN(dbdn_setParam);
-CK_DLL_MFUN(dbdn_getParam);
+CK_DLL_CTOR(dbd2_ctor);
+CK_DLL_CTOR(dbd2_2ctor);
+CK_DLL_DTOR(dbd2_dtor);
+CK_DLL_MFUN(dbd2_setSpeakers);
+CK_DLL_MFUN(dbd2_setParam);
+CK_DLL_MFUN(dbd2_getParam);
+CK_DLL_TICKF(dbd2_tickf);
+CK_DLL_MFUN(dbd2_getSpeakers);
+CK_DLL_MFUN(dbd2_setWeights);
+CK_DLL_MFUN(dbd2_getWeights);
 
-// for chugins extending UGen, this is mono synthesis function for 1 sample
-CK_DLL_TICKF(dbdn_tickf);
+CK_DLL_CTOR(dbd3_ctor);
+CK_DLL_CTOR(dbd3_2ctor);
+CK_DLL_DTOR(dbd3_dtor);
+CK_DLL_MFUN(dbd3_setSpeakers);
+CK_DLL_MFUN(dbd3_setParam);
+CK_DLL_MFUN(dbd3_getParam);
+CK_DLL_TICKF(dbd3_tickf);
+CK_DLL_MFUN(dbd3_getSpeakers);
+CK_DLL_MFUN(dbd3_setWeights);
+CK_DLL_MFUN(dbd3_getWeights);
 
-// this is a special offset reserved for chugin internal data
-t_CKINT dbdn_data_offset = 0;
+CK_DLL_CTOR(dbd4_ctor);
+CK_DLL_CTOR(dbd4_2ctor);
+CK_DLL_DTOR(dbd4_dtor);
+CK_DLL_MFUN(dbd4_setSpeakers);
+CK_DLL_MFUN(dbd4_setParam);
+CK_DLL_MFUN(dbd4_getParam);
+CK_DLL_TICKF(dbd4_tickf);
+CK_DLL_MFUN(dbd4_getSpeakers);
+CK_DLL_MFUN(dbd4_setWeights);
+CK_DLL_MFUN(dbd4_getWeights);
 
+CK_DLL_CTOR(dbd5_ctor);
+CK_DLL_CTOR(dbd5_2ctor);
+CK_DLL_DTOR(dbd5_dtor);
+CK_DLL_MFUN(dbd5_setSpeakers);
+CK_DLL_MFUN(dbd5_setParam);
+CK_DLL_MFUN(dbd5_getParam);
+CK_DLL_TICKF(dbd5_tickf);
+CK_DLL_MFUN(dbd5_getSpeakers);
+CK_DLL_MFUN(dbd5_setWeights);
+CK_DLL_MFUN(dbd5_getWeights);
+
+t_CKINT dbd1_data_offset = 0;
+t_CKINT dbd2_data_offset = 0;
+t_CKINT dbd3_data_offset = 0;
+t_CKINT dbd4_data_offset = 0;
+t_CKINT dbd5_data_offset = 0;
 
 //-----------------------------------------------------------------------------
 // info function: ChucK calls this when loading/probing the chugin
 // NOTE: please customize these info fields below; they will be used for
 // chugins loading, probing, and package management and documentation
 //-----------------------------------------------------------------------------
-CK_DLL_INFO( DBDN )
+CK_DLL_INFO( DBD1 )
 {
     // the version string of this chugin, e.g., "v1.2.1"
     QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.2.0" );
@@ -71,7 +116,7 @@ CK_DLL_INFO( DBDN )
     // text description of this chugin; what is it? what does it do? who is it for?
     QUERY->setinfo( QUERY, CHUGIN_INFO_DESCRIPTION, "A dual band ambisonic decoder up to the fifth order." );
     // (optional) URL of the homepage for this chugin
-    QUERY->setinfo( QUERY, CHUGIN_INFO_URL, "https://github.com/SaintEverett/Encode-Decode.chug/tree/32486a2a3fcbb03b66f6b0c5dfaeed064a58e200/Decode.chug/DBDN" );
+    QUERY->setinfo( QUERY, CHUGIN_INFO_URL, "https://github.com/SaintEverett/Encode-Decode.chug/tree/32486a2a3fcbb03b66f6b0c5dfaeed064a58e200/Decode.chug/DBD1" );
     // (optional) contact email
     QUERY->setinfo( QUERY, CHUGIN_INFO_EMAIL, "carpee2[at]rpi[dot]edu" );
 }
@@ -81,10 +126,10 @@ CK_DLL_INFO( DBDN )
 // query function: ChucK calls this when loading the chugin
 // modify this function to define this chugin's API and language extensions
 //-----------------------------------------------------------------------------
-CK_DLL_QUERY( DBDN )
+CK_DLL_QUERY( DBD1 )
 {
     // generally, don't change this...
-    QUERY->setname( QUERY, "DBDN" );
+    QUERY->setname( QUERY, "DBD1" );
 
     // ------------------------------------------------------------------------
     // begin class definition(s); will be compiled, verified,
@@ -92,38 +137,124 @@ CK_DLL_QUERY( DBDN )
     // ------------------------------------------------------------------------
     // NOTE to create a non-UGen class, change the second argument
     // to extend a different ChucK class (e.g., "Object")
+    QUERY->begin_class( QUERY, "DBD1", "UGen" );
+    QUERY->add_ctor( QUERY, dbd1_ctor );
+    QUERY->add_ctor( QUERY, dbd1_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBD1");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd1_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd1_tickf, NULL, 4, 4 );
+    QUERY->add_mfun(QUERY, dbd1_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd1_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd1_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd1_data", false);
+    QUERY->end_class( QUERY );
+
+    QUERY->begin_class( QUERY, "DBD2", "UGen" );
+    QUERY->add_ctor( QUERY, dbd2_ctor );
+    QUERY->add_ctor( QUERY, dbd2_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBD2");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd2_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd2_tickf, NULL, 9, 9 );
+    QUERY->add_mfun(QUERY, dbd2_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd2_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd2_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd2_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd2_data", false);
+    QUERY->end_class( QUERY );
+
+    QUERY->begin_class( QUERY, "DBD3", "UGen" );
+    QUERY->add_ctor( QUERY, dbd3_ctor );
+    QUERY->add_ctor( QUERY, dbd3_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBD3");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd3_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd3_tickf, NULL, 16, 16 );
+    QUERY->add_mfun(QUERY, dbd3_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd3_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd3_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd3_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd3_data", false);
+    QUERY->end_class( QUERY );
+
+    QUERY->begin_class( QUERY, "DBD4", "UGen" );
+    QUERY->add_ctor( QUERY, dbd4_ctor );
+    QUERY->add_ctor( QUERY, dbd4_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBD4");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd4_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd4_tickf, NULL, 25, 25 );
+    QUERY->add_mfun(QUERY, dbd4_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd4_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd4_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd4_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd4_data", false);
+    QUERY->end_class( QUERY );
+
+    QUERY->begin_class( QUERY, "DBD5", "UGen" );
+    QUERY->add_ctor( QUERY, dbd5_ctor );
+    QUERY->add_ctor( QUERY, dbd5_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBD5");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd5_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd5_tickf, NULL, 36, 36 );
+    QUERY->add_mfun(QUERY, dbd5_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd5_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd5_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd5_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd5_data", false);
+    QUERY->end_class( QUERY );
+
     QUERY->begin_class( QUERY, "DBDN", "UGen" );
-
-    // register default constructor
-    QUERY->add_ctor( QUERY, dbdn_ctor );
-    // NOTE constructors can be overloaded like any other functions,
-    // each overloaded constructor begins with `QUERY->add_ctor()`
-    // followed by a sequence of `QUERY->add_arg()`
-
-    // register the destructor (probably no need to change)
-    QUERY->add_dtor( QUERY, dbdn_dtor );
-    QUERY->add_mfun(QUERY, dbdn_setSpeakers, "void", "placement");
-    QUERY->add_arg(QUERY, "float[][]", "");
-
-    // for UGens only: add tick function
-    // NOTE a non-UGen class should remove or comment out this next line
-    QUERY->add_ugen_funcf(QUERY, dbdn_tickf, NULL, 4, 4);
-    // example of adding setter method
-    QUERY->add_mfun(QUERY, dbdn_setParam, "float", "param");
-    // example of adding argument to the above method
-    QUERY->add_arg(QUERY, "float", "arg");
-
-    // example of adding getter method
-    QUERY->add_mfun(QUERY, dbdn_getParam, "float", "param");
-    
-    // this reserves a variable in the ChucK internal class to store 
-    // referene to the c++ class we defined above
-    dbdn_data_offset = QUERY->add_mvar(QUERY, "int", "@dbdn_data", false);
-
-    // ------------------------------------------------------------------------
-    // end the class definition
-    // IMPORTANT: this MUST be called to each class definition!
-    // ------------------------------------------------------------------------
+    QUERY->add_ctor( QUERY, dbd1_ctor );
+    QUERY->add_ctor( QUERY, dbd1_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "DBDN");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, dbd1_dtor );
+    QUERY->add_ugen_funcf( QUERY, dbd1_tickf, NULL, 36, 36 );
+    QUERY->add_mfun(QUERY, dbd1_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, dbd1_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, dbd1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, dbd1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    dbd1_data_offset = QUERY->add_mvar(QUERY, "int", "@dbd1_data", false);
     QUERY->end_class( QUERY );
 
     // wasn't that a breeze?
@@ -132,78 +263,561 @@ CK_DLL_QUERY( DBDN )
 
 
 // implementation for the default constructor
-CK_DLL_CTOR( dbdn_ctor )
+CK_DLL_CTOR(dbd1_ctor)
 {
     // get the offset where we'll store our internal c++ class pointer
-    OBJ_MEMBER_INT( SELF, dbdn_data_offset ) = 0;
-    
+    OBJ_MEMBER_INT(SELF, dbd1_data_offset) = 0;
     // instantiate our internal c++ class representation
-    DBD1* dbdn_obj = new DBD1( API->vm->srate(VM) );
-    
+    DBD1* dbd1_obj = new DBD1(API->vm->srate(VM));
     // store the pointer in the ChucK object member
-    OBJ_MEMBER_INT( SELF, dbdn_data_offset ) = (t_CKINT)dbdn_obj;
+    OBJ_MEMBER_INT(SELF, dbd1_data_offset) = (t_CKINT)dbd1_obj;
 }
 
+CK_DLL_CTOR(dbd1_2ctor)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd1_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD1* dbd1_obj = new DBD1(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd1_data_offset) = (t_CKINT)dbd1_obj;
+    if (dbd1_obj)
+    {
+        dbd1_obj->CKsetSpeakAngles(multi_array, API);
+    }
+}
 
 // implementation for the destructor
-CK_DLL_DTOR( dbdn_dtor )
+CK_DLL_DTOR( dbd1_dtor )
 {
     // get our c++ class pointer
-    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1 * dbd1_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbd1_data_offset );
     // clean up (this macro tests for NULL, deletes, and zeros out the variable)
-    CK_SAFE_DELETE( dbdn_obj );
+    CK_SAFE_DELETE( dbd1_obj );
     // set the data field to 0
-    OBJ_MEMBER_INT( SELF, dbdn_data_offset ) = 0;
+    OBJ_MEMBER_INT( SELF, dbd1_data_offset ) = 0;
 }
 
-
 // implementation for tick function (relevant only for UGens)
-CK_DLL_TICKF( dbdn_tickf )
+CK_DLL_TICKF(dbd1_tickf)
 {
     // get our c++ class pointer
-    DBD1 * dbdn_obj = (DBD1 *)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
- 
-    // invoke our tick function; store in the magical out variable
-    if( dbdn_obj ) dbdn_obj->tick( in, out, nframes );
-
+    DBD1 * dbd1_obj = (DBD1 *)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
+    if( dbd1_obj ) dbd1_obj->tick(in, out, nframes);
     // yes
     return TRUE;
 }
 
-CK_DLL_MFUN(dbdn_setSpeakers)
+CK_DLL_MFUN(dbd1_setSpeakers)
 {
     Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
     // get our c++ class pointer
-    DBD1* dbdn_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbdn_data_offset);
-    if (dbdn_obj)
-    {
-        dbdn_obj->CKsetSpeakAngles(multi_array, API);
+    DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
+    if (dbd1_obj) 
+    { 
+        dbd1_obj->CKsetSpeakAngles(multi_array, API); 
     }
 }
 
-
-// example implementation for setter
-CK_DLL_MFUN( dbdn_setParam )
+CK_DLL_MFUN(dbd1_getSpeakers)
 {
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
     // get our c++ class pointer
-    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
 
-    // get next argument
-    // NOTE argument type must match what is specified above in CK_DLL_QUERY
-    // NOTE this advances the ARGS pointer, so save in variable for re-use
-    t_CKFLOAT arg1 = GET_NEXT_FLOAT( ARGS );
-    
-    // call setParam() and set the return value
-    RETURN->v_float = 0;
+    std::vector<std::vector<float>> sphericals = dbd1_obj->getSpeakerSH();
+
+    // create [][]
+    Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
+    Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
+
+    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    {
+        Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
+        Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
+
+        for (int j = 0; j < sphericals.size(); j++) 
+        {
+            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+        }
+
+        API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
+    }
+
+    RETURN->v_object = (Chuck_Object*)final;
 }
 
+CK_DLL_MFUN(dbd1_setWeights)
+{
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
+    if (dbd1_obj) dbd1_obj->CKsetWeights(weights, API);
+}
 
-// example implementation for getter
-CK_DLL_MFUN(dbdn_getParam)
+CK_DLL_MFUN(dbd1_getWeights)
 {
     // get our c++ class pointer
-    DBD1* dbdn_obj = (DBD1 *)OBJ_MEMBER_INT( SELF, dbdn_data_offset );
+    DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
 
-    // call getParam() and set the return value
-    RETURN->v_float = 0;
+    std::vector<float> weights = dbd1_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
+// implementation for the default constructor
+CK_DLL_CTOR(dbd2_ctor)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd2_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD2* dbd2_obj = new DBD2(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd2_data_offset) = (t_CKINT)dbd2_obj;
+}
+
+CK_DLL_CTOR(dbd2_2ctor)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd2_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD2* dbd2_obj = new DBD2(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd2_data_offset) = (t_CKINT)dbd2_obj;
+    if (dbd2_obj)
+    {
+        dbd2_obj->CKsetSpeakAngles(multi_array, API);
+    }
+}
+
+// implementation for the destructor
+CK_DLL_DTOR( dbd2_dtor )
+{
+    // get our c++ class pointer
+    DBD2 * dbd2_obj = (DBD2 *)OBJ_MEMBER_INT( SELF, dbd2_data_offset );
+    // clean up (this macro tests for NULL, deletes, and zeros out the variable)
+    CK_SAFE_DELETE( dbd2_obj );
+    // set the data field to 0
+    OBJ_MEMBER_INT( SELF, dbd2_data_offset ) = 0;
+}
+
+// implementation for tick function (relevant only for UGens)
+CK_DLL_TICKF(dbd2_tickf)
+{
+    // get our c++ class pointer
+    DBD2 * dbd2_obj = (DBD2 *)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
+    if( dbd2_obj ) dbd2_obj->tick(in, out, nframes);
+    // yes
+    return TRUE;
+}
+
+CK_DLL_MFUN(dbd2_setSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
+    if (dbd2_obj) 
+    { 
+        dbd2_obj->CKsetSpeakAngles(multi_array, API); 
+    }
+}
+
+CK_DLL_MFUN(dbd2_getSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
+
+    std::vector<std::vector<float>> sphericals = dbd2_obj->getSpeakerSH();
+
+    // create [][]
+    Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
+    Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
+
+    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    {
+        Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
+        Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
+
+        for (int j = 0; j < sphericals.size(); j++) 
+        {
+            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+        }
+
+        API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
+    }
+
+    RETURN->v_object = (Chuck_Object*)final;
+}
+
+CK_DLL_MFUN(dbd2_setWeights)
+{
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
+    if (dbd2_obj) dbd2_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(dbd2_getWeights)
+{
+    // get our c++ class pointer
+    DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
+
+    std::vector<float> weights = dbd2_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
+// implementation for the default constructor
+CK_DLL_CTOR(dbd3_ctor)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd3_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD3* dbd3_obj = new DBD3(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd3_data_offset) = (t_CKINT)dbd3_obj;
+}
+
+CK_DLL_CTOR(dbd3_2ctor)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd3_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD3* dbd3_obj = new DBD3(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd3_data_offset) = (t_CKINT)dbd3_obj;
+    if (dbd3_obj)
+    {
+        dbd3_obj->CKsetSpeakAngles(multi_array, API);
+    }
+}
+
+// implementation for the destructor
+CK_DLL_DTOR( dbd3_dtor )
+{
+    // get our c++ class pointer
+    DBD3 * dbd3_obj = (DBD3 *)OBJ_MEMBER_INT( SELF, dbd3_data_offset );
+    // clean up (this macro tests for NULL, deletes, and zeros out the variable)
+    CK_SAFE_DELETE( dbd3_obj );
+    // set the data field to 0
+    OBJ_MEMBER_INT( SELF, dbd3_data_offset ) = 0;
+}
+
+// implementation for tick function (relevant only for UGens)
+CK_DLL_TICKF(dbd3_tickf)
+{
+    // get our c++ class pointer
+    DBD3 * dbd3_obj = (DBD3 *)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
+    if( dbd3_obj ) dbd3_obj->tick(in, out, nframes);
+    // yes
+    return TRUE;
+}
+
+CK_DLL_MFUN(dbd3_setSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
+    if (dbd3_obj) 
+    { 
+        dbd3_obj->CKsetSpeakAngles(multi_array, API); 
+    }
+}
+
+CK_DLL_MFUN(dbd3_getSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
+
+    std::vector<std::vector<float>> sphericals = dbd3_obj->getSpeakerSH();
+
+    // create [][]
+    Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
+    Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
+
+    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    {
+        Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
+        Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
+
+        for (int j = 0; j < sphericals.size(); j++) 
+        {
+            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+        }
+
+        API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
+    }
+
+    RETURN->v_object = (Chuck_Object*)final;
+}
+
+CK_DLL_MFUN(dbd3_setWeights)
+{
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
+    if (dbd3_obj) dbd3_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(dbd3_getWeights)
+{
+    // get our c++ class pointer
+    DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
+
+    std::vector<float> weights = dbd3_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
+// implementation for the default constructor
+CK_DLL_CTOR(dbd4_ctor)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd4_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD4* dbd4_obj = new DBD4(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd4_data_offset) = (t_CKINT)dbd4_obj;
+}
+
+CK_DLL_CTOR(dbd4_2ctor)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd4_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD4* dbd4_obj = new DBD4(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd4_data_offset) = (t_CKINT)dbd4_obj;
+    if (dbd4_obj)
+    {
+        dbd4_obj->CKsetSpeakAngles(multi_array, API);
+    }
+}
+
+// implementation for the destructor
+CK_DLL_DTOR( dbd4_dtor )
+{
+    // get our c++ class pointer
+    DBD4 * dbd4_obj = (DBD4 *)OBJ_MEMBER_INT( SELF, dbd4_data_offset );
+    // clean up (this macro tests for NULL, deletes, and zeros out the variable)
+    CK_SAFE_DELETE( dbd4_obj );
+    // set the data field to 0
+    OBJ_MEMBER_INT( SELF, dbd4_data_offset ) = 0;
+}
+
+// implementation for tick function (relevant only for UGens)
+CK_DLL_TICKF(dbd4_tickf)
+{
+    // get our c++ class pointer
+    DBD4 * dbd4_obj = (DBD4 *)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
+    if( dbd4_obj ) dbd4_obj->tick(in, out, nframes);
+    // yes
+    return TRUE;
+}
+
+CK_DLL_MFUN(dbd4_setSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
+    if (dbd4_obj) 
+    { 
+        dbd4_obj->CKsetSpeakAngles(multi_array, API); 
+    }
+}
+
+CK_DLL_MFUN(dbd4_getSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
+
+    std::vector<std::vector<float>> sphericals = dbd4_obj->getSpeakerSH();
+
+    // create [][]
+    Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
+    Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
+
+    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    {
+        Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
+        Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
+
+        for (int j = 0; j < sphericals.size(); j++) 
+        {
+            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+        }
+
+        API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
+    }
+
+    RETURN->v_object = (Chuck_Object*)final;
+}
+
+CK_DLL_MFUN(dbd4_setWeights)
+{
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
+    if (dbd4_obj) dbd4_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(dbd4_getWeights)
+{
+    // get our c++ class pointer
+    DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
+
+    std::vector<float> weights = dbd4_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
+// implementation for the default constructor
+CK_DLL_CTOR(dbd5_ctor)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd5_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD5* dbd5_obj = new DBD5(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd5_data_offset) = (t_CKINT)dbd5_obj;
+}
+
+CK_DLL_CTOR(dbd5_2ctor)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, dbd5_data_offset) = 0;
+    // instantiate our internal c++ class representation
+    DBD5* dbd5_obj = new DBD5(API->vm->srate(VM));
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, dbd5_data_offset) = (t_CKINT)dbd5_obj;
+    if (dbd5_obj)
+    {
+        dbd5_obj->CKsetSpeakAngles(multi_array, API);
+    }
+}
+
+// implementation for the destructor
+CK_DLL_DTOR( dbd5_dtor )
+{
+    // get our c++ class pointer
+    DBD5 * dbd5_obj = (DBD5 *)OBJ_MEMBER_INT( SELF, dbd5_data_offset );
+    // clean up (this macro tests for NULL, deletes, and zeros out the variable)
+    CK_SAFE_DELETE( dbd5_obj );
+    // set the data field to 0
+    OBJ_MEMBER_INT( SELF, dbd5_data_offset ) = 0;
+}
+
+// implementation for tick function (relevant only for UGens)
+CK_DLL_TICKF(dbd5_tickf)
+{
+    // get our c++ class pointer
+    DBD5 * dbd5_obj = (DBD5 *)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
+    if( dbd5_obj ) dbd5_obj->tick(in, out, nframes);
+    // yes
+    return TRUE;
+}
+
+CK_DLL_MFUN(dbd5_setSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
+    if (dbd5_obj) 
+    { 
+        dbd5_obj->CKsetSpeakAngles(multi_array, API); 
+    }
+}
+
+CK_DLL_MFUN(dbd5_getSpeakers)
+{
+    Chuck_Object* multi_array = GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
+
+    std::vector<std::vector<float>> sphericals = dbd5_obj->getSpeakerSH();
+
+    // create [][]
+    Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
+    Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
+
+    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    {
+        Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
+        Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
+
+        for (int j = 0; j < sphericals.size(); j++) 
+        {
+            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+        }
+
+        API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
+    }
+
+    RETURN->v_object = (Chuck_Object*)final;
+}
+
+CK_DLL_MFUN(dbd5_setWeights)
+{
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // get our c++ class pointer
+    DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
+    if (dbd5_obj) dbd5_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(dbd5_getWeights)
+{
+    // get our c++ class pointer
+    DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
+
+    std::vector<float> weights = dbd5_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }

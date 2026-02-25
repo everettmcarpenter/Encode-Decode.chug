@@ -47,6 +47,10 @@
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
 <p class="member_description">Set vector of weights to be used, the same vector is used for all speakers.</p>
 </div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
+<p class="member_description">Get the active weighting of the decoder matrix.</p>
+</div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>
 </div>
@@ -54,7 +58,7 @@
 <a name="SADN" /><div class="class">
 <h2 class="class_title" name="SADN">SADN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="class_description">A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).<p>
+<p class="class_description">A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and elevation (elevation).<p>
 <h3 class="class_section_header">examples</h3><div class="examples"><ul>
 <li><a target="_blank" href="examples/basic/simple-decode.ck">examples/basic/simple-decode.ck</a></li>
 </ul></div>
@@ -77,15 +81,19 @@
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">placement</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> speakerAngles)</p>
-<p class="member_description">Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.</p>
+<p class="member_description">Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">placement</span>()</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">sh</span>()</p>
 <p class="member_description">Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
 <p class="member_description">Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
+<p class="member_description">Get the active weighting of the decoder matrix.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>
@@ -101,20 +109,28 @@
 <p class="member_declaration"><span class="membername">DBDN</span>()</p>
 <p class="member_description">Default constructor for DBDN.</p>
 </div>
+<div class="member">
+<p class="member_declaration"><span class="membername">DBDN</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> DBDN)</p>
+<p class="member_description">Constructor for instantiating with an array of speaker angles.</p>
+</div>
 </div>
 <h3 class="class_section_header">member functions</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">param</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> arg)</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">placement</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> speakerAngles)</p>
+<p class="member_description">Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">param</span>()</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> <span class="membername">sh</span>()</p>
+<p class="member_description">Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">placement</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[][]</span> )</p>
-<p class="empty_member_description">No description available</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
+<p class="member_description">Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
+<p class="member_description">Get the active weighting of the decoder matrix.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>

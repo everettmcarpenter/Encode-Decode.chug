@@ -49,6 +49,7 @@ CK_DLL_MFUN(decode1_setSpeakers);
 CK_DLL_MFUN(decode1_getSpeakers);
 CK_DLL_TICKF(decode1_tickf);
 CK_DLL_MFUN(decode1_setWeights);
+CK_DLL_MFUN(decode1_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode1_data_offset = 0;
@@ -60,6 +61,7 @@ CK_DLL_MFUN(decode2_setSpeakers);
 CK_DLL_MFUN(decode2_getSpeakers);
 CK_DLL_TICKF(decode2_tickf);
 CK_DLL_MFUN(decode2_setWeights);
+CK_DLL_MFUN(decode2_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode2_data_offset = 0;
@@ -71,6 +73,7 @@ CK_DLL_MFUN(decode3_setSpeakers);
 CK_DLL_MFUN(decode3_getSpeakers);
 CK_DLL_TICKF(decode3_tickf);
 CK_DLL_MFUN(decode3_setWeights);
+CK_DLL_MFUN(decode3_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode3_data_offset = 0;
@@ -82,6 +85,7 @@ CK_DLL_MFUN(decode4_setSpeakers);
 CK_DLL_MFUN(decode4_getSpeakers);
 CK_DLL_TICKF(decode4_tickf);
 CK_DLL_MFUN(decode4_setWeights);
+CK_DLL_MFUN(decode4_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode4_data_offset = 0;
@@ -93,6 +97,7 @@ CK_DLL_MFUN(decode5_setSpeakers);
 CK_DLL_MFUN(decode5_getSpeakers);
 CK_DLL_TICKF(decode5_tickf);
 CK_DLL_MFUN(decode5_setWeights);
+CK_DLL_MFUN(decode5_getWeights);
 // this is a special offset reserved for chugin internal data
 t_CKINT decode5_data_offset = 0;
 
@@ -136,6 +141,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
@@ -154,6 +161,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode2_data_offset = QUERY->add_mvar(QUERY, "int", "@decode2_data", false);
     QUERY->end_class(QUERY);
@@ -171,6 +180,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode3_data_offset = QUERY->add_mvar(QUERY, "int", "@decode3_data", false);
     QUERY->end_class(QUERY);
@@ -188,6 +199,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode4_data_offset = QUERY->add_mvar(QUERY, "int", "@decode4_data", false);
     QUERY->end_class(QUERY);
@@ -205,6 +218,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode5_data_offset = QUERY->add_mvar(QUERY, "int", "@decode5_data", false);
     QUERY->end_class(QUERY);
@@ -227,6 +242,8 @@ CK_DLL_QUERY(Decode)
     QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
@@ -325,6 +342,24 @@ CK_DLL_MFUN(decode1_setWeights)
         decode1_obj->CKsetWeights(weights, API);
 }
 
+CK_DLL_MFUN(decode1_getWeights)
+{
+    // get our c++ class pointer
+    Decode1* decode1_obj = (Decode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
+
+    std::vector<float> weights = decode1_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
 //=================================================//
 // ************************************************//
 //                                                 //
@@ -411,6 +446,24 @@ CK_DLL_MFUN(decode2_setWeights)
     Decode2 *decode2_obj = (Decode2 *)OBJ_MEMBER_INT(SELF, decode2_data_offset);
     if (decode2_obj)
         decode2_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode2_getWeights)
+{
+    // get our c++ class pointer
+    Decode2* decode2_obj = (Decode2*)OBJ_MEMBER_INT(SELF, decode2_data_offset);
+
+    std::vector<float> weights = decode2_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 //=================================================//
@@ -501,6 +554,24 @@ CK_DLL_MFUN(decode3_setWeights)
         decode3_obj->CKsetWeights(weights, API);
 }
 
+CK_DLL_MFUN(decode3_getWeights)
+{
+    // get our c++ class pointer
+    Decode3* decode3_obj = (Decode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
+
+    std::vector<float> weights = decode3_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
 //=================================================//
 // ************************************************//
 //                                                 //
@@ -589,6 +660,24 @@ CK_DLL_MFUN(decode4_setWeights)
         decode4_obj->CKsetWeights(weights, API);
 }
 
+CK_DLL_MFUN(decode4_getWeights)
+{
+    // get our c++ class pointer
+    Decode4* decode4_obj = (Decode4*)OBJ_MEMBER_INT(SELF, decode4_data_offset);
+
+    std::vector<float> weights = decode4_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
+}
+
 //=================================================//
 // ************************************************//
 //                                                 //
@@ -675,4 +764,22 @@ CK_DLL_MFUN(decode5_setWeights)
     Decode5 *decode5_obj = (Decode5 *)OBJ_MEMBER_INT(SELF, decode5_data_offset);
     if (decode5_obj)
         decode5_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode5_getWeights)
+{
+    // get our c++ class pointer
+    Decode5* decode5_obj = (Decode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
+
+    std::vector<float> weights = decode5_obj->getWeights();
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        API->object->array_float_push_back(coordinatearray, weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }

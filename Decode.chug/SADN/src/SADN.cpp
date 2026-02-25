@@ -143,7 +143,7 @@ CK_DLL_QUERY( SAD )
     QUERY->setname( QUERY, "SAD" );
 
     QUERY->begin_class( QUERY, "SAD1", "UGen" );
-    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).");
+    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and elevation (elevation).");
     QUERY->add_ctor( QUERY, sad1_ctor );
     QUERY->add_ctor( QUERY, sad1_2ctor );
     QUERY->add_arg(QUERY, "float[][]", "SAD1");
@@ -152,8 +152,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf( QUERY, sad1_tickf, NULL, 4, 4 );
     QUERY->add_mfun(QUERY, sad1_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "placement");  
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "sh");  
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -176,8 +176,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad2_tickf, NULL, 9, 9);
     QUERY->add_mfun(QUERY, sad2_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad2_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad2_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -200,8 +200,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad3_tickf, NULL, 16, 16);
     QUERY->add_mfun(QUERY, sad3_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad3_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad3_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -224,8 +224,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad4_tickf, NULL, 25, 25);
     QUERY->add_mfun(QUERY, sad4_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad4_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad4_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -248,8 +248,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad5_tickf, NULL, 36, 36);
     QUERY->add_mfun(QUERY, sad5_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad5_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad5_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
@@ -268,7 +268,7 @@ CK_DLL_QUERY( SAD )
     //
     //=======================================================================
     QUERY->begin_class( QUERY, "SADN", "UGen" );
-    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).");
+    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and elevation (elevation).");
     QUERY->add_ex(QUERY,"examples/basic/simple-decode.ck");
     QUERY->add_ctor( QUERY, sad1_ctor );
     QUERY->add_ctor( QUERY, sad1_2ctor );
@@ -278,8 +278,8 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf( QUERY, sad1_tickf, NULL, 4, 4 );
     QUERY->add_mfun(QUERY, sad1_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "placement");  
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "sh");  
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
