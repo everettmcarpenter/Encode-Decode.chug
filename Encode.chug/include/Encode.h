@@ -40,14 +40,22 @@ class Encoder
 public:
     Encoder()
     {
-        channel_matrix.resize(channel_count);
-        temp_matrix.resize(channel_count);
-        weights.resize(channel_count);
-        for (int i = 0; i < weights.size(); i++)
+        for (int i = 0; i < channel_count; i++)
         {
             weights[i] = 1.0;
         }
     };
+
+    ~Encoder()
+    {
+        delete[] channel_matrix;
+        delete[] temp_matrix;
+        delete[] weights;
+    };
+
+    Encoder(const Encoder&) = delete;
+    Encoder& operator=(const Encoder&) = delete;
+
     // for chugins extending UGen
     void tick(SAMPLE *in, SAMPLE *out, int nframes)
     {
@@ -93,8 +101,7 @@ public:
         {
             return channel_matrix[index];
         }
-        else
-            return 0.0;
+        else return 0.0;
     }
 
     void set_i(t_CKFLOAT value, t_CKUINT index)
@@ -103,8 +110,7 @@ public:
         {
             temp_matrix[index] = value;
         }
-        else
-            NULL;
+        else NULL;
     }
 
     void CKsetWeights(Chuck_ArrayFloat *m_weights, CK_DL_API API)
@@ -119,42 +125,30 @@ public:
         }
     }
 
-    std::vector<float> getWeights()
+    const float* getWeights()
     {
-        std::vector<float> store;
-        store.resize(channel_count);
-        for (int i = 0; i < weights.size(); i++)
-        {
-            store[i] = weights[i];
-        }
-        return store;
+        return weights;
+    }
+
+    const float* getSH()
+    {
+        return channel_matrix;
     }
 
     void position(t_CKFLOAT azimuth_, t_CKFLOAT zenith_)
     {
         last_azimuth = azimuth_;
         last_elevation = zenith_;
-        temp_matrix = SH(order, last_azimuth, last_elevation, 0); // simply just calls the spherical harmonic calculator
-    }
-
-    std::vector<float> getSH()
-    {
-        std::vector<float> store;
-        store.resize(channel_count);
-        for (int i = 0; i < temp_matrix.size(); i++)
-        {
-            store[i] = temp_matrix[i];
-        }
-        return store;
+        SH(temp_matrix, order, last_azimuth, last_elevation, 0); // simply just calls the spherical harmonic calculator
     }
 
 public:
     // instance data
-    constexpr static unsigned order = n_order;
-    constexpr static unsigned channel_count = (n_order + 1) * (n_order + 1);
-    std::vector<float> channel_matrix; // current gain coeffs
-    std::vector<float> temp_matrix;    // temp coeffs to be shifted to current
-    std::vector<float> weights = { 1.0 };
+    const static unsigned order = n_order;
+    const static unsigned channel_count = (n_order + 1) * (n_order + 1);
+    float* channel_matrix = new float[channel_count]; // current gain coeffs
+    float* temp_matrix = new float[channel_count];    // temp coeffs to be shifted to current
+    float* weights = new float[channel_count];
     float last_azimuth = 0.f;
     float last_elevation = 0.f;
     bool zeroCrossing = FALSE; // is there a zero crossing?

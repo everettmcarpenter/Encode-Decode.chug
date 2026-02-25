@@ -518,15 +518,15 @@ CK_DLL_MFUN(encode1_position)
 
 CK_DLL_MFUN(encode1_getSH)
 {
-    // get our c++ class pointer
+    // get our c++ class pointe
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
+    const float* sphericals = encode_obj->getSH();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, sphericals[i]);
     }
@@ -548,12 +548,12 @@ CK_DLL_MFUN(encode1_getWeights)
     // get our c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
+    const float* weights = encode_obj->getWeights();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, weights[i]);
     }
@@ -681,12 +681,12 @@ CK_DLL_MFUN(encode2_getSH)
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
+    const float* sphericals = encode_obj->getSH();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, sphericals[i]);
     }
@@ -708,12 +708,12 @@ CK_DLL_MFUN(encode2_getWeights)
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
+    const float* weights = encode_obj->getWeights();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, weights[i]);
     }
@@ -841,12 +841,12 @@ CK_DLL_MFUN(encode3_getSH)
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
+    const float* sphericals = encode_obj->getSH();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, sphericals[i]);
     }
@@ -868,12 +868,12 @@ CK_DLL_MFUN(encode3_getWeights)
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
+    const float* weights = encode_obj->getWeights();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, weights[i]);
     }
@@ -1001,12 +1001,12 @@ CK_DLL_MFUN(encode4_getSH)
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
+    const float* sphericals = encode_obj->getSH();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, sphericals[i]);
     }
@@ -1028,12 +1028,12 @@ CK_DLL_MFUN(encode4_getWeights)
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
+    const float* weights = encode_obj->getWeights();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, weights[i]);
     }
@@ -1161,12 +1161,12 @@ CK_DLL_MFUN(encode5_getSH)
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
+    const float* sphericals = encode_obj->getSH();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, sphericals[i]);
     }
@@ -1188,12 +1188,12 @@ CK_DLL_MFUN(encode5_getWeights)
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
+    const float* weights = encode_obj->getWeights();
 
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < encode_obj->channel_count; i++)
     {
         API->object->array_float_push_back(coordinatearray, weights[i]);
     }
