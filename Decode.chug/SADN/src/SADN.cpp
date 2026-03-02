@@ -368,26 +368,27 @@ CK_DLL_MFUN(sad1_getSpeakers)
     // get our c++ class pointer
     SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad1_obj->getSpeakerSH();
+    //float** sphericals = sad1_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad1_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < sad1_obj->n_channels; j++) 
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad1_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
     }
 
     RETURN->v_object = (Chuck_Object*)final;
+    //sphericals = nullptr;
 }
 
 CK_DLL_MFUN(sad1_setWeights)
@@ -403,14 +404,12 @@ CK_DLL_MFUN(sad1_getWeights)
     // get our c++ class pointer
     SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
 
-    std::vector<float> weights = sad1_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < sad1_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, sad1_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -491,20 +490,20 @@ CK_DLL_MFUN(sad2_getSpeakers)
     // get our c++ class pointer
     SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad2_obj->getSpeakerSH();
+    //float** sphericals = sad2_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad2_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad2_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad2_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -526,14 +525,12 @@ CK_DLL_MFUN(sad2_getWeights)
     // get our c++ class pointer
     SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
 
-    std::vector<float> weights = sad2_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < sad2_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, sad2_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -614,20 +611,20 @@ CK_DLL_MFUN(sad3_getSpeakers)
     // get our c++ class pointer
     SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad3_obj->getSpeakerSH();
+    //float** sphericals = sad3_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad3_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad3_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad3_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -649,14 +646,12 @@ CK_DLL_MFUN(sad3_getWeights)
     // get our c++ class pointer
     SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
 
-    std::vector<float> weights = sad3_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < sad3_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, sad3_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -737,20 +732,20 @@ CK_DLL_MFUN(sad4_getSpeakers)
     // get our c++ class pointer
     SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad4_obj->getSpeakerSH();
+    //float** sphericals = sad4_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad4_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad4_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad4_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -772,14 +767,12 @@ CK_DLL_MFUN(sad4_getWeights)
     // get our c++ class pointer
     SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
 
-    std::vector<float> weights = sad4_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < sad4_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, sad4_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -863,20 +856,20 @@ CK_DLL_MFUN(sad5_getSpeakers)
     // get our c++ class pointer
     SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad5_obj->getSpeakerSH();
+    //float** sphericals = sad5_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad5_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad5_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad5_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -898,14 +891,12 @@ CK_DLL_MFUN(sad5_getWeights)
     // get our c++ class pointer
     SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
 
-    std::vector<float> weights = sad5_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < sad5_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, sad5_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;

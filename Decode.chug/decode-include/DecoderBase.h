@@ -18,12 +18,27 @@ class Decoder
 public:
 	Decoder()
 	{
-		weights.fill(1.0f);
+		SpeakSH = new float*[n_channels];
+		for (int i = 0; i < n_channels; i++)
+		{
+			SpeakSH[i] = new float[n_channels];
+		}
+		weights = new float[n_channels];
+	}
+
+	~Decoder()
+	{
+		for (int i = 0; i < n_channels; i++)
+		{
+			delete[] SpeakSH[i];
+		}
+		delete[] SpeakSH;
+		delete[] weights;
 	}
 
 	virtual void tick(SAMPLE* in, SAMPLE* out, unsigned nframes) = 0;
 
-	void setSpeakerSH(std::vector<std::vector<float>> n_SpeakSH) // set SH given all speaker SHs
+	void setSpeakerSH(float** n_SpeakSH) // set SH given all speaker SHs
 	{
 		for (int i = 0; i < n_channels; i++)
 		{
@@ -34,43 +49,14 @@ public:
 		}
 	}
 
-	void setSpeakerSH(std::vector<float> n_SpeakSH, unsigned o) // set SH given a certain speaker
+	void setSpeakerSH(float* n_SpeakSH, unsigned o) // set SH given a certain speaker
 	{
-		for (int i = 0; i < n_SpeakSH.size(); i++)
+		for (int i = 0; i < n_channels; i++)
 		{
 			SpeakSH[o][i] = n_SpeakSH[i];
 		}
 	}
 
-	std::vector<std::vector<float>> getSpeakerSH() // retrieve all speaker SHs
-	{
-		std::vector<std::vector<float>> store;
-		store.resize(n_channels);
-		for (int i = 0; i < SpeakSH.size(); i++)
-		{
-			store[i].resize(n_channels);
-			for (int j = 0; j < SpeakSH[i].size(); j++)
-			{
-				store[i][j] = SpeakSH[i][j];
-			}
-		}
-		return store;
-	}
-
-	std::vector<float> getSpeakerSH(unsigned o) // retrieve a speaker's SHs
-	{
-		std::vector<float> store;
-		store.resize(n_channels);
-		if (o < (n_channels - 1))
-		{
-			for (int i = 0; i < SpeakSH[o].size(); i++)
-			{
-				store[i] = SpeakSH[o][i];
-			}
-			return store;
-		}
-		else return store;
-	}
 
 	void CKsetSpeakAngles(Chuck_Object* coord, CK_DL_API API) // using a multi-dimensional chuck array of speaker angles, set the SHs of each speaker
 	{
@@ -83,8 +69,11 @@ public:
 				t_CKUINT size = API->object->array_float_size(row);
 				if (size == 2)
 				{
-					std::vector<float> temp = SH(order, API->object->array_float_get_idx(row, 0), API->object->array_float_get_idx(row, 1), 0);
+					float* temp = new float[n_channels];
+					SH(temp, order, API->object->array_float_get_idx(row, 0), API->object->array_float_get_idx(row, 1), 0);
 					setSpeakerSH(temp, i);
+					delete[] temp;
+					temp = nullptr;
 				}
 			}
 		}
@@ -106,22 +95,27 @@ public:
 		}
 	}
 
-	std::vector<float> getWeights()
+	float** getSpeakerSH() // retrieve all speaker SHs
 	{
-		std::vector<float> store;
-		store.resize(n_channels);
-		for (int i = 0; i < weights.size(); i++)
-		{
-			store[i] = weights[i];
-		}
-		return store;
+		return SpeakSH;
 	}
 
-protected:
+	float* getSpeakerSH(unsigned o) // retrieve a speaker's SHs
+	{	
+		if(o < n_channels)	return SpeakSH[o];
+	}
+
+	float* getWeights()
+	{
+		return weights;
+	}
+
 	static const unsigned order = order_; // order
 	static const unsigned n_channels = (order + 1) * (order + 1); // how many channels
-	std::array<std::array<float, n_channels>, n_channels> SpeakSH{}; // spherical harmonics
-	std::array<float, n_channels> weights{ 1.f }; // weights
+
+public:
+	float** SpeakSH; // spherical harmonics
+	float* weights; // weights
 	float channelBalance = (1.f / n_channels);
 };
 

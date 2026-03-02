@@ -8,7 +8,7 @@ template <const unsigned order_>
 class Decode : public Decoder<order_> // seems redundant, but essentially takes all decoder commonalities, gives to this "Basic decoder" class with a sampling tick function
 {
 public:
-	constexpr void tick(SAMPLE *in, SAMPLE *out, unsigned nframes) override
+	void tick(SAMPLE *in, SAMPLE *out, unsigned nframes) override
 	{
 		memset(out, 0, sizeof(SAMPLE) * this->n_channels * nframes); // clear
 		for (int f = 0; f < nframes; f++)							 // go through each frame

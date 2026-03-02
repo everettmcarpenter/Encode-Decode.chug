@@ -326,20 +326,18 @@ CK_DLL_MFUN(dbd1_getSpeakers)
     // get our c++ class pointer
     DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
 
-    std::vector<std::vector<float>> sphericals = dbd1_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < dbd1_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < dbd1_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, dbd1_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -361,14 +359,12 @@ CK_DLL_MFUN(dbd1_getWeights)
     // get our c++ class pointer
     DBD1* dbd1_obj = (DBD1*)OBJ_MEMBER_INT(SELF, dbd1_data_offset);
 
-    std::vector<float> weights = dbd1_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < dbd1_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, dbd1_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -438,20 +434,18 @@ CK_DLL_MFUN(dbd2_getSpeakers)
     // get our c++ class pointer
     DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
 
-    std::vector<std::vector<float>> sphericals = dbd2_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < dbd2_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < dbd2_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, dbd2_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -473,14 +467,12 @@ CK_DLL_MFUN(dbd2_getWeights)
     // get our c++ class pointer
     DBD2* dbd2_obj = (DBD2*)OBJ_MEMBER_INT(SELF, dbd2_data_offset);
 
-    std::vector<float> weights = dbd2_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < dbd2_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, dbd2_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -550,20 +542,18 @@ CK_DLL_MFUN(dbd3_getSpeakers)
     // get our c++ class pointer
     DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
 
-    std::vector<std::vector<float>> sphericals = dbd3_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < dbd3_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < dbd3_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, dbd3_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -585,14 +575,12 @@ CK_DLL_MFUN(dbd3_getWeights)
     // get our c++ class pointer
     DBD3* dbd3_obj = (DBD3*)OBJ_MEMBER_INT(SELF, dbd3_data_offset);
 
-    std::vector<float> weights = dbd3_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < dbd3_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, dbd3_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -662,20 +650,18 @@ CK_DLL_MFUN(dbd4_getSpeakers)
     // get our c++ class pointer
     DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
 
-    std::vector<std::vector<float>> sphericals = dbd4_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < dbd4_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < dbd4_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, dbd4_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -697,14 +683,12 @@ CK_DLL_MFUN(dbd4_getWeights)
     // get our c++ class pointer
     DBD4* dbd4_obj = (DBD4*)OBJ_MEMBER_INT(SELF, dbd4_data_offset);
 
-    std::vector<float> weights = dbd4_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < dbd4_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, dbd4_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -774,20 +758,18 @@ CK_DLL_MFUN(dbd5_getSpeakers)
     // get our c++ class pointer
     DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
 
-    std::vector<std::vector<float>> sphericals = dbd5_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < dbd5_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < dbd5_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, dbd5_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -809,14 +791,12 @@ CK_DLL_MFUN(dbd5_getWeights)
     // get our c++ class pointer
     DBD5* dbd5_obj = (DBD5*)OBJ_MEMBER_INT(SELF, dbd5_data_offset);
 
-    std::vector<float> weights = dbd5_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (int i = 0; i < dbd5_obj->n_channels; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, dbd5_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object*)coordinatearray;
