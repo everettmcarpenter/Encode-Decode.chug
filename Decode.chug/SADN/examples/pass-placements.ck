@@ -16,8 +16,8 @@ enc.gain(1.0);
 float place[][];
 float encplace[];
 
-sad.placement() @=> place;
-enc.pos() @=> encplace;
+sad.sh() @=> place;
+enc.sh() @=> encplace;
 
 fun void varImpulse(Impulse a, dur speed)
 {

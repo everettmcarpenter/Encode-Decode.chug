@@ -19,8 +19,9 @@ public:
 		delete low;
 	}
 
-	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes)
+	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes) override
 	{
+		if (!high || !low) return; 
 		memset(out, 0, sizeof(SAMPLE) * this->n_channels * nframes); // clear
 		for (int f = 0; f < nframes; f++)							 // go through each frame
 		{

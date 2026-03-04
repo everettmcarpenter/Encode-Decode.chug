@@ -1,12 +1,12 @@
-float speak[9][2];
+float speak[16][2];
 
 for(int i; i < speak.size(); i++)
 {
-    (360.0/speak.size())*i => speak[i][0];
+    (360.0/(speak.size()-1))*i => speak[i][0];
 }
 
 Encode2 enc;
-SAD2 sad(speak);
+SAD3 sad(speak);
 Impulse imp;
 LPF lp;
 lp.set(452.0, 25);
@@ -19,7 +19,7 @@ float place[][];
 float encplace[];
 
 sad.placement() @=> place;
-enc.pos() @=> encplace;
+enc.sh() @=> encplace;
 
 fun void varImpulse(Impulse a, dur speed)
 {
@@ -32,7 +32,7 @@ fun void varImpulse(Impulse a, dur speed)
 
 for(int i; i < place.size(); i++)
 {
-    cherr <= "Speaker: " <= i+1 <= " angle: " <= 90*i <= IO.newline();
+    cherr <= "Speaker: " <= i+1 <= " angle: " <= (360.0/(speak.size()-1))*i <= IO.newline();
     for(int j; j < place[i].size(); j++)
     {
         cherr <= place[i][j] <= " ";

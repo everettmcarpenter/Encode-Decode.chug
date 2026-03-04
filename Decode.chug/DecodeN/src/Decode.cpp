@@ -49,6 +49,7 @@ CK_DLL_MFUN(decode1_setSpeakers);
 CK_DLL_MFUN(decode1_getSpeakers);
 CK_DLL_TICKF(decode1_tickf);
 CK_DLL_MFUN(decode1_setWeights);
+CK_DLL_MFUN(decode1_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode1_data_offset = 0;
@@ -60,6 +61,7 @@ CK_DLL_MFUN(decode2_setSpeakers);
 CK_DLL_MFUN(decode2_getSpeakers);
 CK_DLL_TICKF(decode2_tickf);
 CK_DLL_MFUN(decode2_setWeights);
+CK_DLL_MFUN(decode2_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode2_data_offset = 0;
@@ -71,6 +73,7 @@ CK_DLL_MFUN(decode3_setSpeakers);
 CK_DLL_MFUN(decode3_getSpeakers);
 CK_DLL_TICKF(decode3_tickf);
 CK_DLL_MFUN(decode3_setWeights);
+CK_DLL_MFUN(decode3_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode3_data_offset = 0;
@@ -82,6 +85,7 @@ CK_DLL_MFUN(decode4_setSpeakers);
 CK_DLL_MFUN(decode4_getSpeakers);
 CK_DLL_TICKF(decode4_tickf);
 CK_DLL_MFUN(decode4_setWeights);
+CK_DLL_MFUN(decode4_getWeights);
 
 // this is a special offset reserved for chugin internal data
 t_CKINT decode4_data_offset = 0;
@@ -93,6 +97,7 @@ CK_DLL_MFUN(decode5_setSpeakers);
 CK_DLL_MFUN(decode5_getSpeakers);
 CK_DLL_TICKF(decode5_tickf);
 CK_DLL_MFUN(decode5_setWeights);
+CK_DLL_MFUN(decode5_getWeights);
 // this is a special offset reserved for chugin internal data
 t_CKINT decode5_data_offset = 0;
 
@@ -124,76 +129,123 @@ CK_DLL_QUERY(Decode)
     // generally, don't change this...
     QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode1", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
     QUERY->add_ctor(QUERY, decode1_ctor);
     QUERY->add_dtor(QUERY, decode1_dtor);
     QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
     QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode2", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
     QUERY->add_ctor(QUERY, decode2_ctor);
     QUERY->add_dtor(QUERY, decode2_dtor);
     QUERY->add_ugen_funcf(QUERY, decode2_tickf, NULL, 9, 9);
     QUERY->add_mfun(QUERY, decode2_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode2_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode2_data_offset = QUERY->add_mvar(QUERY, "int", "@decode2_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode3", "UGen");
     QUERY->add_ctor(QUERY, decode3_ctor);
     QUERY->add_dtor(QUERY, decode3_dtor);
     QUERY->add_ugen_funcf(QUERY, decode3_tickf, NULL, 16, 16);
     QUERY->add_mfun(QUERY, decode3_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode3_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode3_data_offset = QUERY->add_mvar(QUERY, "int", "@decode3_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode4", "UGen");
     QUERY->add_ctor(QUERY, decode4_ctor);
     QUERY->add_dtor(QUERY, decode4_dtor);
     QUERY->add_ugen_funcf(QUERY, decode4_tickf, NULL, 25, 25);
     QUERY->add_mfun(QUERY, decode4_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode4_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode4_data_offset = QUERY->add_mvar(QUERY, "int", "@decode4_data", false);
     QUERY->end_class(QUERY);
 
     // generally, don't change this...
-    QUERY->setname(QUERY, "Decode");
     QUERY->begin_class(QUERY, "Decode5", "UGen");
     QUERY->add_ctor(QUERY, decode5_ctor);
     QUERY->add_dtor(QUERY, decode5_dtor);
     QUERY->add_ugen_funcf(QUERY, decode5_tickf, NULL, 36, 36);
     QUERY->add_mfun(QUERY, decode5_setSpeakers, "void", "sh");
-    QUERY->add_arg(QUERY, "float[][]", "");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
     QUERY->add_mfun(QUERY, decode5_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     // this reserves a variable in the ChucK internal class to store
     decode5_data_offset = QUERY->add_mvar(QUERY, "int", "@decode5_data", false);
+    QUERY->end_class(QUERY);
+
+    //=======================================================================
+    // DecodeN (purely for documentation purposes)
+    //
+    //=======================================================================
+    QUERY->begin_class(QUERY, "DecodeN", "UGen");
+    QUERY->doc_class(QUERY, "Decoder based on a given matrix of spherical harmonic values.");
+    QUERY->add_ex(QUERY, "examples/deep/advanced-decode.ck");
+    QUERY->add_ctor(QUERY, decode1_ctor);
+    QUERY->add_dtor(QUERY, decode1_dtor);
+    QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 4);
+    QUERY->add_mfun(QUERY, decode1_setSpeakers, "void", "sh");
+    QUERY->add_arg(QUERY, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Set matrix of spherical harmonics to be used for decoding, column one is (N+1)^2 length containing ACN ordered spherical harmonics for speaker 1, column 2 is the same for speaker 2, etc.");
+    QUERY->add_mfun(QUERY, decode1_getSpeakers, "float[][]", "sh");
+    QUERY->doc_func(QUERY, "Get current matrix of spherical harmonics.");
+    QUERY->add_mfun(QUERY, decode1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set vector of weights to be used, the same vector is used for all speakers.");
+    QUERY->add_mfun(QUERY, decode1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    // this reserves a variable in the ChucK internal class to store
+    decode1_data_offset = QUERY->add_mvar(QUERY, "int", "@decode1_data", false);
     QUERY->end_class(QUERY);
 
     // wasn't that a breeze?
@@ -259,20 +311,18 @@ CK_DLL_MFUN(decode1_getSpeakers)
     // get our c++ class pointer
     Decode1 *decode1_obj = (Decode1 *)OBJ_MEMBER_INT(SELF, decode1_data_offset);
 
-    std::vector<std::vector<float>> sphericals = decode1_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt *column = (Chuck_ArrayInt *) final;                                                  // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < decode1_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat *row_tmp = (Chuck_ArrayFloat *)target_tmp;                                            // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < decode1_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, decode1_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array
@@ -288,6 +338,22 @@ CK_DLL_MFUN(decode1_setWeights)
     Decode1 *decode1_obj = (Decode1 *)OBJ_MEMBER_INT(SELF, decode1_data_offset);
     if (decode1_obj)
         decode1_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode1_getWeights)
+{
+    // get our c++ class pointer
+    Decode1* decode1_obj = (Decode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < decode1_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, decode1_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 //=================================================//
@@ -347,20 +413,18 @@ CK_DLL_MFUN(decode2_getSpeakers)
     // get our c++ class pointer
     Decode2 *decode2_obj = (Decode2 *)OBJ_MEMBER_INT(SELF, decode2_data_offset);
 
-    std::vector<std::vector<float>> sphericals = decode2_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt *column = (Chuck_ArrayInt *) final;                                                  // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < decode2_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat *row_tmp = (Chuck_ArrayFloat *)target_tmp;                                            // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < decode2_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, decode2_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array
@@ -376,6 +440,22 @@ CK_DLL_MFUN(decode2_setWeights)
     Decode2 *decode2_obj = (Decode2 *)OBJ_MEMBER_INT(SELF, decode2_data_offset);
     if (decode2_obj)
         decode2_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode2_getWeights)
+{
+    // get our c++ class pointer
+    Decode2* decode2_obj = (Decode2*)OBJ_MEMBER_INT(SELF, decode2_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < decode2_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, decode2_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 //=================================================//
@@ -435,20 +515,18 @@ CK_DLL_MFUN(decode3_getSpeakers)
     // get our c++ class pointer
     Decode3 *decode3_obj = (Decode3 *)OBJ_MEMBER_INT(SELF, decode3_data_offset);
 
-    std::vector<std::vector<float>> sphericals = decode3_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt *column = (Chuck_ArrayInt *) final;                                                  // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < decode3_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat *row_tmp = (Chuck_ArrayFloat *)target_tmp;                                            // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < decode3_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, decode3_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array
@@ -464,6 +542,22 @@ CK_DLL_MFUN(decode3_setWeights)
     Decode3 *decode3_obj = (Decode3 *)OBJ_MEMBER_INT(SELF, decode3_data_offset);
     if (decode3_obj)
         decode3_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode3_getWeights)
+{
+    // get our c++ class pointer
+    Decode3* decode3_obj = (Decode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < decode3_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, decode3_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 //=================================================//
@@ -523,20 +617,18 @@ CK_DLL_MFUN(decode4_getSpeakers)
     // get our c++ class pointer
     Decode4 *decode4_obj = (Decode4 *)OBJ_MEMBER_INT(SELF, decode4_data_offset);
 
-    std::vector<std::vector<float>> sphericals = decode4_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt *column = (Chuck_ArrayInt *) final;                                                  // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < decode4_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat *row_tmp = (Chuck_ArrayFloat *)target_tmp;                                            // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < decode4_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, decode4_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array
@@ -552,6 +644,22 @@ CK_DLL_MFUN(decode4_setWeights)
     Decode4 *decode4_obj = (Decode4 *)OBJ_MEMBER_INT(SELF, decode4_data_offset);
     if (decode4_obj)
         decode4_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode4_getWeights)
+{
+    // get our c++ class pointer
+    Decode4* decode4_obj = (Decode4*)OBJ_MEMBER_INT(SELF, decode4_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < decode4_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, decode4_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 //=================================================//
@@ -611,20 +719,18 @@ CK_DLL_MFUN(decode5_getSpeakers)
     // get our c++ class pointer
     Decode5 *decode5_obj = (Decode5 *)OBJ_MEMBER_INT(SELF, decode5_data_offset);
 
-    std::vector<std::vector<float>> sphericals = decode5_obj->getSpeakerSH();
-
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt *column = (Chuck_ArrayInt *) final;                                                  // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < decode5_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat *row_tmp = (Chuck_ArrayFloat *)target_tmp;                                            // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < decode5_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, decode5_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array
@@ -640,4 +746,20 @@ CK_DLL_MFUN(decode5_setWeights)
     Decode5 *decode5_obj = (Decode5 *)OBJ_MEMBER_INT(SELF, decode5_data_offset);
     if (decode5_obj)
         decode5_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(decode5_getWeights)
+{
+    // get our c++ class pointer
+    Decode5* decode5_obj = (Decode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < decode5_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, decode5_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }

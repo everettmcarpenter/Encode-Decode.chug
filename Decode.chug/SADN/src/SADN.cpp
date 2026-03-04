@@ -51,6 +51,7 @@ CK_DLL_MFUN(sad1_setSpeakers);
 CK_DLL_MFUN(sad1_getSpeakers);
 CK_DLL_TICKF( sad1_tickf );
 CK_DLL_MFUN(sad1_setWeights);
+CK_DLL_MFUN(sad1_getWeights);
 CK_DLL_MFUN(sad1_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -64,6 +65,7 @@ CK_DLL_MFUN(sad2_setSpeakers);
 CK_DLL_MFUN(sad2_getSpeakers);
 CK_DLL_TICKF(sad2_tickf);
 CK_DLL_MFUN(sad2_setWeights);
+CK_DLL_MFUN(sad2_getWeights);
 CK_DLL_MFUN(sad2_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -77,6 +79,7 @@ CK_DLL_MFUN(sad3_setSpeakers);
 CK_DLL_MFUN(sad3_getSpeakers);
 CK_DLL_TICKF(sad3_tickf);
 CK_DLL_MFUN(sad3_setWeights);
+CK_DLL_MFUN(sad3_getWeights);
 CK_DLL_MFUN(sad3_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -90,6 +93,7 @@ CK_DLL_MFUN(sad4_setSpeakers);
 CK_DLL_MFUN(sad4_getSpeakers);
 CK_DLL_TICKF(sad4_tickf);
 CK_DLL_MFUN(sad4_setWeights);
+CK_DLL_MFUN(sad4_getWeights);
 CK_DLL_MFUN(sad4_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -103,6 +107,7 @@ CK_DLL_MFUN(sad5_setSpeakers);
 CK_DLL_MFUN(sad5_getSpeakers);
 CK_DLL_TICKF(sad5_tickf);
 CK_DLL_MFUN(sad5_setWeights);
+CK_DLL_MFUN(sad5_getWeights);
 CK_DLL_MFUN(sad5_setDimension);
 
 // this is a special offset reserved for chugin internal data
@@ -138,7 +143,7 @@ CK_DLL_QUERY( SAD )
     QUERY->setname( QUERY, "SAD" );
 
     QUERY->begin_class( QUERY, "SAD1", "UGen" );
-    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and zenith (elevation).");
+    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and elevation (elevation).");
     QUERY->add_ctor( QUERY, sad1_ctor );
     QUERY->add_ctor( QUERY, sad1_2ctor );
     QUERY->add_arg(QUERY, "float[][]", "SAD1");
@@ -147,12 +152,14 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf( QUERY, sad1_tickf, NULL, 4, 4 );
     QUERY->add_mfun(QUERY, sad1_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "placement");  
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "sh");  
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad1_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -169,12 +176,14 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad2_tickf, NULL, 9, 9);
     QUERY->add_mfun(QUERY, sad2_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad2_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad2_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad2_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad2_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -191,12 +200,14 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad3_tickf, NULL, 16, 16);
     QUERY->add_mfun(QUERY, sad3_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad3_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad3_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad3_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad3_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -213,12 +224,14 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad4_tickf, NULL, 25, 25);
     QUERY->add_mfun(QUERY, sad4_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad4_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad4_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad4_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad4_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
@@ -235,17 +248,47 @@ CK_DLL_QUERY( SAD )
     QUERY->add_ugen_funcf(QUERY, sad5_tickf, NULL, 36, 36);
     QUERY->add_mfun(QUERY, sad5_setSpeakers, "void", "placement");
     QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
-    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and zenith of the first speaker.");
-    QUERY->add_mfun(QUERY, sad5_getSpeakers, "float[][]", "placement");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad5_getSpeakers, "float[][]", "sh");
     QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
     QUERY->add_mfun(QUERY, sad5_setWeights, "void", "weights");
     QUERY->add_arg(QUERY, "float[]", "weights");
     QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
     QUERY->add_mfun(QUERY, sad5_setDimension, "void", "dim");
     QUERY->add_arg(QUERY, "int", "dimension");
     QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
     // this reserves a variable in the ChucK internal class to store 
     sad5_data_offset = QUERY->add_mvar(QUERY, "int", "@sad_data", false);
+    QUERY->end_class(QUERY);
+
+    //=======================================================================
+    // SADN (purely for documentation purposes)
+    //
+    //=======================================================================
+    QUERY->begin_class( QUERY, "SADN", "UGen" );
+    QUERY->doc_class(QUERY, "A sampling ambisonic decoder (SAD) for speaker decoding. This decoder works best if you are describing your speaker arrangement in terms of azimuth and elevation (elevation).");
+    QUERY->add_ex(QUERY,"examples/basic/simple-decode.ck");
+    QUERY->add_ctor( QUERY, sad1_ctor );
+    QUERY->add_ctor( QUERY, sad1_2ctor );
+    QUERY->add_arg(QUERY, "float[][]", "SAD1");
+    QUERY->doc_func(QUERY, "Constructor for instantiating with an array of speaker angles.");
+    QUERY->add_dtor( QUERY, sad1_dtor );
+    QUERY->add_ugen_funcf( QUERY, sad1_tickf, NULL, 4, 4 );
+    QUERY->add_mfun(QUERY, sad1_setSpeakers, "void", "placement");
+    QUERY->add_arg(QUERY, "float[][]", "speakerAngles");
+    QUERY->doc_func(QUERY, "Function to set speaker angles for each output. Output channel 1 is assumed to be fed to speaker 1, thus the first pair of angles should be the azimuth and elevation of the first speaker.");
+    QUERY->add_mfun(QUERY, sad1_getSpeakers, "float[][]", "sh");  
+    QUERY->doc_func(QUERY, "Receive the matrix of spherical harmonics currently being used for decoding. If you have provided SAD with speaker angles, this will be the spherical harmonics calculated for those angles.");  
+    QUERY->add_mfun(QUERY, sad1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set the weighting of each spherical harmonic. This can often be thought of as a 'filter' for the harmonics, weighting certain entries more than other.");
+    QUERY->add_mfun(QUERY, sad1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get the active weighting of the decoder matrix.");
+    QUERY->add_mfun(QUERY, sad1_setDimension, "void", "dim");
+    QUERY->add_arg(QUERY, "int", "dimension");
+    QUERY->doc_func(QUERY, "Set the dimension of the decoder, expects 3 for three dimensional, and 2 for two dimensions. This is useful if you are not using a speaker array with height.");
     QUERY->end_class(QUERY);
 
     // wasn't that a breeze?
@@ -325,26 +368,27 @@ CK_DLL_MFUN(sad1_getSpeakers)
     // get our c++ class pointer
     SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad1_obj->getSpeakerSH();
+    //float** sphericals = sad1_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad1_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++) 
+        for (int j = 0; j < sad1_obj->n_channels; j++) 
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad1_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
     }
 
     RETURN->v_object = (Chuck_Object*)final;
+    //sphericals = nullptr;
 }
 
 CK_DLL_MFUN(sad1_setWeights)
@@ -353,6 +397,22 @@ CK_DLL_MFUN(sad1_setWeights)
     // get our c++ class pointer
     SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
     if (sad1_obj) sad1_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad1_getWeights)
+{
+    // get our c++ class pointer
+    SAD1* sad1_obj = (SAD1*)OBJ_MEMBER_INT(SELF, sad1_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < sad1_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, sad1_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad1_setDimension)
@@ -430,20 +490,20 @@ CK_DLL_MFUN(sad2_getSpeakers)
     // get our c++ class pointer
     SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad2_obj->getSpeakerSH();
+    //float** sphericals = sad2_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad2_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad2_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad2_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -458,6 +518,22 @@ CK_DLL_MFUN(sad2_setWeights)
     // get our c++ class pointer
     SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
     if (sad2_obj) sad2_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad2_getWeights)
+{
+    // get our c++ class pointer
+    SAD2* sad2_obj = (SAD2*)OBJ_MEMBER_INT(SELF, sad2_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < sad2_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, sad2_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad2_setDimension)
@@ -535,20 +611,20 @@ CK_DLL_MFUN(sad3_getSpeakers)
     // get our c++ class pointer
     SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad3_obj->getSpeakerSH();
+    //float** sphericals = sad3_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad3_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad3_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad3_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -563,6 +639,22 @@ CK_DLL_MFUN(sad3_setWeights)
     // get our c++ class pointer
     SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
     if (sad3_obj) sad3_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad3_getWeights)
+{
+    // get our c++ class pointer
+    SAD3* sad3_obj = (SAD3*)OBJ_MEMBER_INT(SELF, sad3_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < sad3_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, sad3_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad3_setDimension)
@@ -640,20 +732,20 @@ CK_DLL_MFUN(sad4_getSpeakers)
     // get our c++ class pointer
     SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad4_obj->getSpeakerSH();
+    //float** sphericals = sad4_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad4_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad4_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad4_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -668,6 +760,22 @@ CK_DLL_MFUN(sad4_setWeights)
     // get our c++ class pointer
     SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
     if (sad4_obj) sad4_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad4_getWeights)
+{
+    // get our c++ class pointer
+    SAD4* sad4_obj = (SAD4*)OBJ_MEMBER_INT(SELF, sad4_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < sad4_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, sad4_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad4_setDimension)
@@ -748,20 +856,20 @@ CK_DLL_MFUN(sad5_getSpeakers)
     // get our c++ class pointer
     SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
 
-    std::vector<std::vector<float>> sphericals = sad5_obj->getSpeakerSH();
+    //float** sphericals = sad5_obj->getSpeakerSH();
 
     // create [][]
     Chuck_DL_Api::Object final = API->object->create(SHRED, API->type->lookup(VM, "float[][]"), false); // create idea of float[][]
     Chuck_ArrayInt* column = (Chuck_ArrayInt*)final; // cast to int array
 
-    for (int i = 0; i < sphericals.capacity(); i++) // snatched from Line
+    for (int i = 0; i < sad5_obj->n_channels; i++) // snatched from Line
     {
         Chuck_DL_Api::Object target_tmp = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false); // create idea of float[]
         Chuck_ArrayFloat* row_tmp = (Chuck_ArrayFloat*)target_tmp; // cast to float array
 
-        for (int j = 0; j < sphericals.size(); j++)
+        for (int j = 0; j < sad5_obj->n_channels; j++)
         {
-            API->object->array_float_push_back(row_tmp, sphericals[i][j]);
+            API->object->array_float_push_back(row_tmp, sad5_obj->SpeakSH[i][j]);
         }
 
         API->object->array_int_push_back(column, (t_CKINT)row_tmp); // push back the previously created float array 
@@ -776,6 +884,22 @@ CK_DLL_MFUN(sad5_setWeights)
     // get our c++ class pointer
     SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
     if (sad5_obj) sad5_obj->CKsetWeights(weights, API);
+}
+
+CK_DLL_MFUN(sad5_getWeights)
+{
+    // get our c++ class pointer
+    SAD5* sad5_obj = (SAD5*)OBJ_MEMBER_INT(SELF, sad5_data_offset);
+
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (int i = 0; i < sad5_obj->n_channels; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, sad5_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(sad5_setDimension)

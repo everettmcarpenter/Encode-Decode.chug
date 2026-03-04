@@ -9,19 +9,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\chuckSH.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\chugin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Decode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DecoderBase.h">
+    <ClInclude Include="..\decode-include\chuckSH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SHCT.h">
+    <ClInclude Include="..\decode-include\chugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\DecoderBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\SHCT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

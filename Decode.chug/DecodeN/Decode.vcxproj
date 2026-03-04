@@ -135,11 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\chuckSH.h" />
-    <ClInclude Include="include\chugin.h" />
+    <ClInclude Include="..\decode-include\chuckSH.h" />
+    <ClInclude Include="..\decode-include\chugin.h" />
+    <ClInclude Include="..\decode-include\DecoderBase.h" />
+    <ClInclude Include="..\decode-include\SHCT.h" />
     <ClInclude Include="include\Decode.h" />
-    <ClInclude Include="include\DecoderBase.h" />
-    <ClInclude Include="include\SHCT.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Decode.cpp" />

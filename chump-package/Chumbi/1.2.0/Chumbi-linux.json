@@ -6,10 +6,10 @@
     "arch": "x86_64",
     "files": [
         {
-            "checksum": "99024f0740689feee8a7980630914ed5a583d25d81dcad7f2019211151808d3b",
+            "checksum": "8cf08baeada9240137d8f2ee9795ae1fdbcfe636237615dc25e780e767aca164",
             "file_type": "zip",
             "local_dir": "./",
-            "url": "https://everettmiles.com/Chumbi/1.0.0/windows/Chumbi.zip"
+            "url": "https://everettmiles.com/Chumbi/1.2.0/linux/Chumbi.zip"
         }
     ],
     "language_version_min": {
@@ -18,6 +18,6 @@
         "minor": 4,
         "patch": 0
     },
-    "os": "windows",
-    "version": "1.0.0"
+    "os": "linux",
+    "version": "1.2.0"
 }

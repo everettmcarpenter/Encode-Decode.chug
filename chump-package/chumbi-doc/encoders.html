@@ -13,21 +13,25 @@
 </div>
 <div id="body">
 <div class="toc"><a id="toc"/>
-<p class="toc_class"><a href="#Encode1" class="ckdoc_typename ckdoc_type_ugen">Encode1</a></p>
+<p class="toc_class"><a href="#EncodeN" class="ckdoc_typename ckdoc_type_ugen">EncodeN</a></p>
 <p class="toc_class"><a href="#ABFormat" class="ckdoc_typename ckdoc_type_ugen">ABFormat</a></p>
 <p class="toc_class"><a href="#BAFormat" class="ckdoc_typename ckdoc_type_ugen">BAFormat</a></p>
 </div>
 <div class="classes">
 <p class="group_desc">Ambisonic virtual encoders and microphone utilities. Encoder works from 1st to 5th order.</p>
-<a name="Encode1" /><div class="class">
-<h2 class="class_title" name="Encode1">Encode1</h2>
+<a name="EncodeN" /><div class="class">
+<h2 class="class_title" name="EncodeN">EncodeN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="class_description">A first order ambisonic virtual source encoder.<p>
+<p class="class_description">An nth order ambisonic virtual source encoder.<p>
+<h3 class="class_section_header">examples</h3><div class="examples"><ul>
+<li><a target="_blank" href="examples/basic/encode.ck">examples/basic/encode.ck</a></li>
+<li><a target="_blank" href="examples/deep/advanced-decode.ck">examples/deep/advanced-decode.ck</a></li>
+</ul></div>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
-<p class="member_declaration"><span class="membername">Encode1</span>()</p>
-<p class="member_description">Default constructor for Encode1.</p>
+<p class="member_declaration"><span class="membername">EncodeN</span>()</p>
+<p class="member_description">Default constructor for EncodeN.</p>
 </div>
 </div>
 <h3 class="class_section_header">member functions</h3>
@@ -41,8 +45,16 @@
 <p class="member_description">Set azimuth.</p>
 </div>
 <div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">pos</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> azimuth, <span class="ckdoc_typename ckdoc_type_primitive">float</span> zenith)</p>
-<p class="member_description">Set azimuth and zenith of encoder virtual source.</p>
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">elev</span>()</p>
+<p class="member_description">Get last given elevation.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">elev</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> elevation)</p>
+<p class="member_description">Set elevation.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">pos</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> azimuth, <span class="ckdoc_typename ckdoc_type_primitive">float</span> elevation)</p>
+<p class="empty_member_description">No description available</p>
 </div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">int</span> n)</p>
@@ -68,14 +80,6 @@
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
 <p class="member_description">Get 1D array of weighting for all spherical harmonics.</p>
 </div>
-<div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">zeni</span>()</p>
-<p class="member_description">Get last given zenith.</p>
-</div>
-<div class="member">
-<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">zeni</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> zenith)</p>
-<p class="member_description">Set zenith.</p>
-</div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>
 </div>
@@ -83,7 +87,7 @@
 <a name="ABFormat" /><div class="class">
 <h2 class="class_title" name="ABFormat">ABFormat</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="empty_class_description">No description available</p>
+<p class="class_description">A class for converting A-Format ambisonics signals to B-Format ambisonic signals.<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">

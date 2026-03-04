@@ -1,9 +1,5 @@
-//----------------------------------------------
-//	Functiosn 
-//----------------------------------------------
-
-#ifndef BIQUAD_H
-#define BIQUAD_H
+#ifndef CROSSCOEFF_H
+#define CROSSCOEFF_H
 
 #ifndef SAMPLE
 #define SAMPLE float

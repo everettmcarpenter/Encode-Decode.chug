@@ -6,7 +6,7 @@ CKDoc doc;
 
 // encoders
 doc.addGroup(
-    ["Encode1", "ABFormat", "BAFormat"],
+    ["EncodeN", "ABFormat", "BAFormat"],
     "Encoders and Converters",
     "encoders", 
     "Ambisonic virtual encoders and microphone utilities. Encoder works from 1st to 5th order."
@@ -14,7 +14,7 @@ doc.addGroup(
 
 // decoders
 doc.addGroup(
-    [ "Decode1", "SAD1", "DBD1"],
+    [ "DecodeN", "SADN", "DBDN"],
     "Decoders",
     "decoders",
     "Ambisonic decoders, all work from 1st to 5th order."
@@ -22,7 +22,7 @@ doc.addGroup(
 
 //utilities
 doc.addGroup(
-    [ "OrderGain1", "Mirror1", "Rotate1", "Warp1" ],
+    [ "OrderGainN", "MirrorN", "RotateN", "WarpN" ],
     "Soundfield Utilities",
     "utilities",
     "Basic soundfield alterers, shapers and modifiers, all work from 1st to 5th order."
@@ -32,4 +32,4 @@ doc.addGroup(
 doc.genGroups(["Encoders and Converters", "Decoders", "Soundfield Utilities"]);
 
 // generate
-doc.outputToDir( "doc/", "Chumbi Doc" );
+doc.outputToDir( "chumbi-doc/", "Chumbi Doc" );

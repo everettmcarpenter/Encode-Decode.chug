@@ -6,10 +6,10 @@
     "arch": "universal",
     "files": [
         {
-            "checksum": "f5083009c1025a2fa8c1ad63c2791392e8eb595da9461c6881e3108ea9c9e3ce",
+            "checksum": "b77693c7ad233e34f2406ec51a75183559c3c60c0a214c24c535dd066e63a273",
             "file_type": "zip",
             "local_dir": "./",
-            "url": "https://everettmiles.com/Chumbi/1.0.0/mac/Chumbi.zip"
+            "url": "https://everettmiles.com/Chumbi/1.2.0/mac/Chumbi.zip"
         }
     ],
     "language_version_min": {
@@ -19,5 +19,5 @@
         "patch": 1
     },
     "os": "mac",
-    "version": "1.0.0"
+    "version": "1.2.0"
 }

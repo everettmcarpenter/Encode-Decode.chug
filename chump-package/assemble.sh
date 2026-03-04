@@ -1,5 +1,5 @@
 # documentation generation (nice)
-chuck doc/make-doc.ck
+chuck chumbi-doc/make-doc.ck
 
 # linux (easiest)
 chuck -s build-pkg-linux.ck

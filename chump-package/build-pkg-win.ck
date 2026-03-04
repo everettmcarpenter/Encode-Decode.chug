@@ -1,6 +1,6 @@
 @import "Chumpinate"
 
-"1.0.0" => string version;
+"1.2.0" => string version;
 
 <<< "Generating Chumpinate package version " >>>;
 
@@ -37,14 +37,14 @@ vers.addFile("../current-builds/win/Mirror.chug");
 vers.addFile("../current-builds/win/ABFormat.chug");
 vers.addFile("../current-builds/win/BAFormat.chug");
 
-vers.addExampleFile("examples/basic/encode.ck");
-vers.addExampleFile("examples/basic/simple-decode.ck");
-vers.addExampleFile("examples/deep/advanced-decode.ck");
+vers.addExampleFile("chumbi-doc/examples/basic/encode.ck");
+vers.addExampleFile("chumbi-doc/examples/basic/simple-decode.ck");
+vers.addExampleFile("chumbi-doc/examples/deep/advanced-decode.ck");
 
-vers.addDocsFile("doc/index.html");
-vers.addDocsFile("doc/decoders.html");
-vers.addDocsFile("doc/encoders.html");
-vers.addDocsFile("doc/utilities.html");
+vers.addDocsFile("chumbi-doc/index.html");
+vers.addDocsFile("chumbi-doc/decoders.html");
+vers.addDocsFile("chumbi-doc/encoders.html");
+vers.addDocsFile("chumbi-doc/utilities.html");
 
 "Chumbi/" + vers.version() + "/" + vers.os() + "/Chumbi.zip" => string path;
 
