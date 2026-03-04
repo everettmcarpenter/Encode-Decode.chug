@@ -59,13 +59,13 @@ for(int tick; tick < 720; tick++)
     reso[1].freq(Math.random2f(742.0, 744.9999));
     enc[0].pos(direction[0],elevation); // move!
     enc[1].pos(direction[1], elevation);
-    enc[0].pos() @=> sh;
+    enc[0].sh() @=> sh;
     for(int i; i < sh.size(); i++)
     {
         //cherr <= sh[i] <= " ";
     }
     //cherr <= IO.nl();
-    enc[1].pos() @=> sh;
+    enc[1].sh() @=> sh;
     for(int i; i < sh.size(); i++)
     {
         //cherr <= sh[i] <= " ";
