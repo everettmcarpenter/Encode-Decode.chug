@@ -413,12 +413,12 @@ CK_DLL_DTOR(encode1_dtor)
 
 CK_DLL_MFUN(encode1_geti)
 {
-    int index = GET_NEXT_INT(ARGS);
+    t_CKUINT index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->get_i(index);
+        RETURN->v_float = encode_obj->channel_matrix[index];
     }
 }
 
@@ -447,8 +447,8 @@ CK_DLL_MFUN(encode1_coefficients)
 
 CK_DLL_MFUN(encode1_seti)
 {
-    float input_value = GET_NEXT_FLOAT(ARGS);
-    int input_index = GET_NEXT_INT(ARGS);
+    t_CKFLOAT input_value = GET_NEXT_FLOAT(ARGS);
+    t_CKUINT input_index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     if (encode_obj)
@@ -459,8 +459,8 @@ CK_DLL_MFUN(encode1_seti)
 
 CK_DLL_MFUN(encode1_position)
 {
-    float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     if (encode_obj)
@@ -474,17 +474,15 @@ CK_DLL_MFUN(encode1_getSH)
     // get our c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
-    Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, sphericals[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
     }
-
-    RETURN->v_object = (Chuck_Object *)coordinatearray;
+    // set return value
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 CK_DLL_MFUN(encode1_setWeights)
@@ -501,14 +499,12 @@ CK_DLL_MFUN(encode1_getWeights)
     // get our c++ class pointer
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -529,14 +525,14 @@ CK_DLL_MFUN(encode1_getZeni)
 CK_DLL_MFUN(encode1_setAzi)
 {
     Encode1* encode_obj = (Encode1*)OBJ_MEMBER_INT(SELF, encode1_data_offset);
-    float azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
 }
 
 CK_DLL_MFUN(encode1_setZeni)
 {
     Encode1* encode_obj = (Encode1*)OBJ_MEMBER_INT(SELF, encode1_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
 }
 
@@ -588,12 +584,12 @@ CK_DLL_TICKF(encode2_tickf)
 
 CK_DLL_MFUN(encode2_geti)
 {
-    int index = GET_NEXT_INT(ARGS);
+    t_CKUINT index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->get_i(index);
+        RETURN->v_float = encode_obj->channel_matrix[index];
     }
 }
 
@@ -607,8 +603,8 @@ CK_DLL_MFUN(encode2_coefficients)
 
 CK_DLL_MFUN(encode2_seti)
 {
-    float input_value = GET_NEXT_FLOAT(ARGS);
-    int input_index = GET_NEXT_INT(ARGS);
+    t_CKFLOAT input_value = GET_NEXT_FLOAT(ARGS);
+    t_CKUINT input_index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     if (encode_obj)
@@ -619,8 +615,8 @@ CK_DLL_MFUN(encode2_seti)
 
 CK_DLL_MFUN(encode2_position)
 {
-    float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     if (encode_obj)
@@ -634,14 +630,12 @@ CK_DLL_MFUN(encode2_getSH)
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, sphericals[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -661,14 +655,12 @@ CK_DLL_MFUN(encode2_getWeights)
     // get our c++ class pointer
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -689,14 +681,14 @@ CK_DLL_MFUN(encode2_getZeni)
 CK_DLL_MFUN(encode2_setAzi)
 {
     Encode2* encode_obj = (Encode2*)OBJ_MEMBER_INT(SELF, encode2_data_offset);
-    float azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
 }
 
 CK_DLL_MFUN(encode2_setZeni)
 {
     Encode2* encode_obj = (Encode2*)OBJ_MEMBER_INT(SELF, encode2_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
 }
 
@@ -748,12 +740,12 @@ CK_DLL_TICKF(encode3_tickf)
 
 CK_DLL_MFUN(encode3_geti)
 {
-    int index = GET_NEXT_INT(ARGS);
+    t_CKUINT index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->get_i(index);
+        RETURN->v_float = encode_obj->channel_matrix[index];
     }
 }
 
@@ -767,8 +759,8 @@ CK_DLL_MFUN(encode3_coefficients)
 
 CK_DLL_MFUN(encode3_seti)
 {
-    float input_value = GET_NEXT_FLOAT(ARGS);
-    int input_index = GET_NEXT_INT(ARGS);
+    t_CKFLOAT input_value = GET_NEXT_FLOAT(ARGS);
+    t_CKUINT input_index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     if (encode_obj)
@@ -779,8 +771,8 @@ CK_DLL_MFUN(encode3_seti)
 
 CK_DLL_MFUN(encode3_position)
 {
-    float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     if (encode_obj)
@@ -794,14 +786,12 @@ CK_DLL_MFUN(encode3_getSH)
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, sphericals[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -821,14 +811,12 @@ CK_DLL_MFUN(encode3_getWeights)
     // get our c++ class pointer
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -849,14 +837,14 @@ CK_DLL_MFUN(encode3_getZeni)
 CK_DLL_MFUN(encode3_setAzi)
 {
     Encode3* encode_obj = (Encode3*)OBJ_MEMBER_INT(SELF, encode3_data_offset);
-    float azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
 }
 
 CK_DLL_MFUN(encode3_setZeni)
 {
     Encode3* encode_obj = (Encode3*)OBJ_MEMBER_INT(SELF, encode3_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
 }
 
@@ -908,12 +896,12 @@ CK_DLL_TICKF(encode4_tickf)
 
 CK_DLL_MFUN(encode4_geti)
 {
-    int index = GET_NEXT_INT(ARGS);
+    t_CKUINT index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->get_i(index);
+        RETURN->v_float = encode_obj->channel_matrix[index];
     }
 }
 
@@ -927,8 +915,8 @@ CK_DLL_MFUN(encode4_coefficients)
 
 CK_DLL_MFUN(encode4_seti)
 {
-    float input_value = GET_NEXT_FLOAT(ARGS);
-    int input_index = GET_NEXT_INT(ARGS);
+    t_CKFLOAT input_value = GET_NEXT_FLOAT(ARGS);
+    t_CKUINT input_index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     if (encode_obj)
@@ -939,8 +927,8 @@ CK_DLL_MFUN(encode4_seti)
 
 CK_DLL_MFUN(encode4_position)
 {
-    float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     if (encode_obj)
@@ -954,14 +942,12 @@ CK_DLL_MFUN(encode4_getSH)
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, sphericals[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -981,14 +967,12 @@ CK_DLL_MFUN(encode4_getWeights)
     // get our c++ class pointer
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -1009,14 +993,14 @@ CK_DLL_MFUN(encode4_getZeni)
 CK_DLL_MFUN(encode4_setAzi)
 {
     Encode4* encode_obj = (Encode4*)OBJ_MEMBER_INT(SELF, encode4_data_offset);
-    float azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
 }
 
 CK_DLL_MFUN(encode4_setZeni)
 {
     Encode4* encode_obj = (Encode4*)OBJ_MEMBER_INT(SELF, encode4_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
 }
 
@@ -1068,12 +1052,12 @@ CK_DLL_TICKF(encode5_tickf)
 
 CK_DLL_MFUN(encode5_geti)
 {
-    int index = GET_NEXT_INT(ARGS);
+    t_CKUINT index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->get_i(index);
+        RETURN->v_float = encode_obj->channel_matrix[index];
     }
 }
 
@@ -1087,8 +1071,8 @@ CK_DLL_MFUN(encode5_coefficients)
 
 CK_DLL_MFUN(encode5_seti)
 {
-    float input_value = GET_NEXT_FLOAT(ARGS);
-    int input_index = GET_NEXT_INT(ARGS);
+    t_CKFLOAT input_value = GET_NEXT_FLOAT(ARGS);
+    t_CKUINT input_index = GET_NEXT_INT(ARGS);
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     if (encode_obj)
@@ -1099,8 +1083,8 @@ CK_DLL_MFUN(encode5_seti)
 
 CK_DLL_MFUN(encode5_position)
 {
-    float azi = GET_NEXT_FLOAT(ARGS);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     // get c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     if (encode_obj)
@@ -1114,14 +1098,12 @@ CK_DLL_MFUN(encode5_getSH)
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
 
-    std::vector<float> sphericals = encode_obj->getSH();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < sphericals.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, sphericals[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -1141,14 +1123,12 @@ CK_DLL_MFUN(encode5_getWeights)
     // get our c++ class pointer
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
 
-    std::vector<float> weights = encode_obj->getWeights();
-
     // Create a float[] array
     Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
-    for (int i = 0; i < weights.size(); i++)
+    for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, weights[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->weights[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -1169,14 +1149,14 @@ CK_DLL_MFUN(encode5_getZeni)
 CK_DLL_MFUN(encode5_setAzi)
 {
     Encode5* encode_obj = (Encode5*)OBJ_MEMBER_INT(SELF, encode5_data_offset);
-    float azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(azi, encode_obj->last_zenith);
 }
 
 CK_DLL_MFUN(encode5_setZeni)
 {
     Encode5* encode_obj = (Encode5*)OBJ_MEMBER_INT(SELF, encode5_data_offset);
-    float zeni = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT zeni = GET_NEXT_FLOAT(ARGS);
     if (encode_obj) encode_obj->position(encode_obj->last_azimuth, zeni);
 }
 
