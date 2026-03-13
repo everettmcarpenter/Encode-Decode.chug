@@ -16,21 +16,21 @@ public class FrequencyRing extends Chugraph
     // sum
     OrderGain2 out;
     // freq split
-    BPF @ split[];
+    ResonZ @ split[];
     // number of bands
     4 => int numBands;
 
     fun void FrequencyRing()
     {
         // allocate filters and encoders
-        new BPF[numBands] @=> split;
+        new ResonZ[numBands] @=> split;
         new Encode2[numBands] @=> enc;
         out.gain(1.0/numBands); // volume control
         // patchbay & config
         for(int i; i < numBands; i++)
         {
             // set freq and Q
-            split[i].set((14000.0/numBands) * (i+1.0), 4.0);
+            split[i].set((14000.0/numBands) * (i+1.0), 24.0);
             // set position
             enc[i].pos((360.0/numBands) * (i), 0.0);
             // route
@@ -42,17 +42,16 @@ public class FrequencyRing extends Chugraph
     {
         // allocate filters and encoders
         n => numBands;
-        new BPF[numBands] @=> split;
+        new ResonZ[numBands] @=> split;
         new Encode2[numBands] @=> enc;
         out.gain(1.0/numBands); // volume control
         // patchbay & config
         for(int i; i < numBands; i++)
         {
             // set freq and Q
-            split[i].set((14000.0/numBands) * (i+1.0), 4.0);
+            split[i].set((14000.0/numBands) * (i+1.0), 24.0);
             // set position
             enc[i].pos((360.0/numBands) * (i), 0.0);
-            <<< (360.0/numBands) * (i), 0.0 >>>;
             // route
             inlet => split[i] => enc[i] => out;
         }
@@ -63,6 +62,7 @@ public class FrequencyRing extends Chugraph
         for(int i; i < numBands; i++)
         {
             enc[i].azi() + delta => enc[i].azi;
+            <<< enc[i].azi() >>>;
         }
     }
 }
