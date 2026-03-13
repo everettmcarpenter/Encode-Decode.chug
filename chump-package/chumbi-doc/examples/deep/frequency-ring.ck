@@ -1,0 +1,83 @@
+public class FrequencyRing extends Chugraph
+{
+    // ambi encode
+    Encode2 @ enc[];
+    // sum
+    OrderGain2 out;
+    // freq split
+    BPF @ split[];
+    // number of bands
+    4 => int numBands;
+
+    fun void FrequencyRing()
+    {
+        // allocate filters and encoders
+        new BPF[numBands] @=> split;
+        new Encode2[numBands] @=> enc;
+        out.gain(1.0/numBands); // volume control
+        // patchbay & config
+        for(int i; i < numBands; i++)
+        {
+            // set freq and Q
+            split[i].set((14000.0/numBands) * (i+1.0), 4.0);
+            // set position
+            enc[i].pos((360.0/numBands) * (i), 0.0);
+            // route
+            inlet => split[i] => enc[i] => out;
+        }
+    }
+
+    fun void FrequencyRing(int n)
+    {
+        // allocate filters and encoders
+        n => numBands;
+        new BPF[numBands] @=> split;
+        new Encode2[numBands] @=> enc;
+        out.gain(1.0/numBands); // volume control
+        // patchbay & config
+        for(int i; i < numBands; i++)
+        {
+            // set freq and Q
+            split[i].set((14000.0/numBands) * (i+1.0), 4.0);
+            // set position
+            enc[i].pos((360.0/numBands) * (i), 0.0);
+            <<< (360.0/numBands) * (i), 0.0 >>>;
+            // route
+            inlet => split[i] => enc[i] => out;
+        }
+    }
+
+    fun void rotate(float delta)
+    {
+        for(int i; i < numBands; i++)
+        {
+            enc[i].azi() + delta => enc[i].azi;
+        }
+    }
+}
+
+// record
+fun void beginRecord(OrderGain2 sum, WvOut recorder[])
+{
+    for(int i; i < sum.channels(); i++)
+    {
+        recorder[i].wavFilename("../recordings/"+Machine.timeOfDay()+"-"+i+".wav");
+        sum.chan(i) => recorder[i] => blackhole;
+    }
+}
+
+// audio source
+SqrOsc imp(432.0) => FrequencyRing spin(4) => blackhole;
+// recorder
+WvOut bformat[9];
+
+// lets record it
+spork ~ beginRecord(spin.out, bformat);
+
+for(int i; i < 100; i++)
+{
+    // spin around
+    spin.rotate(360.0/100.0);
+    // pass time
+    100::ms => now;
+}
