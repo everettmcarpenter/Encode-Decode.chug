@@ -9,13 +9,15 @@ ba =< dac;
 
 <<< "ABFormat & BAFormat operational." >>>;
 
+sine[0] =< ab;
+
 <<< "Testing EncodeN" >>>;
 
 sine[0] => Encode1 enc1 => dac;
 
 enc1.pos(45.0, 0.0);
-enc1.sh() @=> float sh1[];
 2::second => now;
+enc1.sh() @=> float sh1[];
 for(int i; i < sh1.size(); i++)
 {
     cherr <= sh1[i] <= " ";
@@ -27,8 +29,8 @@ enc1 =< dac;
 sine[0] => Encode2 enc2 => dac;
 
 enc2.pos(45.0, 0.0);
-enc2.sh() @=> float sh2[];
 2::second => now;
+enc2.sh() @=> float sh2[];
 for(int i; i < sh2.size(); i++)
 {
     cherr <= sh2[i] <= " ";
@@ -40,8 +42,8 @@ enc2 =< dac;
 sine[0] => Encode3 enc3 => dac;
 
 enc3.pos(45.0, 0.0);
-enc3.sh() @=> float sh3[];
 2::second => now;
+enc3.sh() @=> float sh3[];
 for(int i; i < sh3.size(); i++)
 {
     cherr <= sh3[i] <= " ";
@@ -53,8 +55,8 @@ enc3 =< dac;
 sine[0] => Encode4 enc4 => dac;
 
 enc4.pos(45.0, 0.0);
-enc4.sh() @=> float sh4[];
 2::second => now;
+enc4.sh() @=> float sh4[];
 for(int i; i < sh4.size(); i++)
 {
     cherr <= sh4[i] <= " ";
@@ -66,8 +68,8 @@ enc4 =< dac;
 sine[0] => Encode5 enc5 => dac;
 
 enc5.pos(45.0, 0.0);
-enc5.sh() @=> float sh5[];
 2::second => now;
+enc5.sh() @=> float sh5[];
 for(int i; i < sh5.size(); i++)
 {
     cherr <= sh5[i] <= " ";
