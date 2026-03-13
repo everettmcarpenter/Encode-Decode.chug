@@ -1,3 +1,14 @@
+//-----------------------------------------------------------
+// name: frequency-ring.ck
+// author: everett m. carpenter
+// desc: takes a mono input source and spreads it's spectrum
+//       into a horizontal ring in ambisonics. be sure to 
+//       use FrequencyRing.out as your output stream, since
+//       multichannel chugraphs are not yet supported. if you
+//       overload the constructor, you can set the number of 
+//       frequency bands to be spatialized.
+//-----------------------------------------------------------
+
 public class FrequencyRing extends Chugraph
 {
     // ambi encode
