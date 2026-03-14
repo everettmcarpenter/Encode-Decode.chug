@@ -50,9 +50,9 @@ public class RingModEncoder extends Chugraph
     }
 
     // move center point (dry)
-    fun void position(float azimuth)
+    fun void rotate(float delta)
     {
-        azimuth => enc[0].azi;
+        enc[0].azi() + delta => enc[0].azi;
         enc[0].azi() + (upDown[0].shift()/spreadFactor) * maxWidth => enc[1].azi;
         enc[0].azi() + (upDown[1].shift()/spreadFactor) * maxWidth => enc[2].azi;
     }
@@ -88,7 +88,7 @@ spork ~ beginRecord(ring.out, bformat);
 
 for(int i; i < 100; i++)
 {
-    ring.position(i * (360.0/100.0));
+    ring.rotate(i * (360.0/100.0));
     ring.widen(i * (8.0/100.0));
     ring.mix(i * 1.0/100.0);
     // pass time
