@@ -6,14 +6,14 @@ Currently functional:
       EncodeN // virtual source encoder & ambisonic panner
       SADN // sampling ambisonic decoder designed to receive speaker array angles
       DecodeN // sampling ambisonic decoder designed to receive speaker spherical harmonics
+      DBDN // dual band ambisonic decoding
       BFormatN // gain UGen for BFormat signals (multi channel gain factor)
-      ABFormat // convert AFromat to BFormat
+      ABFormat // convert AFormat to BFormat
       BAFormat // convert BFormat to AFormat
       MirrorN // mirroring of sound fields along axes
 
 Coming soon:
 
-      DBDN // dual band ambisonic decoding
       MMADN // mode matching ambisonic decoding
       RotateN // rotation of sound fields
       WarpN // warping of sound fields
