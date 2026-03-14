@@ -6,7 +6,7 @@ if [ $# -eq 0 ]; then
 fi
 
 OS="$1"
-VERS="1.2.0"
+VERS="1.2.2"
 BUILD_DIR="current-builds"
 ROOT_DIR="$(pwd)"
 DEST_DIR="$ROOT_DIR/$BUILD_DIR"

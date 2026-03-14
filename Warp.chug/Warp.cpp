@@ -101,7 +101,7 @@ private:
 //-----------------------------------------------------------------------------
 CK_DLL_INFO( Warp )
 {
-    // the version string of this chugin, e.g., "v1.2.1"
+    // the version string of this chugin, e.g., "v1.2.2"
     QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "" );
     // the author(s) of this chugin, e.g., "Alice Baker & Carl Donut"
     QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "" );

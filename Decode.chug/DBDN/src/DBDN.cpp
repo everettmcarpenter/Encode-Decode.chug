@@ -109,8 +109,8 @@ t_CKINT dbd5_data_offset = 0;
 //-----------------------------------------------------------------------------
 CK_DLL_INFO( DBD1 )
 {
-    // the version string of this chugin, e.g., "v1.2.1"
-    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.2.0" );
+    // the version string of this chugin, e.g., "v1.2.2"
+    QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "v1.2.2" );
     // the author(s) of this chugin, e.g., "Alice Baker & Carl Donut"
     QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "Everett M. Carpenter" );
     // text description of this chugin; what is it? what does it do? who is it for?

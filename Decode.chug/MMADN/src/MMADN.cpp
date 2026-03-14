@@ -61,7 +61,7 @@ t_CKINT mmadn1_data_offset = 0;
 //-----------------------------------------------------------------------------
 CK_DLL_INFO( MMADN )
 {
-    // the version string of this chugin, e.g., "v1.2.1"
+    // the version string of this chugin, e.g., "v1.2.2"
     QUERY->setinfo( QUERY, CHUGIN_INFO_CHUGIN_VERSION, "" );
     // the author(s) of this chugin, e.g., "Alice Baker & Carl Donut"
     QUERY->setinfo( QUERY, CHUGIN_INFO_AUTHORS, "" );
