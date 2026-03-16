@@ -7,7 +7,6 @@ template <const unsigned order_>
 class MonoDecode : public Decoder<order_> // seems redundant, but essentially takes all decoder commonalities, gives to this "Basic decoder" class with a sampling tick function
 {
 public:
-
 	MonoDecode()
 	{
 		// we only need one vector or row of SH so let's get rid of the matrix
@@ -18,10 +17,10 @@ public:
 		delete[] this->SpeakSH;
 	}
 
-	~MonoDecode()
+	~MonoDecode() override
 	{
 		delete[] mySH;
-		delete[] weights;
+		delete[] this->weights;
 	}
 
 	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes) 
