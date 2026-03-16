@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{11e7822f-6542-4de2-b009-8cd9583e4c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{700171e8-a2db-4009-8a90-59b79b35cd8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Make Files">
+      <UniqueIdentifier>{012d9c33-e17e-4281-8951-2e22dc9d4f14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\MonoDecode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\chuckSH.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\chugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\DecoderBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\decode-include\SHCT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\MonoDecode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="makefile.linux">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="makefile.mac">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="makefile.win">
+      <Filter>Make Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
