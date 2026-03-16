@@ -14,6 +14,7 @@
 <div id="body">
 <div class="toc"><a id="toc"/>
 <p class="toc_class"><a href="#DecodeN" class="ckdoc_typename ckdoc_type_ugen">DecodeN</a></p>
+<p class="toc_class"><a href="#MonoDecodeN" class="ckdoc_typename ckdoc_type_ugen">MonoDecodeN</a></p>
 <p class="toc_class"><a href="#SADN" class="ckdoc_typename ckdoc_type_ugen">SADN</a></p>
 <p class="toc_class"><a href="#DBDN" class="ckdoc_typename ckdoc_type_ugen">DBDN</a></p>
 </div>
@@ -50,6 +51,46 @@
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
 <p class="member_description">Get the active weighting of the decoder matrix.</p>
+</div>
+</div>
+<p class="top_link">[ <a href="#top">top</a> ]</p>
+</div>
+<hr />
+<a name="MonoDecodeN" /><div class="class">
+<h2 class="class_title" name="MonoDecodeN">MonoDecodeN</h2>
+<h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
+<p class="class_description">MonoDecoder based on a given vector of spherical harmonic values.<p>
+<h3 class="class_section_header">examples</h3><div class="examples"><ul>
+<li><a target="_blank" href="examples/deep/advanced-decode.ck">examples/deep/advanced-decode.ck</a></li>
+</ul></div>
+<h3 class="class_section_header">constructors</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="membername">MonoDecodeN</span>()</p>
+<p class="member_description">Default constructor for MonoDecodeN.</p>
+</div>
+</div>
+<h3 class="class_section_header">member functions</h3>
+<div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">rms</span>()</p>
+<p class="member_description">Get the RMS value of the last buffer pass.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">sh</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> sh)</p>
+<p class="member_description">A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">sh</span>()</p>
+<p class="member_description">Get current vector of spherical harmonics.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">weights</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> weights)</p>
+<p class="member_description">Set vector of weights to be used, the same vector is used for all speakers.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span><span class="typename">[]</span> <span class="membername">weights</span>()</p>
+<p class="member_description">Get the active weighting of the decoder vector.</p>
 </div>
 </div>
 <p class="top_link">[ <a href="#top">top</a> ]</p>

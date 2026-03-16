@@ -14,7 +14,7 @@ doc.addGroup(
 
 // decoders
 doc.addGroup(
-    [ "DecodeN", "SADN", "DBDN"],
+    [ "DecodeN", "MonoDecodeN", "SADN", "DBDN"],
     "Decoders",
     "decoders",
     "Ambisonic decoders, all work from 1st to 5th order."

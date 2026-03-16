@@ -6,7 +6,7 @@
     "arch": "universal",
     "files": [
         {
-            "checksum": "30e2c5e4adfc457d495dcfef0c7186bfac2c980a990f4dcce41e519ac0c56b41",
+            "checksum": "ed800afe88ae3e30ac104748e3adb8c8de99703adbb0efaa3e9af8338d5b0e56",
             "file_type": "zip",
             "local_dir": "./",
             "url": "https://everettmiles.com/Chumbi/1.2.0/mac/Chumbi.zip"

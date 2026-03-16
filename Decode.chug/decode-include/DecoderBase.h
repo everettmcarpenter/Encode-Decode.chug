@@ -26,7 +26,7 @@ public:
 		weights = new float[n_channels];
 	}
 
-	~Decoder()
+	virtual ~Decoder()
 	{
 		for (int i = 0; i < n_channels; i++)
 		{

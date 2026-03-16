@@ -25,7 +25,7 @@ public:
 		}
 	}
 
-	void CKsetSpeakSH(Chuck_Object* coord, CK_DL_API API) // using a multi-dimensional chuck array of speaker angles, set the SHs of each speaker
+	void CKsetSpeakSH(Chuck_Object* coord, CK_DL_API API) // using a multi-dimensional chuck array of spherical harmonics, set the SHs of each speaker
 	{
 		Chuck_ArrayInt* column = (Chuck_ArrayInt*)coord;
 		if (API->object->array_int_size(column) >= this->n_channels)

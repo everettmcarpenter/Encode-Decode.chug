@@ -16,6 +16,7 @@ CHUGS=(
     "B-A-BFormat.chug/BAFormat.chug/:BAFormat.chug"
     "Encode.chug/:Encode.chug"
     "Decode.chug/DecodeN/:Decode.chug"
+    "Decode.chug/MonoDecodeN/:MonoDecode.chug"
     "Decode.chug/SADN/:SADN.chug"
     "Decode.chug/DBDN/:DBDN.chug"
     "OrderGain.chug/:OrderGain.chug"
