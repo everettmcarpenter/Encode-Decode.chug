@@ -33,7 +33,6 @@ build_and_move() {
 	pwd
     make clean
 	make "$OS"
-	make "$OS" 
     if [[ "$OS" == "win32" ]]; then
         cp "x64/Release/$chug" "$DEST_DIR/win/"
     else

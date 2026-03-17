@@ -114,10 +114,10 @@ public:
 
     void position(t_CKFLOAT azimuth_, t_CKFLOAT zenith_)
     {
-        last_azimuth = azimuth_;
-        last_zenith = zenith_;
+        lastAzimuth = azimuth_;
+        lastElevation = zenith_;
         float* temp = new float[channel_count];
-        SH(temp, order, last_azimuth, last_zenith, 0); // simply just calls the spherical harmonic calculator
+        SH(temp, order, lastAzimuth, lastElevation, 0); // simply just calls the spherical harmonic calculator
         for (int i = 0; i < channel_count; i++)
         {
             temp_matrix[i] = temp[i];
@@ -133,8 +133,8 @@ public:
     float* channel_matrix; // current gain coeffs
     float* temp_matrix;    // temp coeffs to be shifted to current
     float* weights;
-    t_CKFLOAT last_azimuth = 0.f;
-    t_CKFLOAT last_zenith = 0.f;
+    t_CKFLOAT lastAzimuth = 0.f;
+    t_CKFLOAT lastElevation = 0.f;
     bool zeroCrossing = FALSE; // is there a zero crossing?
 };
 
