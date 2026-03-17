@@ -1,3 +1,7 @@
+API REFERENCE:
+
+https://everettmiles.com/chumbi-doc/
+
 # Encode-Decode.chug
 Ambisonic encoding and decoding chugins for ChucK
 
