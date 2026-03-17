@@ -50,8 +50,10 @@ public:
 		}
 	}
 
-	void CKsetSpeakAngles(t_CKFLOAT azimuth, t_CKFLOAT elevation) // set the position via azimuth and elevation
+	void CKsetSpeakAngles(const t_CKFLOAT azimuth, const t_CKFLOAT elevation) // set the position via azimuth and elevation
 	{
+		lastAzimuth = azimuth;
+		lastElevation = elevation;
 		float* temp = new float[this->n_channels]; // temporary memory storage
 		SH(temp, this->order, azimuth, elevation, 0); // calculate SH
 		for (int i = 0; i < this->n_channels; i++)
@@ -76,6 +78,8 @@ public:
 public:
 	float* mySH = new float[this->n_channels];
 	t_CKFLOAT rms = 0.0;
+	t_CKFLOAT lastAzimuth = 0.0;
+	t_CKFLOAT lastElevation = 0.0;
 };
 
 // this is actually what gets called and used by the chugin

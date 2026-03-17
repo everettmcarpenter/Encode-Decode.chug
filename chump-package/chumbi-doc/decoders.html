@@ -59,10 +59,7 @@
 <a name="MonoDecodeN" /><div class="class">
 <h2 class="class_title" name="MonoDecodeN">MonoDecodeN</h2>
 <h4><span class="class_inherits">inherits</span> : <a href="" class="ckdoc_typename ckdoc_type_ugen">UGen</a> : <a href="" class="ckdoc_typename ckdoc_type_object">Object</a> </h4>
-<p class="class_description">MonoDecoder based on a given vector of spherical harmonic values.<p>
-<h3 class="class_section_header">examples</h3><div class="examples"><ul>
-<li><a target="_blank" href="examples/deep/advanced-decode.ck">examples/deep/advanced-decode.ck</a></li>
-</ul></div>
+<p class="class_description">Retrieve current elevation angle.<p>
 <h3 class="class_section_header">constructors</h3>
 <div class="members">
 <div class="member">
@@ -72,6 +69,18 @@
 </div>
 <h3 class="class_section_header">member functions</h3>
 <div class="members">
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">azi</span>()</p>
+<p class="member_description">Retrieve current azimuth.</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">elev</span>()</p>
+<p class="empty_member_description">No description available</p>
+</div>
+<div class="member">
+<p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">void</span> <span class="membername">pos</span>(<span class="ckdoc_typename ckdoc_type_primitive">float</span> azimuth, <span class="ckdoc_typename ckdoc_type_primitive">float</span> elevation)</p>
+<p class="member_description">Set the position of the MonoDecode via spherical coordinates.</p>
+</div>
 <div class="member">
 <p class="member_declaration"><span class="ckdoc_typename ckdoc_type_primitive">float</span> <span class="membername">rms</span>()</p>
 <p class="member_description">Get the RMS value of the last buffer pass.</p>

@@ -1,3 +1,13 @@
+//-----------------------------------------------------------
+// name: strings-in-space.ck
+// author: everett m. carpenter
+// desc: creates a collection of string models which are 
+//       randomly struck around the sphere. further edits 
+//       include the interaction of current string vibration
+//       with other strings, causing continuous feedback
+//       networks. 
+//-----------------------------------------------------------
+
 @import "../../classes/plucked-string.ck"
 
 if(dac.channels() < 9) me.exit(); // not enough channels?

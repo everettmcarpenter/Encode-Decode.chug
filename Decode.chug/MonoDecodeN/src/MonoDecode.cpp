@@ -46,6 +46,9 @@
 CK_DLL_CTOR(decode1_ctor);
 CK_DLL_DTOR(decode1_dtor);
 CK_DLL_MFUN(decode1_setSH);
+CK_DLL_MFUN(decode1_setPos);
+CK_DLL_MFUN(decode1_getAzi);
+CK_DLL_MFUN(decode1_getElev);
 CK_DLL_MFUN(decode1_getSH);
 CK_DLL_MFUN(decode1_getRMS);
 CK_DLL_TICKF(decode1_tickf);
@@ -59,6 +62,9 @@ t_CKINT decode1_data_offset = 0;
 CK_DLL_CTOR(decode2_ctor);
 CK_DLL_DTOR(decode2_dtor);
 CK_DLL_MFUN(decode2_setSH);
+CK_DLL_MFUN(decode2_setPos);
+CK_DLL_MFUN(decode2_getAzi);
+CK_DLL_MFUN(decode2_getElev);
 CK_DLL_MFUN(decode2_getSH);
 CK_DLL_MFUN(decode2_getRMS);
 CK_DLL_TICKF(decode2_tickf);
@@ -72,6 +78,9 @@ t_CKINT decode2_data_offset = 0;
 CK_DLL_CTOR(decode3_ctor);
 CK_DLL_DTOR(decode3_dtor);
 CK_DLL_MFUN(decode3_setSH);
+CK_DLL_MFUN(decode3_setPos);
+CK_DLL_MFUN(decode3_getAzi);
+CK_DLL_MFUN(decode3_getElev);
 CK_DLL_MFUN(decode3_getSH);
 CK_DLL_MFUN(decode3_getRMS);
 CK_DLL_TICKF(decode3_tickf);
@@ -85,6 +94,9 @@ t_CKINT decode3_data_offset = 0;
 CK_DLL_CTOR(decode4_ctor);
 CK_DLL_DTOR(decode4_dtor);
 CK_DLL_MFUN(decode4_setSH);
+CK_DLL_MFUN(decode4_setPos);
+CK_DLL_MFUN(decode4_getAzi);
+CK_DLL_MFUN(decode4_getElev);
 CK_DLL_MFUN(decode4_getSH);
 CK_DLL_MFUN(decode4_getRMS);
 CK_DLL_TICKF(decode4_tickf);
@@ -98,6 +110,9 @@ t_CKINT decode4_data_offset = 0;
 CK_DLL_CTOR(decode5_ctor);
 CK_DLL_DTOR(decode5_dtor);
 CK_DLL_MFUN(decode5_setSH);
+CK_DLL_MFUN(decode5_setPos);
+CK_DLL_MFUN(decode5_getAzi);
+CK_DLL_MFUN(decode5_getElev);
 CK_DLL_MFUN(decode5_getSH);
 CK_DLL_MFUN(decode5_getRMS);
 CK_DLL_TICKF(decode5_tickf);
@@ -141,6 +156,14 @@ CK_DLL_QUERY(MonoDecode)
     QUERY->add_mfun(QUERY, decode1_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode1_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode1_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode1_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode1_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode1_getRMS, "float", "rms");
@@ -163,6 +186,14 @@ CK_DLL_QUERY(MonoDecode)
     QUERY->add_mfun(QUERY, decode2_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode2_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode2_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode2_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode2_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode2_getRMS, "float", "rms");
@@ -184,6 +215,14 @@ CK_DLL_QUERY(MonoDecode)
     QUERY->add_mfun(QUERY, decode3_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode3_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode3_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode3_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode3_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode3_getRMS, "float", "rms");
@@ -205,6 +244,14 @@ CK_DLL_QUERY(MonoDecode)
     QUERY->add_mfun(QUERY, decode4_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode4_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode4_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode4_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode4_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode4_getRMS, "float", "rms");
@@ -226,6 +273,14 @@ CK_DLL_QUERY(MonoDecode)
     QUERY->add_mfun(QUERY, decode5_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode5_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode5_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode5_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode5_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode5_getRMS, "float", "rms");
@@ -245,13 +300,20 @@ CK_DLL_QUERY(MonoDecode)
     //=======================================================================
     QUERY->begin_class(QUERY, "MonoDecodeN", "UGen");
     QUERY->doc_class(QUERY, "MonoDecoder based on a given vector of spherical harmonic values.");
-    QUERY->add_ex(QUERY, "examples/deep/advanced-decode.ck");
     QUERY->add_ctor(QUERY, decode1_ctor);
     QUERY->add_dtor(QUERY, decode1_dtor);
     QUERY->add_ugen_funcf(QUERY, decode1_tickf, NULL, 4, 1);
     QUERY->add_mfun(QUERY, decode1_setSH, "void", "sh");
     QUERY->add_arg(QUERY, "float[]", "sh");
     QUERY->doc_func(QUERY, "A simple sampling decoder used to find metrics of a soundfield. It's processing is similar to the inverse of encoding, where it will find sound present at a position on the sphere, rather than place it at that position.");
+    QUERY->add_mfun(QUERY, decode1_setPos, "void", "pos");
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Set the position of the MonoDecode via spherical coordinates.");
+    QUERY->add_mfun(QUERY, decode1_getAzi, "float", "azi");
+    QUERY->doc_func(QUERY, "Retrieve current azimuth.");
+    QUERY->add_mfun(QUERY, decode1_getElev, "float", "elev");
+    QUERY->doc_class(QUERY, "Retrieve current elevation angle.");
     QUERY->add_mfun(QUERY, decode1_getSH, "float[]", "sh");
     QUERY->doc_func(QUERY, "Get current vector of spherical harmonics.");
     QUERY->add_mfun(QUERY, decode1_getRMS, "float", "rms");
@@ -318,6 +380,29 @@ CK_DLL_MFUN(decode1_setSH)
     MonoDecode1* decode1_obj = (MonoDecode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
     if (decode1_obj)
         decode1_obj->CKsetSpeakSH(weights, API);
+}
+
+CK_DLL_MFUN(decode1_setPos)
+{
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+    MonoDecode1* decode1_obj = (MonoDecode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
+    if (decode1_obj)
+        decode1_obj->CKsetSpeakAngles(azi, elev);
+}
+
+CK_DLL_MFUN(decode1_getAzi)
+{
+    MonoDecode1* decode1_obj = (MonoDecode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
+    if(decode1_obj) RETURN->v_float = decode1_obj->lastAzimuth;
+    else API->vm->throw_exception("MonoDecode1 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
+CK_DLL_MFUN(decode1_getElev)
+{
+    MonoDecode1* decode1_obj = (MonoDecode1*)OBJ_MEMBER_INT(SELF, decode1_data_offset);
+    if (decode1_obj) RETURN->v_float = decode1_obj->lastElevation;
+    else API->vm->throw_exception("MonoDecode1 Error", "Failed to access MonoDecode internal data.", SHRED);
 }
 
 CK_DLL_MFUN(decode1_getSH)
@@ -419,6 +504,29 @@ CK_DLL_MFUN(decode2_setSH)
         decode2_obj->CKsetSpeakSH(weights, API);
 }
 
+CK_DLL_MFUN(decode2_setPos)
+{
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+    MonoDecode2* decode2_obj = (MonoDecode2*)OBJ_MEMBER_INT(SELF, decode2_data_offset);
+    if (decode2_obj)
+        decode2_obj->CKsetSpeakAngles(azi, elev);
+}
+
+CK_DLL_MFUN(decode2_getAzi)
+{
+    MonoDecode2* decode2_obj = (MonoDecode2*)OBJ_MEMBER_INT(SELF, decode2_data_offset);
+    if (decode2_obj) RETURN->v_float = decode2_obj->lastAzimuth;
+    else API->vm->throw_exception("MonoDecode2 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
+CK_DLL_MFUN(decode2_getElev)
+{
+    MonoDecode2* decode2_obj = (MonoDecode2*)OBJ_MEMBER_INT(SELF, decode2_data_offset);
+    if (decode2_obj) RETURN->v_float = decode2_obj->lastElevation;
+    else API->vm->throw_exception("MonoDecode2 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
 CK_DLL_MFUN(decode2_getSH)
 {
     // get our c++ class pointer
@@ -516,6 +624,29 @@ CK_DLL_MFUN(decode3_setSH)
     MonoDecode3* decode3_obj = (MonoDecode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
     if (decode3_obj)
         decode3_obj->CKsetSpeakSH(weights, API);
+}
+
+CK_DLL_MFUN(decode3_setPos)
+{
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+    MonoDecode3* decode3_obj = (MonoDecode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
+    if (decode3_obj)
+        decode3_obj->CKsetSpeakAngles(azi, elev);
+}
+
+CK_DLL_MFUN(decode3_getAzi)
+{
+    MonoDecode3* decode3_obj = (MonoDecode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
+    if (decode3_obj) RETURN->v_float = decode3_obj->lastAzimuth;
+    else API->vm->throw_exception("MonoDecode3 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
+CK_DLL_MFUN(decode3_getElev)
+{
+    MonoDecode3* decode3_obj = (MonoDecode3*)OBJ_MEMBER_INT(SELF, decode3_data_offset);
+    if (decode3_obj) RETURN->v_float = decode3_obj->lastElevation;
+    else API->vm->throw_exception("MonoDecode3 Error", "Failed to access MonoDecode internal data.", SHRED);
 }
 
 CK_DLL_MFUN(decode3_getSH)
@@ -617,6 +748,29 @@ CK_DLL_MFUN(decode4_setSH)
         decode4_obj->CKsetSpeakSH(weights, API);
 }
 
+CK_DLL_MFUN(decode4_setPos)
+{
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+    MonoDecode4* decode4_obj = (MonoDecode4*)OBJ_MEMBER_INT(SELF, decode4_data_offset);
+    if (decode4_obj)
+        decode4_obj->CKsetSpeakAngles(azi, elev);
+}
+
+CK_DLL_MFUN(decode4_getAzi)
+{
+    MonoDecode4* decode4_obj = (MonoDecode4*)OBJ_MEMBER_INT(SELF, decode4_data_offset);
+    if (decode4_obj) RETURN->v_float = decode4_obj->lastAzimuth;
+    else API->vm->throw_exception("MonoDecode4 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
+CK_DLL_MFUN(decode4_getElev)
+{
+    MonoDecode4* decode4_obj = (MonoDecode4*)OBJ_MEMBER_INT(SELF, decode4_data_offset);
+    if (decode4_obj) RETURN->v_float = decode4_obj->lastElevation;
+    else API->vm->throw_exception("MonoDecode4 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
 CK_DLL_MFUN(decode4_getSH)
 {
     // get our c++ class pointer
@@ -714,6 +868,29 @@ CK_DLL_MFUN(decode5_setSH)
     MonoDecode5* decode5_obj = (MonoDecode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
     if (decode5_obj)
         decode5_obj->CKsetSpeakSH(weights, API);
+}
+
+CK_DLL_MFUN(decode5_setPos)
+{
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+    MonoDecode5* decode5_obj = (MonoDecode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
+    if (decode5_obj)
+        decode5_obj->CKsetSpeakAngles(azi, elev);
+}
+
+CK_DLL_MFUN(decode5_getAzi)
+{
+    MonoDecode5* decode5_obj = (MonoDecode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
+    if (decode5_obj) RETURN->v_float = decode5_obj->lastAzimuth;
+    else API->vm->throw_exception("MonoDecode5 Error", "Failed to access MonoDecode internal data.", SHRED);
+}
+
+CK_DLL_MFUN(decode5_getElev)
+{
+    MonoDecode5* decode5_obj = (MonoDecode5*)OBJ_MEMBER_INT(SELF, decode5_data_offset);
+    if (decode5_obj) RETURN->v_float = decode5_obj->lastElevation;
+    else API->vm->throw_exception("MonoDecode5 Error", "Failed to access MonoDecode internal data.", SHRED);
 }
 
 CK_DLL_MFUN(decode5_getSH)
