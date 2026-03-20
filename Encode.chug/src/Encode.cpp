@@ -447,6 +447,7 @@ CK_DLL_CTOR(encode1_ctor)
 
     // instantiate our internal c++ class representation
     Encode1 *encode_obj = new Encode1(API->vm->srate(VM));
+    encode_obj->position(0.0, 0.0);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode1_data_offset) = (t_CKINT)encode_obj;
@@ -603,6 +604,7 @@ CK_DLL_CTOR(encode2_ctor)
 
     // instantiate our internal c++ class representation
     Encode2 *encode_obj = new Encode2(API->vm->srate(VM));
+    encode_obj->position(0.0, 0.0);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode2_data_offset) = (t_CKINT)encode_obj;
@@ -759,6 +761,7 @@ CK_DLL_CTOR(encode3_ctor)
 
     // instantiate our internal c++ class representation
     Encode3 *encode_obj = new Encode3(API->vm->srate(VM));
+    encode_obj->position(0.0, 0.0);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode3_data_offset) = (t_CKINT)encode_obj;
@@ -915,6 +918,7 @@ CK_DLL_CTOR(encode4_ctor)
 
     // instantiate our internal c++ class representation
     Encode4 *encode_obj = new Encode4(API->vm->srate(VM));
+    encode_obj->position(0.0, 0.0);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode4_data_offset) = (t_CKINT)encode_obj;
@@ -1071,6 +1075,7 @@ CK_DLL_CTOR(encode5_ctor)
 
     // instantiate our internal c++ class representation
     Encode5 *encode_obj = new Encode5(API->vm->srate(VM));
+    encode_obj->position(0.0, 0.0);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode5_data_offset) = (t_CKINT)encode_obj;

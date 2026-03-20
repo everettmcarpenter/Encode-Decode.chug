@@ -51,6 +51,14 @@ public:
             weights[i] = 1.0;
         }
     };
+
+    ~Encoder()
+    {
+        delete[] channel_matrix;
+        delete[] temp_matrix;
+        delete[] weights;
+    }
+    
     // for chugins extending UGen
     void tick(SAMPLE *in, SAMPLE *out, int nframes)
     {
