@@ -6,7 +6,7 @@
     "arch": "x86_64",
     "files": [
         {
-            "checksum": "335696c46c202481c67c08fa56363b3a6717c40265f77db3f496140278efa613",
+            "checksum": "6ba4defb441684f00a26ac4a1ea160fc36c6774b77d19bf3cda069fe4bfcaa0e",
             "file_type": "zip",
             "local_dir": "./",
             "url": "https://everettmiles.com/Chumbi/1.2.0/windows/Chumbi.zip"

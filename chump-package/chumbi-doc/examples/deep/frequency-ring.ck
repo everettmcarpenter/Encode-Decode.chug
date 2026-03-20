@@ -66,29 +66,3 @@ public class FrequencyRing extends Chugraph
         }
     }
 }
-
-// record
-fun void beginRecord(OrderGain2 sum, WvOut recorder[])
-{
-    for(int i; i < sum.channels(); i++)
-    {
-        recorder[i].wavFilename("../recordings/"+Machine.timeOfDay()+"-"+i+".wav");
-        sum.chan(i) => recorder[i] => blackhole;
-    }
-}
-
-// audio source
-SqrOsc imp(432.0) => FrequencyRing spin(4) => blackhole;
-// recorder
-WvOut bformat[9];
-
-// lets record it
-spork ~ beginRecord(spin.out, bformat);
-
-for(int i; i < 100; i++)
-{
-    // spin around
-    spin.rotate(360.0/100.0);
-    // pass time
-    100::ms => now;
-}

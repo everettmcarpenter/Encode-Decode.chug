@@ -128,8 +128,8 @@ public:
 
 public:
     // instance data
-    constexpr static t_CKUINT order = n_order;
-    constexpr static t_CKUINT channel_count = (n_order + 1) * (n_order + 1);
+    const static t_CKUINT order = n_order;
+    const static t_CKUINT channel_count = (n_order + 1) * (n_order + 1);
     float* channel_matrix; // current gain coeffs
     float* temp_matrix;    // temp coeffs to be shifted to current
     float* weights;
