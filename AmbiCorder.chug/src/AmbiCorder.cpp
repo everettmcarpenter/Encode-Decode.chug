@@ -44,8 +44,8 @@
 
 CK_DLL_CTOR( ambicorder1_ctor );
 CK_DLL_DTOR( ambicorder1_dtor );
-CK_DLL_MFUN( ambicorder1_setParam );
-CK_DLL_MFUN( ambicorder1_getParam );
+CK_DLL_MFUN( ambicorder1_openFile );
+CK_DLL_MFUN( ambicorder1_closeFile );
 CK_DLL_TICKF( ambicorder1_tick );
 t_CKINT ambicorder1_data_offset = 0;
 
@@ -98,10 +98,10 @@ CK_DLL_QUERY( AmbiCorder )
     // register default constructor
     QUERY->add_ctor( QUERY, ambicorder1_ctor );
     QUERY->add_dtor( QUERY, ambicorder1_dtor );
-    QUERY->add_ugen_funcf( QUERY, ambicorder1_tick, NULL, 4, 4 );
-    QUERY->add_mfun( QUERY, ambicorder1_setParam, "float", "param" );
-    QUERY->add_arg( QUERY, "float", "arg" );
-    QUERY->add_mfun( QUERY, ambicorder1_getParam, "float", "param" );
+    QUERY->add_ugen_funcf (QUERY, ambicorder1_tick, NULL, 4, 0 );
+    QUERY->add_mfun( QUERY, ambicorder1_openFile, "string", "openFile" );
+    QUERY->add_arg( QUERY, "string", "filename" );
+    QUERY->add_mfun( QUERY, ambicorder1_closeFile, "void", "closeFile" );
     ambicorder1_data_offset = QUERY->add_mvar( QUERY, "int", "@ac1_data", false );
     QUERY->end_class( QUERY );
 
@@ -109,12 +109,9 @@ CK_DLL_QUERY( AmbiCorder )
     QUERY->begin_class(QUERY, "AmbiCorder2", "UGen");
 
     // register default constructor
-    QUERY->add_ctor(QUERY, ambicorder_ctor);
-    QUERY->add_dtor(QUERY, ambicorder_dtor);
-    QUERY->add_ugen_func(QUERY, ambicorder_tick, NULL, 9, 9);
-    QUERY->add_mfun(QUERY, ambicorder_setParam, "float", "param");
-    QUERY->add_arg(QUERY, "float", "arg");
-    QUERY->add_mfun(QUERY, ambicorder_getParam, "float", "param");
+    QUERY->add_ctor(QUERY, ambicorder2_ctor);
+    QUERY->add_dtor(QUERY, ambicorder2_dtor);
+    QUERY->add_ugen_funcf(QUERY, ambicorder1_tick, NULL, 9, 0);
     ambicorder2_data_offset = QUERY->add_mvar(QUERY, "int", "@ac2_data", false);
     QUERY->end_class(QUERY);
 
@@ -156,7 +153,7 @@ CK_DLL_TICKF( ambicorder1_tick )
     AmbiCorder1 * ac_obj = (AmbiCorder1 *)OBJ_MEMBER_INT(SELF, ambicorder1_data_offset);
  
     // invoke our tick function;
-    if( ac_obj ) ac_obj->tick( in*, out*,  );
+    if( ac_obj ) ac_obj->tick( in, out, nframes );
 
     // yes
     return TRUE;
@@ -164,10 +161,10 @@ CK_DLL_TICKF( ambicorder1_tick )
 
 
 // example implementation for setter
-CK_DLL_MFUN( ambicorder_setParam )
+CK_DLL_MFUN( ambicorder1_openFile )
 {
     // get our c++ class pointer
-    AmbiCorder * ac_obj = (AmbiCorder *)OBJ_MEMBER_INT( SELF, ambicorder_data_offset );
+    AmbiCorder1 * ac_obj = (AmbiCorder *)OBJ_MEMBER_INT( SELF, ambicorder_data_offset );
 
     // get next argument
     // NOTE argument type must match what is specified above in CK_DLL_QUERY
@@ -180,10 +177,10 @@ CK_DLL_MFUN( ambicorder_setParam )
 
 
 // example implementation for getter
-CK_DLL_MFUN(ambicorder_getParam)
+CK_DLL_MFUN( ambicorder1_closeFile )
 {
     // get our c++ class pointer
-    AmbiCorder * ac_obj = (AmbiCorder *)OBJ_MEMBER_INT( SELF, ambicorder_data_offset );
+    AmbiCorder1 * ac_obj = (AmbiCorder *)OBJ_MEMBER_INT( SELF, ambicorder_data_offset );
 
     // call getParam() and set the return value
     RETURN->v_float = ac_obj->getParam();

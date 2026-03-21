@@ -5,16 +5,27 @@
 #include "WvOut.h"
 #include "FileWvOut.h"
 #include "FileWrite.h"
+#include "Stk.h"
 #include "chugin.h"
 
-class AmbiCorder1 : public FileWvOut
+class AmbiCorder1 : public stk::FileWvOut
 {
-	AmbiCorder1( t_CKFLOAT fs );
+public:
+	AmbiCorder1(t_CKFLOAT fs)
+	{
+	};
+	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes)
+	{
+
+	}
+
+	stk:StkFrames* passAlong;
 };
 
-class AmbiCorder2 : public FileWvOut
+class AmbiCorder2 : public stk::FileWvOut
 {
-	AmbiCorder2(t_CKFLOAT fs);
+public:
+	AmbiCorder2(t_CKFLOAT fs) {};
 };
 
 #endif
