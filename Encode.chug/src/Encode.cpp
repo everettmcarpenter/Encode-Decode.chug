@@ -471,7 +471,7 @@ CK_DLL_MFUN(encode1_geti)
     Encode1 *encode_obj = (Encode1 *)OBJ_MEMBER_INT(SELF, encode1_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->channel_matrix[index];
+        RETURN->v_float = encode_obj->temp_matrix[index];
     }
 }
 
@@ -532,7 +532,7 @@ CK_DLL_MFUN(encode1_getSH)
     Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
     for (t_CKINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->temp_matrix[i]);
     }
     // set return value
     RETURN->v_object = (Chuck_Object*)coordinatearray;
@@ -643,7 +643,7 @@ CK_DLL_MFUN(encode2_geti)
     Encode2 *encode_obj = (Encode2 *)OBJ_MEMBER_INT(SELF, encode2_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->channel_matrix[index];
+        RETURN->v_float = encode_obj->temp_matrix[index];
     }
 }
 
@@ -689,7 +689,7 @@ CK_DLL_MFUN(encode2_getSH)
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
     for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->temp_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -800,7 +800,7 @@ CK_DLL_MFUN(encode3_geti)
     Encode3 *encode_obj = (Encode3 *)OBJ_MEMBER_INT(SELF, encode3_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->channel_matrix[index];
+        RETURN->v_float = encode_obj->temp_matrix[index];
     }
 }
 
@@ -846,7 +846,7 @@ CK_DLL_MFUN(encode3_getSH)
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
     for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->temp_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -957,7 +957,7 @@ CK_DLL_MFUN(encode4_geti)
     Encode4 *encode_obj = (Encode4 *)OBJ_MEMBER_INT(SELF, encode4_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->channel_matrix[index];
+        RETURN->v_float = encode_obj->temp_matrix[index];
     }
 }
 
@@ -1003,7 +1003,7 @@ CK_DLL_MFUN(encode4_getSH)
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
     for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->temp_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
@@ -1114,7 +1114,7 @@ CK_DLL_MFUN(encode5_geti)
     Encode5 *encode_obj = (Encode5 *)OBJ_MEMBER_INT(SELF, encode5_data_offset);
     if (encode_obj)
     {
-        RETURN->v_float = encode_obj->channel_matrix[index];
+        RETURN->v_float = encode_obj->temp_matrix[index];
     }
 }
 
@@ -1160,7 +1160,7 @@ CK_DLL_MFUN(encode5_getSH)
     Chuck_ArrayFloat *coordinatearray = (Chuck_ArrayFloat *)returnarray;
     for (t_CKUINT i = 0; i < encode_obj->channel_count; i++)
     {
-        API->object->array_float_push_back(coordinatearray, encode_obj->channel_matrix[i]);
+        API->object->array_float_push_back(coordinatearray, encode_obj->temp_matrix[i]);
     }
 
     RETURN->v_object = (Chuck_Object *)coordinatearray;
