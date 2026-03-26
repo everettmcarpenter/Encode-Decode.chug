@@ -1,11 +1,16 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-    echo "input arguments [ os ] include mac, linux, win32"
+    echo "input arguments [ os ] include mac-intel, mac-silicon, linux, win32"
     exit 1
 fi
 
 OS="$1"
+DELIVERY="$1"
+if [ $OS == "mac-intel" ] || [ $OS == "mac-silicon" ]; then
+    OS="mac"
+fi
+
 VERS="1.2.2"
 BUILD_DIR="current-builds"
 ROOT_DIR="$(pwd)"
@@ -28,7 +33,7 @@ build_and_move() {
     local chug="$2"
     
     echo "Building $chug"
-    
+
     cd "$path" || { echo "Failed to enter $path"; exit 1; }
 	pwd
     make clean
@@ -37,7 +42,7 @@ build_and_move() {
         cp "x64/Release/$chug" "$DEST_DIR/win/"
     else
 		pwd
-        cp "$chug" "$DEST_DIR/$OS/"
+        cp "$chug" "$DEST_DIR/$DELIVERY/"
     fi
     
     cd "$ROOT_DIR" || exit 1
