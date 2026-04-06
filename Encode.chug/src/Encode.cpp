@@ -18,6 +18,7 @@
 // declaration of chugin constructor
 // Encode1
 CK_DLL_CTOR(encode1_ctor);
+CK_DLL_CTOR(encode1_ctor2);
 CK_DLL_DTOR(encode1_dtor);
 CK_DLL_TICKF(encode1_tickf);
 CK_DLL_MFUN(encode1_geti);
@@ -135,6 +136,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A first order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode1_ctor);
+    QUERY->add_ctor(QUERY, encode1_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode1_dtor);
     QUERY->add_ugen_funcf(QUERY, encode1_tickf, NULL, 1, 4);
     // get SH
@@ -385,6 +390,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A fifth order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode1_ctor);
+    QUERY->add_ctor(QUERY, encode1_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode1_dtor);
     QUERY->add_ugen_funcf(QUERY, encode1_tickf, NULL, 1, 4);
     QUERY->add_mfun(QUERY, encode1_geti, "float", "sh");
@@ -448,6 +457,21 @@ CK_DLL_CTOR(encode1_ctor)
     // instantiate our internal c++ class representation
     Encode1 *encode_obj = new Encode1(API->vm->srate(VM));
     encode_obj->position(0.0, 0.0);
+
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, encode1_data_offset) = (t_CKINT)encode_obj;
+}
+
+CK_DLL_CTOR(encode1_ctor2)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, encode1_data_offset) = 0;
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+
+    // instantiate our internal c++ class representation
+    Encode1* encode_obj = new Encode1(API->vm->srate(VM));
+    encode_obj->position(azi, elev);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode1_data_offset) = (t_CKINT)encode_obj;
@@ -610,6 +634,21 @@ CK_DLL_CTOR(encode2_ctor)
     OBJ_MEMBER_INT(SELF, encode2_data_offset) = (t_CKINT)encode_obj;
 }
 
+CK_DLL_CTOR(encode2_ctor2)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, encode2_data_offset) = 0;
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+
+    // instantiate our internal c++ class representation
+    Encode2* encode_obj = new Encode2(API->vm->srate(VM));
+    encode_obj->position(azi, elev);
+
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, encode2_data_offset) = (t_CKINT)encode_obj;
+}
+
 // implementation for the destructor
 CK_DLL_DTOR(encode2_dtor)
 {
@@ -762,6 +801,21 @@ CK_DLL_CTOR(encode3_ctor)
     // instantiate our internal c++ class representation
     Encode3 *encode_obj = new Encode3(API->vm->srate(VM));
     encode_obj->position(0.0, 0.0);
+
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, encode3_data_offset) = (t_CKINT)encode_obj;
+}
+
+CK_DLL_CTOR(encode3_ctor2)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, encode3_data_offset) = 0;
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+
+    // instantiate our internal c++ class representation
+    Encode3* encode_obj = new Encode3(API->vm->srate(VM));
+    encode_obj->position(azi, elev);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode3_data_offset) = (t_CKINT)encode_obj;
@@ -924,6 +978,21 @@ CK_DLL_CTOR(encode4_ctor)
     OBJ_MEMBER_INT(SELF, encode4_data_offset) = (t_CKINT)encode_obj;
 }
 
+CK_DLL_CTOR(encode4_ctor2)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, encode4_data_offset) = 0;
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+
+    // instantiate our internal c++ class representation
+    Encode4* encode_obj = new Encode4(API->vm->srate(VM));
+    encode_obj->position(azi, elev);
+
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, encode4_data_offset) = (t_CKINT)encode_obj;
+}
+
 // implementation for the destructor
 CK_DLL_DTOR(encode4_dtor)
 {
@@ -1076,6 +1145,21 @@ CK_DLL_CTOR(encode5_ctor)
     // instantiate our internal c++ class representation
     Encode5 *encode_obj = new Encode5(API->vm->srate(VM));
     encode_obj->position(0.0, 0.0);
+
+    // store the pointer in the ChucK object member
+    OBJ_MEMBER_INT(SELF, encode5_data_offset) = (t_CKINT)encode_obj;
+}
+
+CK_DLL_CTOR(encode5_ctor2)
+{
+    // get the offset where we'll store our internal c++ class pointer
+    OBJ_MEMBER_INT(SELF, encode5_data_offset) = 0;
+    t_CKFLOAT azi = GET_NEXT_FLOAT(ARGS);
+    t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
+
+    // instantiate our internal c++ class representation
+    Encode5* encode_obj = new Encode5(API->vm->srate(VM));
+    encode_obj->position(azi, elev);
 
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT(SELF, encode5_data_offset) = (t_CKINT)encode_obj;

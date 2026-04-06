@@ -47,7 +47,9 @@ CK_DLL_CTOR(ordergain1_ctor);
 CK_DLL_CTOR(ordergain1_ctor2);
 CK_DLL_DTOR(ordergain1_dtor);
 CK_DLL_MFUN(ordergain1_setGain);
+CK_DLL_MFUN(ordergain1_setWeights);
 CK_DLL_MFUN(ordergain1_getGain);
+CK_DLL_MFUN(ordergain1_getWeights);
 CK_DLL_TICKF(ordergain1_tickf);
 t_CKINT ordergain1_data_offset = 0;
 
@@ -55,7 +57,9 @@ CK_DLL_CTOR(ordergain2_ctor);
 CK_DLL_CTOR(ordergain2_ctor2);
 CK_DLL_DTOR(ordergain2_dtor);
 CK_DLL_MFUN(ordergain2_setGain);
+CK_DLL_MFUN(ordergain2_setWeights);
 CK_DLL_MFUN(ordergain2_getGain);
+CK_DLL_MFUN(ordergain2_getWeights);
 CK_DLL_TICKF(ordergain2_tickf);
 t_CKINT ordergain2_data_offset = 0;
 
@@ -63,7 +67,9 @@ CK_DLL_CTOR(ordergain3_ctor);
 CK_DLL_CTOR(ordergain3_ctor2);
 CK_DLL_DTOR(ordergain3_dtor);
 CK_DLL_MFUN(ordergain3_setGain);
+CK_DLL_MFUN(ordergain3_setWeights);
 CK_DLL_MFUN(ordergain3_getGain);
+CK_DLL_MFUN(ordergain3_getWeights);
 CK_DLL_TICKF(ordergain3_tickf);
 t_CKINT ordergain3_data_offset = 0;
 
@@ -71,7 +77,9 @@ CK_DLL_CTOR(ordergain4_ctor);
 CK_DLL_CTOR(ordergain4_ctor2);
 CK_DLL_DTOR(ordergain4_dtor);
 CK_DLL_MFUN(ordergain4_setGain);
+CK_DLL_MFUN(ordergain4_setWeights);
 CK_DLL_MFUN(ordergain4_getGain);
+CK_DLL_MFUN(ordergain4_getWeights);
 CK_DLL_TICKF(ordergain4_tickf);
 t_CKINT ordergain4_data_offset = 0;
 
@@ -79,7 +87,9 @@ CK_DLL_CTOR(ordergain5_ctor);
 CK_DLL_CTOR(ordergain5_ctor2);
 CK_DLL_DTOR(ordergain5_dtor);
 CK_DLL_MFUN(ordergain5_setGain);
+CK_DLL_MFUN(ordergain5_setWeights);
 CK_DLL_MFUN(ordergain5_getGain);
+CK_DLL_MFUN(ordergain5_getWeights);
 CK_DLL_TICKF(ordergain5_tickf);
 t_CKINT ordergain5_data_offset = 0;
 
@@ -118,11 +128,16 @@ CK_DLL_QUERY(OrderGain)
     QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain1_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain1_tickf, NULL, 4, 4);
-    QUERY->add_mfun(QUERY, ordergain1_setGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain1_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain1_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weighting.");
+    QUERY->add_mfun(QUERY, ordergain1_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
+    QUERY->add_mfun(QUERY, ordergain1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
     ordergain1_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
@@ -134,11 +149,16 @@ CK_DLL_QUERY(OrderGain)
     QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain2_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain2_tickf, NULL, 9, 9);
-    QUERY->add_mfun(QUERY, ordergain2_setGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain2_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain2_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain2_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weights.");
+    QUERY->add_mfun(QUERY, ordergain2_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
+    QUERY->add_mfun(QUERY, ordergain2_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
     ordergain2_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
@@ -150,11 +170,16 @@ CK_DLL_QUERY(OrderGain)
     QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain3_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain3_tickf, NULL, 16, 16);
-    QUERY->add_mfun(QUERY, ordergain3_setGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain3_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain3_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain3_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weights.");
+    QUERY->add_mfun(QUERY, ordergain3_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
+    QUERY->add_mfun(QUERY, ordergain3_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
     ordergain3_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
@@ -166,11 +191,16 @@ CK_DLL_QUERY(OrderGain)
     QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain4_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain4_tickf, NULL, 25, 25);
-    QUERY->add_mfun(QUERY, ordergain4_setGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain4_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain4_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain4_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weights.");
+    QUERY->add_mfun(QUERY, ordergain4_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
+    QUERY->add_mfun(QUERY, ordergain4_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
     ordergain4_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
@@ -182,11 +212,16 @@ CK_DLL_QUERY(OrderGain)
     QUERY->doc_func(QUERY, "Set gain via constructor.");
     QUERY->add_dtor(QUERY, ordergain5_dtor);
     QUERY->add_ugen_funcf(QUERY, ordergain5_tickf, NULL, 36, 36);
-    QUERY->add_mfun(QUERY, ordergain5_setGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain5_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain5_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain4_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weights.");
+    QUERY->add_mfun(QUERY, ordergain5_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
+    QUERY->add_mfun(QUERY, ordergain5_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
     ordergain5_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
@@ -196,18 +231,23 @@ CK_DLL_QUERY(OrderGain)
     //========================================
     QUERY->begin_class(QUERY, "OrderGainN", "UGen");
     QUERY->doc_class(QUERY, "BFormat gain adjustment, allows easy management and mixing of BFormat streams.");
-    QUERY->add_ctor(QUERY, ordergain5_ctor);
-    QUERY->add_ctor(QUERY, ordergain5_ctor2);
+    QUERY->add_ctor(QUERY, ordergain1_ctor);
+    QUERY->add_ctor(QUERY, ordergain1_ctor2);
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain via constructor.");
-    QUERY->add_dtor(QUERY, ordergain5_dtor);
-    QUERY->add_ugen_funcf(QUERY, ordergain5_tickf, NULL, 36, 36);
-    QUERY->add_mfun(QUERY, ordergain5_setGain, "float", "gain");
+    QUERY->add_dtor(QUERY, ordergain1_dtor);
+    QUERY->add_ugen_funcf(QUERY, ordergain1_tickf, NULL, 4, 4);
+    QUERY->add_mfun(QUERY, ordergain1_setGain, "void", "volume");
     QUERY->add_arg(QUERY, "float", "gain");
     QUERY->doc_func(QUERY, "Set gain.");
-    QUERY->add_mfun(QUERY, ordergain5_getGain, "float", "gain");
+    QUERY->add_mfun(QUERY, ordergain1_setWeights, "void", "weights");
+    QUERY->add_arg(QUERY, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Set weighting.");
+    QUERY->add_mfun(QUERY, ordergain1_getGain, "float", "volume");
     QUERY->doc_func(QUERY, "Get gain.");
-    ordergain5_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
+    QUERY->add_mfun(QUERY, ordergain1_getWeights, "float[]", "weights");
+    QUERY->doc_func(QUERY, "Get current weighting scheme.");
+    ordergain1_data_offset = QUERY->add_mvar(QUERY, "int", "@bf_data", false);
     QUERY->end_class(QUERY);
 
     // wasn't that a breeze?
@@ -284,6 +324,16 @@ CK_DLL_MFUN(ordergain1_setGain)
     bf1_obj->setGain(arg1);
 }
 
+// example implementation for setter
+CK_DLL_MFUN(ordergain1_setWeights)
+{
+    // get our c++ class pointer
+    OrderGain1* bf1_obj = (OrderGain1*)OBJ_MEMBER_INT(SELF, ordergain1_data_offset);
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // call setParam() and set the return value
+    bf1_obj->setWeights(weights, API);
+}
+
 // example implementation for getter
 CK_DLL_MFUN(ordergain1_getGain)
 {
@@ -292,6 +342,20 @@ CK_DLL_MFUN(ordergain1_getGain)
 
     // call getParam() and set the return value
     RETURN->v_float = bf1_obj->getGain();
+}
+
+CK_DLL_MFUN(ordergain1_getWeights)
+{
+    OrderGain1* bf1_obj = (OrderGain1*)OBJ_MEMBER_INT(SELF, ordergain1_data_offset);
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKUINT i = 0; i < bf1_obj->channel_count; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, bf1_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 // implementation for the default constructor
@@ -364,6 +428,15 @@ CK_DLL_MFUN(ordergain2_setGain)
     bf2_obj->setGain(arg2);
 }
 
+CK_DLL_MFUN(ordergain2_setWeights)
+{
+    // get our c++ class pointer
+    OrderGain2* bf1_obj = (OrderGain2*)OBJ_MEMBER_INT(SELF, ordergain2_data_offset);
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // call setParam() and set the return value
+    bf1_obj->setWeights(weights, API);
+}
+
 // example implementation for getter
 CK_DLL_MFUN(ordergain2_getGain)
 {
@@ -372,6 +445,20 @@ CK_DLL_MFUN(ordergain2_getGain)
 
     // call getParam() and set the return value
     RETURN->v_float = bf2_obj->getGain();
+}
+
+CK_DLL_MFUN(ordergain2_getWeights)
+{
+    OrderGain2* bf2_obj = (OrderGain2*)OBJ_MEMBER_INT(SELF, ordergain2_data_offset);
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKUINT i = 0; i < bf2_obj->channel_count; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, bf2_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 // implementation for the default constructor
@@ -444,6 +531,16 @@ CK_DLL_MFUN(ordergain3_setGain)
     bf3_obj->setGain(arg3);
 }
 
+// example implementation for setter
+CK_DLL_MFUN(ordergain3_setWeights)
+{
+    // get our c++ class pointer
+    OrderGain3* bf1_obj = (OrderGain3*)OBJ_MEMBER_INT(SELF, ordergain3_data_offset);
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // call setParam() and set the return value
+    bf1_obj->setWeights(weights, API);
+}
+
 // example implementation for getter
 CK_DLL_MFUN(ordergain3_getGain)
 {
@@ -452,6 +549,20 @@ CK_DLL_MFUN(ordergain3_getGain)
 
     // call getParam() and set the return value
     RETURN->v_float = bf3_obj->getGain();
+}
+
+CK_DLL_MFUN(ordergain3_getWeights)
+{
+    OrderGain3* bf3_obj = (OrderGain3*)OBJ_MEMBER_INT(SELF, ordergain3_data_offset);
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKUINT i = 0; i < bf3_obj->channel_count; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, bf3_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 // implementation for the default constructor
@@ -524,6 +635,15 @@ CK_DLL_MFUN(ordergain4_setGain)
     bf4_obj->setGain(arg4);
 }
 
+CK_DLL_MFUN(ordergain4_setWeights)
+{
+    // get our c++ class pointer
+    OrderGain4* bf1_obj = (OrderGain4*)OBJ_MEMBER_INT(SELF, ordergain4_data_offset);
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // call setParam() and set the return value
+    bf1_obj->setWeights(weights, API);
+}
+
 // example implementation for getter
 CK_DLL_MFUN(ordergain4_getGain)
 {
@@ -532,6 +652,20 @@ CK_DLL_MFUN(ordergain4_getGain)
 
     // call getParam() and set the return value
     RETURN->v_float = bf4_obj->getGain();
+}
+
+CK_DLL_MFUN(ordergain4_getWeights)
+{
+    OrderGain4* bf4_obj = (OrderGain4*)OBJ_MEMBER_INT(SELF, ordergain4_data_offset);
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKUINT i = 0; i < bf4_obj->channel_count; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, bf4_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
 
 // implementation for the default constructor
@@ -604,6 +738,15 @@ CK_DLL_MFUN(ordergain5_setGain)
     bf5_obj->setGain(arg5);
 }
 
+CK_DLL_MFUN(ordergain5_setWeights)
+{
+    // get our c++ class pointer
+    OrderGain5* bf1_obj = (OrderGain5*)OBJ_MEMBER_INT(SELF, ordergain5_data_offset);
+    Chuck_ArrayFloat* weights = (Chuck_ArrayFloat*)GET_NEXT_OBJECT(ARGS);
+    // call setParam() and set the return value
+    bf1_obj->setWeights(weights, API);
+}
+
 // example implementation for getter
 CK_DLL_MFUN(ordergain5_getGain)
 {
@@ -612,4 +755,18 @@ CK_DLL_MFUN(ordergain5_getGain)
 
     // call getParam() and set the return value
     RETURN->v_float = bf5_obj->getGain();
+}
+
+CK_DLL_MFUN(ordergain5_getWeights)
+{
+    OrderGain5* bf5_obj = (OrderGain5*)OBJ_MEMBER_INT(SELF, ordergain5_data_offset);
+    // Create a float[] array
+    Chuck_DL_Api::Object returnarray = API->object->create(SHRED, API->type->lookup(VM, "float[]"), false);
+    Chuck_ArrayFloat* coordinatearray = (Chuck_ArrayFloat*)returnarray;
+    for (t_CKUINT i = 0; i < bf5_obj->channel_count; i++)
+    {
+        API->object->array_float_push_back(coordinatearray, bf5_obj->weights[i]);
+    }
+
+    RETURN->v_object = (Chuck_Object*)coordinatearray;
 }
