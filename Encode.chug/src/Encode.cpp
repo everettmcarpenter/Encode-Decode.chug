@@ -35,6 +35,7 @@ CK_DLL_MFUN(encode1_setZeni);
 t_CKINT encode1_data_offset = 0;
 // Encode2
 CK_DLL_CTOR(encode2_ctor);
+CK_DLL_CTOR(encode2_ctor2);
 CK_DLL_DTOR(encode2_dtor);
 CK_DLL_TICKF(encode2_tickf);
 CK_DLL_MFUN(encode2_geti);
@@ -51,6 +52,7 @@ CK_DLL_MFUN(encode2_setZeni);
 t_CKINT encode2_data_offset = 0;
 // Encode3
 CK_DLL_CTOR(encode3_ctor);
+CK_DLL_CTOR(encode3_ctor2);
 CK_DLL_DTOR(encode3_dtor);
 CK_DLL_TICKF(encode3_tickf);
 CK_DLL_MFUN(encode3_geti);
@@ -67,6 +69,7 @@ CK_DLL_MFUN(encode3_setZeni);
 t_CKINT encode3_data_offset = 0;
 // Encode4
 CK_DLL_CTOR(encode4_ctor);
+CK_DLL_CTOR(encode4_ctor2);
 CK_DLL_DTOR(encode4_dtor);
 CK_DLL_TICKF(encode4_tickf);
 CK_DLL_MFUN(encode4_geti);
@@ -83,6 +86,7 @@ CK_DLL_MFUN(encode4_setZeni);
 t_CKINT encode4_data_offset = 0;
 // Encode5
 CK_DLL_CTOR(encode5_ctor);
+CK_DLL_CTOR(encode5_ctor2);
 CK_DLL_DTOR(encode5_dtor);
 CK_DLL_TICKF(encode5_tickf);
 CK_DLL_MFUN(encode5_geti);
@@ -198,6 +202,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A second order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode2_ctor);
+    QUERY->add_ctor(QUERY, encode2_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode2_dtor);
     QUERY->add_ugen_funcf(QUERY, encode2_tickf, NULL, 1, 9);
     QUERY->add_mfun(QUERY, encode2_geti, "float", "sh");
@@ -246,6 +254,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A third order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode3_ctor);
+    QUERY->add_ctor(QUERY, encode3_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode3_dtor);
     QUERY->add_ugen_funcf(QUERY, encode3_tickf, NULL, 1, 16);
     QUERY->add_mfun(QUERY, encode3_geti, "float", "sh");
@@ -294,6 +306,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A fourth order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode4_ctor);
+    QUERY->add_ctor(QUERY, encode4_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode4_dtor);
     QUERY->add_ugen_funcf(QUERY, encode4_tickf, NULL, 1, 25);
     QUERY->add_mfun(QUERY, encode4_geti, "float", "sh");
@@ -342,6 +358,10 @@ CK_DLL_QUERY(Encode)
     QUERY->doc_class(QUERY, "A fifth order ambisonic virtual source encoder.");
     // register the destructor (probably no need to change)
     QUERY->add_ctor(QUERY, encode5_ctor);
+    QUERY->add_ctor(QUERY, encode5_ctor2);
+    QUERY->add_arg(QUERY, "float", "azimuth");
+    QUERY->add_arg(QUERY, "float", "elevation");
+    QUERY->doc_func(QUERY, "Initialize encoder with an azimuth and elevation.");
     QUERY->add_dtor(QUERY, encode5_dtor);
     QUERY->add_ugen_funcf(QUERY, encode5_tickf, NULL, 1, 36);
     QUERY->add_mfun(QUERY, encode5_geti, "float", "sh");
