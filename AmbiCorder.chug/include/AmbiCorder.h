@@ -1,31 +1,55 @@
 #ifndef AMBICORDER_H
 #define AMBICORDER_H
 
-// stk includes
-#include "WvOut.h"
-#include "FileWvOut.h"
-#include "FileWrite.h"
-#include "Stk.h"
 #include "chugin.h"
+#include <sndfile.h>
 
-class AmbiCorder1 : public stk::FileWvOut
+template <const unsigned n_order>
+class AmbiCorder
 {
 public:
-	AmbiCorder1(t_CKFLOAT fs)
+	AmbiCorder( t_CKFLOAT fs )
 	{
 	};
-	void tick(SAMPLE* in, SAMPLE* out, unsigned nframes)
+
+	void tick( SAMPLE* in, SAMPLE* out, unsigned nframes )
 	{
 
 	}
 
-	stk:StkFrames* passAlong;
-};
+	int openFile( const char* path )
+	{
+		// attempt to read 
+		myFile = sf_open( path, // where
+						  SFM_WRITE, // only write
+						  myFileInformation ); // tell me what it is
+		// if we failed
+		if( !myFileInformation ) { wipeInternalFile(); // play it safe
+								   return 1; }
+		// otherwise . . . 
+		else if ( myFile && myFileInformation ) { return 0; }
+	}
 
-class AmbiCorder2 : public stk::FileWvOut
-{
-public:
-	AmbiCorder2(t_CKFLOAT fs) {};
+	void wipeInternalFile() { delete myFile; // delete
+							  delete myFileInformation;
+							  myFile = nullptr; // cleanup
+							  myFileInformation = nullptr; }
+
+	int samplerate() { if( myFileInformation ) return myFileInformation->samplerate;
+					   else return 0; }
+
+	int channels() { if( myFileInformation ) return myFileInformation->channels;
+					 else return 0;}
+
+
+	// my order
+	unsigned order = n_order;
+	// how many channels I need
+	unsigned nchannels = (order + 1) * (order + 1);
+	// pointer to my eventual file
+	FILE* myFile;
+	// pointer to my struct describing the file above
+	SF_INFO* myFileInformation;
 };
 
 #endif

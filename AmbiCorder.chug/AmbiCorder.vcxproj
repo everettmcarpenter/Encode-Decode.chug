@@ -19,17 +19,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AmbiCorder.cpp" />
-    <ClCompile Include="src\FileWrite.cpp" />
-    <ClCompile Include="src\FileWvOut.cpp" />
-    <ClCompile Include="src\Stk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AmbiCorder.h" />
     <ClInclude Include="include\chugin.h" />
-    <ClInclude Include="include\FileWrite.h" />
-    <ClInclude Include="include\FileWvOut.h" />
-    <ClInclude Include="include\Stk.h" />
-    <ClInclude Include="include\WvOut.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F5B57519-99E0-E91A-7E59-C97E8FE73DB7}</ProjectGuid>
@@ -119,6 +112,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;AMBICORDER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/libsndfile/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

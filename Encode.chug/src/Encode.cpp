@@ -834,7 +834,7 @@ CK_DLL_CTOR(encode3_ctor2)
     t_CKFLOAT elev = GET_NEXT_FLOAT(ARGS);
 
     // instantiate our internal c++ class representation
-    Encode3* encode_obj = new Encode3(API->vm->srate(VM));
+    Encode3* encode_obj = new Encode3(API->vm->srate(VM)); 
     encode_obj->position(azi, elev);
 
     // store the pointer in the ChucK object member
