@@ -31,9 +31,12 @@ public:
 		for (int i = 0; i < n_channels; i++)
 		{
 			delete[] SpeakSH[i];
+			SpeakSH[i] = nullptr;
 		}
 		delete[] SpeakSH;
+		SpeakSH = nullptr;
 		delete[] weights;
+		weights = nullptr;
 	}
 
 	virtual void tick(SAMPLE* in, SAMPLE* out, unsigned nframes) = 0;
