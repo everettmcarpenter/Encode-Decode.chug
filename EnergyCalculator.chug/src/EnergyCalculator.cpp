@@ -36,7 +36,8 @@
 //-----------------------------------------------------------------------------
 
 // include chugin header
-#include "chugin.h"
+#include "../include/chugin.h"
+#include "../include/EnergyCalculator.h"
 
 // general includes
 #include <iostream>
@@ -52,7 +53,7 @@ CK_DLL_MFUN( energycalculator1_setParam );
 CK_DLL_MFUN( energycalculator1_getParam );
 
 // for chugins extending UGen, this is mono synthesis function for 1 sample
-CK_DLL_TICKF( energycalculator1_tickf );
+CK_DLL_TICKF( energycalculator1_tick );
 
 // this is a special offset reserved for chugin internal data
 t_CKINT energycalculator1_data_offset = 0;
@@ -105,7 +106,7 @@ CK_DLL_QUERY( EnergyCalculator )
 
     // for UGens only: add tick function
     // NOTE a non-UGen class should remove or comment out this next line
-    QUERY->add_ugen_funcf( QUERY, energycalculator1_tickf, NULL, 4, 4 );
+    QUERY->add_ugen_funcf( QUERY, energycalculator1_tick, NULL, 4, 4 );
     // NOTE: if this is to be a UGen with more than 1 channel,
     // e.g., a multichannel UGen -- will need to use add_ugen_funcf()
     // and declare a tickf function using CK_DLL_TICKF
@@ -140,7 +141,7 @@ CK_DLL_CTOR( energycalculator1_ctor )
     OBJ_MEMBER_INT( SELF, energycalculator1_data_offset ) = 0;
     
     // instantiate our internal c++ class representation
-    EnergyCalculator * ec_obj = new EnergyCalculator( API->vm->srate(VM) );
+    EnergyCalculator * ec_obj = new EnergyCalculator();
     
     // store the pointer in the ChucK object member
     OBJ_MEMBER_INT( SELF, energycalculator1_data_offset ) = (t_CKINT)ec_obj;
@@ -160,13 +161,13 @@ CK_DLL_DTOR( energycalculator1_dtor )
 
 
 // implementation for tick function (relevant only for UGens)
-CK_DLL_TICK( energycalculator1_tick )
+CK_DLL_TICKF( energycalculator1_tick )
 {
     // get our c++ class pointer
     EnergyCalculator * ec_obj = (EnergyCalculator *)OBJ_MEMBER_INT(SELF, energycalculator1_data_offset);
  
     // invoke our tick function; store in the magical out variable
-    if( ec_obj ) *out = ec_obj->tick( in );
+    // if( ec_obj ) *out = ec_obj->tick( in );
 
     // yes
     return TRUE;
@@ -185,7 +186,7 @@ CK_DLL_MFUN( energycalculator1_setParam )
     t_CKFLOAT arg1 = GET_NEXT_FLOAT( ARGS );
     
     // call setParam() and set the return value
-    RETURN->v_float = ec_obj->setParam( arg1 );
+    RETURN->v_float = 0.0;
 }
 
 
@@ -196,5 +197,5 @@ CK_DLL_MFUN(energycalculator1_getParam)
     EnergyCalculator * ec_obj = (EnergyCalculator *)OBJ_MEMBER_INT( SELF, energycalculator1_data_offset );
 
     // call getParam() and set the return value
-    RETURN->v_float = ec_obj->getParam();
+    RETURN->v_float = 0.0;
 }

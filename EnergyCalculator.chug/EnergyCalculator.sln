@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnergyCalculator", "EnergyCalculator.vcxproj", "{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Debug|x64.ActiveCfg = Debug|x64
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Debug|x64.Build.0 = Debug|x64
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Debug|x86.ActiveCfg = Debug|Win32
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Debug|x86.Build.0 = Debug|Win32
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Release|x64.ActiveCfg = Release|x64
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Release|x64.Build.0 = Release|x64
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Release|x86.ActiveCfg = Release|Win32
+		{ECB09FAD-B2F4-6446-A288-4DD8DCED8353}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7EDD5F1D-DD5C-458D-8342-07D0697C1B9F}
+	EndGlobalSection
+EndGlobal

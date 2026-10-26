@@ -1,6 +1,6 @@
 /*
  ==============================================================================
- This file is part of the IEM plug-in suite.
+ This file is part of the IEM plug-in suite. ( HACKED BY EMC )
  Author: Daniel Rudrich
  Copyright (c) 2017 - Institute of Electronic Music and Acoustics (IEM)
  https://iem.at
@@ -21,6 +21,8 @@
  */
 
 #pragma once
+
+#include "emc-vectorSupplement.h"
 
 const float maxre0 = 1.0f;
 
@@ -260,25 +262,25 @@ inline void multiplyMaxRE (const int N, float* data)
         case 0:
             break;
         case 1:
-            juce::FloatVectorOperations::multiply (data, maxre1, 4);
+            multiplyVectorByVector(data, maxre1, 4);
             break;
         case 2:
-            juce::FloatVectorOperations::multiply (data, maxre2, 9);
+            multiplyVectorByVector(data, maxre2, 9);
             break;
         case 3:
-            juce::FloatVectorOperations::multiply (data, maxre3, 16);
+            multiplyVectorByVector(data, maxre3, 16);
             break;
         case 4:
-            juce::FloatVectorOperations::multiply (data, maxre4, 25);
+            multiplyVectorByVector(data, maxre4, 25);
             break;
         case 5:
-            juce::FloatVectorOperations::multiply (data, maxre5, 36);
+            multiplyVectorByVector(data, maxre5, 36);
             break;
         case 6:
-            juce::FloatVectorOperations::multiply (data, maxre6, 47);
+            multiplyVectorByVector(data, maxre6, 47);
             break;
         case 7:
-            juce::FloatVectorOperations::multiply (data, maxre7, 64);
+            multiplyVectorByVector(data, maxre7, 64);
             break;
     }
 }
@@ -291,25 +293,25 @@ inline void copyMaxRE (const int N, float* data)
             *data = 1.0f;
             break;
         case 1:
-            juce::FloatVectorOperations::copy (data, maxre1, 4);
+            copyVector(data, maxre1, 4);
             break;
         case 2:
-            juce::FloatVectorOperations::copy (data, maxre2, 9);
+            copyVector(data, maxre2, 9);
             break;
         case 3:
-            juce::FloatVectorOperations::copy (data, maxre3, 16);
+            copyVector(data, maxre3, 16);
             break;
         case 4:
-            juce::FloatVectorOperations::copy (data, maxre4, 25);
+            copyVector(data, maxre4, 25);
             break;
         case 5:
-            juce::FloatVectorOperations::copy (data, maxre5, 36);
+            copyVector(data, maxre5, 36);
             break;
         case 6:
-            juce::FloatVectorOperations::copy (data, maxre6, 47);
+            copyVector(data, maxre6, 47);
             break;
         case 7:
-            juce::FloatVectorOperations::copy (data, maxre7, 64);
+            copyVector(data, maxre7, 64);
             break;
     }
 }
