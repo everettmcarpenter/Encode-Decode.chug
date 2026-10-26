@@ -2,6 +2,7 @@
 #define ENERGYCALC_H
 
 #include "chugin.h"
+#include <math.h>
 #include "efficientSHvanilla.h"
 #include "emc-vectorSupplement.h" // this is included with the above file but for the sake of clarity i am including it here
 #include "hammerAitovSample.h"
@@ -23,23 +24,23 @@ public:
         // columns
         decoderMatrix = new float*[nSamplePoints];
         // rows
-        for( int i = 0; i < nSamplePoints; i++ )
+        for( unsigned int i = 0; i < nSamplePoints; i++ )
             decoderMatrix[i] = new float[maximumSH];
         // rms
         rms = new float[nSamplePoints];
         // fill with zeros ( i know there's a loop just above that does this, we're in the constructor )
-        for( int i = 0; i < nSamplePoints; i++ )
+        for( unsigned int i = 0; i < nSamplePoints; i++ )
             rms[i] = 0.0f;
         // weights
         weights = new float[maximumSH];
         
         // calc
-        for( int c = 0; c < nSamplePoints; c++ ) // columns decoderMatrix[c][?]
+        for( unsigned int c = 0; c < nSamplePoints; c++ ) // columns decoderMatrix[c][?]
         {
             // evaluate harmonics
             SHEval( maxOrder, hammerAitovSampleX[c], hammerAitovSampleY[c], hammerAitovSampleZ[c], decoderMatrix[c] );
             // undo correction
-            for( int r = 0; r < maximumSH; r++ )
+            for( unsigned int r = 0; r < maximumSH; r++ )
             {
                 // undo seventh order correction
                 decoderMatrix[c][r] = decoderMatrix[c][r] * ( 1.0 / decodeCorrection( 7 ) );
@@ -53,7 +54,7 @@ public:
     ~EnergyCalculator()
     {
         // backwards, rows first
-        for( int i = 0; i < nSamplePoints; i++ )
+        for( unsigned int i = 0; i < nSamplePoints; i++ )
             CK_SAFE_DELETE_ARRAY( decoderMatrix[i] );
         // columns next
         CK_SAFE_DELETE_ARRAY( decoderMatrix );
@@ -94,10 +95,10 @@ public:
             // copy entire signal
             copyVector( sampledSignal, in, bufferLength );
             // cycle through frames
-            for( int f = 0; f < nframes; f++ )
+            for( unsigned int f = 0; f < nframes; f++ )
             {
                 // cycle through channels
-                for( int c = 0; c < inChannels; c++ )
+                for( unsigned int c = 0; c < inChannels; c++ )
                 {
                     // decode !
                     sampledSignal[f * inChannels + c] = in[f * inChannels + c] * weights[c] * decoderMatrix[point][c];
@@ -106,7 +107,7 @@ public:
 
             // calculate rms of the point
             float summation = 0.f;
-            for( int r = 0; r < nframes * inChannels; r++ )
+            for( unsigned int r = 0; r < nframes * inChannels; r++ )
             {
                 float sample = sampledSignal[r];
                 summation += sample * sample; // squared sum
@@ -138,13 +139,22 @@ public:
     void getPoint( float* location, unsigned int point )
     {
         if( point >= nSamplePoints )
-            return;
+        {
+        	return;
+        }
         else // if we're good
         {
             location[0] = hammerAitovSampleX[point];
             location[1] = hammerAitovSampleY[point];
             location[2] = hammerAitovSampleZ[point];
         }
+    }
+
+    // get rms
+    // rmsBuffer - should be of size nSamplePoints
+    void getRMS( float* rmsBuffer )
+    {
+    	copyVector( rmsBuffer, rms, nSamplePoints );
     }
 
 private:
