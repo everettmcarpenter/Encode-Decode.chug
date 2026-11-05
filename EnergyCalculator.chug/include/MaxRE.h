@@ -277,7 +277,7 @@ inline void multiplyMaxRE (const int N, float* data)
             multiplyVectorByVector(data, maxre5, 36);
             break;
         case 6:
-            multiplyVectorByVector(data, maxre6, 47);
+            multiplyVectorByVector(data, maxre6, 49);
             break;
         case 7:
             multiplyVectorByVector(data, maxre7, 64);
@@ -308,7 +308,7 @@ inline void copyMaxRE (const int N, float* data)
             copyVector(data, maxre5, 36);
             break;
         case 6:
-            copyVector(data, maxre6, 47);
+            copyVector(data, maxre6, 49);
             break;
         case 7:
             copyVector(data, maxre7, 64);

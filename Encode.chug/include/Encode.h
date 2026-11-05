@@ -67,7 +67,7 @@ public:
             }
         }
 
-        memset(out, 0, sizeof(SAMPLE) * channel_count * nframes); // clear
+        memset( out, 0, sizeof(SAMPLE) * channel_count * nframes ); // clear
 
         for (int f = 0; f < nframes; f++)
         {

@@ -2,50 +2,65 @@
 #define ENERGYCALC_H
 
 #include "chugin.h"
-#include <math.h>
+#include <iostream>
+#include <cmath>
 #include "efficientSHvanilla.h"
 #include "emc-vectorSupplement.h" // this is included with the above file but for the sake of clarity i am including it here
 #include "hammerAitovSample.h"
 #include "MaxRE.h"
 
-#define nSamplePoints 426
 #define maxOrder 7
-#define maximumSH ( maxOrder + 1 ) * ( maxOrder + 1 )
+#define maxInputChannels ( maxOrder + 1 ) * ( maxOrder + 1 )
 
 class EnergyCalculator
 {
 public:
     // create all the data
-    EnergyCalculator( unsigned int sampleRate, unsigned int nframes )
+    EnergyCalculator( unsigned int sampleRate, unsigned int bufsize )
     {
         // set
         fs = sampleRate;
-        bs = nframes;
+        bs = bufsize;
+        
         // columns
         decoderMatrix = new float*[nSamplePoints];
+        
         // rows
         for( unsigned int i = 0; i < nSamplePoints; i++ )
-            decoderMatrix[i] = new float[maximumSH];
+            decoderMatrix[i] = new float[maxInputChannels];
+        
         // rms
         rms = new float[nSamplePoints];
         // fill with zeros ( i know there's a loop just above that does this, we're in the constructor )
         for( unsigned int i = 0; i < nSamplePoints; i++ )
             rms[i] = 0.0f;
-        // weights
-        weights = new float[maximumSH];
         
+        // this is somewhat of a temp variable where we will perform some math to derive the information we need
+        sampledSignal = new float[bs];
+
+        // weights
+        weights = new float[maxInputChannels];
+        
+        // time constant
+        this->setTimeConstant( 500.0, bs, maxInputChannels );
+
         // calc
-        for( unsigned int c = 0; c < nSamplePoints; c++ ) // columns decoderMatrix[c][?]
+        for( unsigned int p = 0; p < nSamplePoints; p++ ) // columns decoderMatrix[c][?]
         {
             // evaluate harmonics
-            SHEval( maxOrder, hammerAitovSampleX[c], hammerAitovSampleY[c], hammerAitovSampleZ[c], decoderMatrix[c] );
+            SHEval( maxOrder, // i think our overload is coming from how we rewrote this function
+                    hammerAitovSampleX[p],
+                    hammerAitovSampleY[p],
+                    hammerAitovSampleZ[p],
+                    decoderMatrix[p],
+                    false );
+            // convert to n3d
+            multiplyVectorByVector( decoderMatrix[p], sn3d2n3d, maxInputChannels );
             // undo correction
-            for( unsigned int r = 0; r < maximumSH; r++ )
+            for( unsigned int r = 0; r < maxInputChannels; r++ )
             {
                 // undo seventh order correction
-                decoderMatrix[c][r] = decoderMatrix[c][r] * ( 1.0 / decodeCorrection( 7 ) );
-                // conver to n3d
-                multiplyVectorByVector( decoderMatrix[c], sn3d2n3d, 64 );
+                decoderMatrix[p][r] *= ( 1.0 / decodeCorrection( 7 ) );
             }
         }
     };
@@ -58,6 +73,8 @@ public:
             CK_SAFE_DELETE_ARRAY( decoderMatrix[i] );
         // columns next
         CK_SAFE_DELETE_ARRAY( decoderMatrix );
+        // delete sampledSignal
+        CK_SAFE_DELETE_ARRAY( sampledSignal );
         // rms
         CK_SAFE_DELETE_ARRAY( rms );
         // weights
@@ -68,61 +85,50 @@ public:
     // out - a vector of length nSamplePoints
     // incomingOrder - the order at which the input stream is operating
     // nframes - the number of frames that incoming buffer holds
-    void tick( float* in, float* out, unsigned int incomingOrder, unsigned int nframes )
+    void tick( float* in, unsigned int nframes )
     {
         // for ambiguity, we'll let the caller specify the incoming order
-        unsigned int inChannels = ( incomingOrder + 1 ) * ( incomingOrder + 1 ); 
+        unsigned int inChannels = ( myOrder + 1 ) * ( myOrder + 1 );
         
-        // take a guess
-        unsigned int bufferLength = nframes * inChannels;
-        
-        // this is somewhat of a temp variable where we will perform some math to derive the information we need
-        float* sampledSignal = new float[bufferLength];
-
-        // retrieve our weights ( weights is of length maximumSH but we will ignore entries which are > incoming order's SH count
-        copyMaxRE( incomingOrder, weights );
-
-        // multiply the maxRE and decode corrections
-        multiplyVectorByScalar( weights, maxRECorrection[incomingOrder] * decodeCorrection( incomingOrder ), maximumSH );
-
+        // it is important to note we are creating a buffer of nframes * maxSH length but will only use nframes * inChannels
         // we need this
         float oneMinusTC = 1.0f - timeConstant;
 
         // time to increase our computation time
-        // it is important to know that point 0 is whatever hammerAitovSampleN[i] is
+        // it is important to know that point i is whatever hammerAitovSampleN[i] is
         for( int point = 0; point < nSamplePoints; point++ )
         {
-            // copy entire signal
-            copyVector( sampledSignal, in, bufferLength );
             // cycle through frames
             for( unsigned int f = 0; f < nframes; f++ )
             {
-                // cycle through channels
-                for( unsigned int c = 0; c < inChannels; c++ )
+                // copy the 0th channel for this frame, and decode & weight it
+                sampledSignal[f] = in[f * maxInputChannels + 0] * weights[0] * decoderMatrix[point][0];
+                // cycle only through the channels we're using ( we get 64, but might only be using 16 or 9, etc )
+                for( unsigned int c = 1; c < inChannels; c++ ) // c++!
                 {
                     // decode !
-                    sampledSignal[f * inChannels + c] = in[f * inChannels + c] * weights[c] * decoderMatrix[point][c];
+                    sampledSignal[f] += in[f * maxInputChannels + c] * weights[c] * decoderMatrix[point][c];
                 }
             }
 
             // calculate rms of the point
             float summation = 0.f;
-            for( unsigned int r = 0; r < nframes * inChannels; r++ )
+            for( unsigned int r = 0; r < nframes; r++ )
             {
-                float sample = sampledSignal[r];
+                const float sample = sampledSignal[r];
                 summation += sample * sample; // squared sum
             }
 
             // time averaged rms
-            rms[point] = timeConstant * rms[point] + oneMinusTC * std::sqrt( summation / bufferLength );
+            rms[point] = timeConstant * rms[point] + oneMinusTC * std::sqrt( summation / nframes );
         }
     }
 
     // set time constant
-    void setTimeConstant( float RMStimeConstant, unsigned int nframes, unsigned int inChannels )
+    void setTimeConstant( float RMStimeConstant, unsigned int bufferSize, unsigned int inChannels )
     {
         // calc
-        timeConstant = std::exp( -1.0 / ( fs * ( RMStimeConstant / 1000.0 ) / nframes * inChannels ) );
+        timeConstant = std::exp( -1.0 / ( fs * ( RMStimeConstant / 1000.0 ) / ( bufferSize  * inChannels ) ) );
     }
 
     // get num points
@@ -150,6 +156,62 @@ public:
         }
     }
 
+    // get individual coordinates of a point seems even safer than passing a buffer
+    float getPointX( unsigned int point )
+    {
+        if( point >= nSamplePoints )
+        {
+            return 0.f;
+        }
+        else // if we're good
+        {
+            return hammerAitovSampleX[point];
+        }
+    }
+
+    float getPointY( unsigned int point )
+    {
+        if( point >= nSamplePoints )
+        {
+            return 0.f;
+        }
+        else // if we're good
+        {
+            return hammerAitovSampleY[point];
+        }
+    }
+
+    float getPointZ( unsigned int point )
+    {
+        if( point >= nSamplePoints )
+        {
+        	return 0.f;
+        }
+        else // if we're good
+        {
+            return hammerAitovSampleZ[point];
+        }
+    }
+
+    void setOrder( unsigned int ord )
+    {
+        if( ord >= 0 && ord <= maxOrder )
+            myOrder = ord;
+        else
+            myOrder = 7;
+
+        // retrieve our weights ( weights is of length maxInputChannels but we will ignore entries which are > incoming order's SH count
+        copyMaxRE( myOrder, weights );
+        // multiply the maxRE and decode corrections
+        multiplyVectorByScalar( weights, maxRECorrection[myOrder] * decodeCorrection( myOrder ), ( myOrder + 1 ) * ( myOrder + 1 ) );
+        
+        if( sn3d ) // use sn3d
+            multiplyVectorByVector( weights, n3d2sn3d, ( myOrder + 1 ) * ( myOrder + 1 ) );
+    }
+
+    unsigned int getOrder() 
+    { return myOrder; }
+
     // get rms
     // rmsBuffer - should be of size nSamplePoints
     void getRMS( float* rmsBuffer )
@@ -157,13 +219,28 @@ public:
     	copyVector( rmsBuffer, rms, nSamplePoints );
     }
 
+    float getRMSAtPoint( unsigned int point )
+    {
+        if ( point >= nSamplePoints )
+        {
+            return 0.f;
+        }
+        else // if we're good
+        {
+            return rms[point];
+        }
+    }
+
 private:
     float** decoderMatrix = nullptr;
     float* rms = nullptr;
     float* weights = nullptr;
-    float timeConstant = 0.0f;
+    float* sampledSignal = nullptr;
+    float timeConstant = 1.0f;
     unsigned int fs = 0;
     unsigned int bs = 0;
+    unsigned int myOrder = 7;
+    bool sn3d = true; // if we wanna use sn3d
 };
 
 #endif /* ENERGYCALC_H */

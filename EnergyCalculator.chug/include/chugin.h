@@ -2112,6 +2112,8 @@ public:
         VMApi();
         // get sample rate | 1.5.1.5
         t_CKUINT (CK_DLL_CALL * const srate)( Chuck_VM * vm );
+        // get buffer size | 1.5.5.9 : emc
+        t_CKUINT (CK_DLL_CALL * const bufsize)( Chuck_VM * vm );
         // get chuck now | 1.5.1.5
         t_CKTIME (CK_DLL_CALL * const now)( Chuck_VM * vm );
         // create a new lock-free one-producer, one-consumer buffer | 1.5.1.5

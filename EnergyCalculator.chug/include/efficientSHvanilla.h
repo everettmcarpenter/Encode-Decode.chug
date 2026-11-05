@@ -53,40 +53,39 @@ inline void SHEval (const int N,
                     float* SHcoeffs,
                     const bool doEncode = true)
 {
-    unsigned int nChan = ( N + 1 ) * ( N + 1 ); // emc
     switch ( N )
     {
         case 0:
             SHEval0 (fX, fY, fZ, SHcoeffs); // calc sh
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 0 ), 1 ); // emc ( normalize )
             break;
         case 1:
             SHEval1 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 1 ), 4 ); // emc ( normalize )
             break;
         case 2:
             SHEval2 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 2 ), 9 ); // emc ( normalize )
             break;
         case 3:
             SHEval3 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 3 ), 16 ); // emc ( normalize )
             break;
         case 4:
             SHEval4 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 4 ), 25 ); // emc ( normalize )
             break;
         case 5:
             SHEval5 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 5 ), 36 ); // emc ( normalize )
             break;
         case 6:
             SHEval6 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 6 ), 49 ); // emc ( normalize )
             break;
         case 7:
             SHEval7 (fX, fY, fZ, SHcoeffs);
-            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( N ), nChan ); // emc ( normalize )
+            multiplyVectorByScalar( SHcoeffs, doEncode ? sqrt4PI : decodeCorrection( 7 ), 64 ); // emc ( normalize )
             break;
     }
 }
